@@ -7,19 +7,19 @@
 				<ul class="list-reset footer-links mb2">
 					<li><a rel="noopener" href="#" target="_blank" class="inline-block footer-link text-decoration-none">INeedAHelp Technologies Pvt. Ltd.</a></li>
 					<li><a rel="noopener" href="#" target="_blank" class="inline-block footer-link text-decoration-none" style="line-height:24px">Defence Colony, New Delhi - 110024, India</a></li>
-					<li class="xs-hide sm-hide"><a class="text-decoration-none footer-link inline-block" href="tel:+919811442001"><i class="fa fa-phone"></i> +91-9811442001</a></li>
-					<li class="xs-hide sm-hide"><a class="text-decoration-none footer-link inline-block" href="https://wa.me/919811442001" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp us</a></li>
+					<li class="xs-hide sm-hide"><a class="text-decoration-none footer-link inline-block" href="tel:+#"><i class="fa fa-phone"></i> +91-9811442001</a></li>
+					<li class="xs-hide sm-hide"><a class="text-decoration-none footer-link inline-block" href="https://wa.me/#" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp us</a></li>
 					<li class="xs-hide sm-hide"><a class="text-decoration-none footer-link inline-block" href="mailto:contact@helpersnearme.com"><i class="fa fa-envelope-o"></i> contact@helpersnearme.com</a></li>
 				</ul>
 				<div class="md-hide lg-hide">
 					<div class="mb1">  
-					  <a class="text-decoration-none" href="tel:+919811442001" style="color:#000;display:block">
+					  <a class="text-decoration-none" href="tel:+#" style="color:#000;display:block">
 						<div class="card" style="background:#6c9aa5">
 						  <div class="card-body">
 							<div class="md-list">
 							  <div class="md-list-item">
 								<p style="font-size:15px">Have a doubt? Talk to us</p>
-								<amp-img layout="fixed" width="28" height="28" src="images/icons/phone-call.png" alt="Call us"></amp-img>
+								<amp-img layout="fixed" width="28" height="28" src="{{url('/front-assets')}}/images/icons/phone-call.png" alt="Call us"></amp-img>
 							  </div>
 							</div>
 						  </div>
@@ -27,13 +27,13 @@
 					  </a>
 					</div>
 					<div class="mb1">
-					  <a class="text-decoration-none" target="_blank" href="https://wa.me/919811442001" style="color:#000;display:block">
+					  <a class="text-decoration-none" target="_blank" href="https://wa.me/#" style="color:#000;display:block">
 						<div class="card" style="background:#6c9aa5">
 						  <div class="card-body">
 							<div class="md-list">
 							  <div class="md-list-item">
 								<p style="font-size:15px">Or WhatsApp us</p>
-								<amp-img layout="fixed" width="28" height="28" src="images/icons/whatsapp-line.svg" alt="WhatsApp us"></amp-img>
+								<amp-img layout="fixed" width="28" height="28" src="{{url('/front-assets')}}/images/icons/whatsapp-line.svg" alt="WhatsApp us"></amp-img>
 							  </div>
 							</div>
 						  </div>
@@ -47,7 +47,7 @@
 							<div class="md-list">
 							  <div class="md-list-item">
 								<p style="font-size:15px">Or Write to us</p>
-								<amp-img layout="fixed" width="28" height="28" src="images/icons/message.svg" alt="Email us"></amp-img>
+								<amp-img layout="fixed" width="28" height="28" src="{{url('/front-assets')}}/images/icons/message.svg" alt="Email us"></amp-img>
 							  </div>
 							</div>
 						  </div>
@@ -61,7 +61,7 @@
 							<div class="md-list">
 							  <div class="md-list-item">
 								<p style="font-size:15px;line-height:23px">काम ढूंढ रहें हैं? हमसे जुड़ने के लिये कॉल करें</p>
-								<amp-img layout="fixed" width="28" height="28" src="images/icons/phone-call.png" alt="Call us" style="display:table"></amp-img>
+								<amp-img layout="fixed" width="28" height="28" src="{{url('/front-assets')}}/images/icons/phone-call.png" alt="Call us" style="display:table"></amp-img>
 							  </div>
 							</div>
 						  </div>
@@ -75,7 +75,7 @@
 							<div class="md-list">
 							  <div class="md-list-item">
 								<p style="font-size:15px;line-height:23px">या हमसे जुड़ने के लिये WhatsApp करें</p>
-								<amp-img layout="fixed" width="28" height="28" src="images/icons/whatsapp-line.svg" alt="Call us" style="display:table"></amp-img>
+								<amp-img layout="fixed" width="28" height="28" src="{{url('/front-assets')}}/images/icons/whatsapp-line.svg" alt="Call us" style="display:table"></amp-img>
 							  </div>
 							</div>
 						  </div>
@@ -108,7 +108,7 @@
 				</ul>
 			</div>
 			<div class="sm-col-12 md-col-2 md-col lg-col lg-col-2 text-center">
-				<amp-img layout="fixed" width="175" height="175" src="images/footer_logo.png" alt="Helpers near me"></amp-img>
+				<amp-img layout="fixed" width="175" height="175" src="{{url('/front-assets')}}/images/footer_logo.png" alt="Helpers near me"></amp-img>
 			</div>
 		</nav>
 	  </div>	
@@ -117,16 +117,16 @@
 		<nav class="ampstart-footer-nav">
 		  <ul class="social-list">
         <li class="social-list-item">
-          <a class="social-link" rel="noopener" href="#" target="_blank" aria-label="Helper Near Me on Facebook" style="background:#3b5998"><amp-img layout="fixed" width="40" height="40" src="images/icons/facebook.svg" alt="Helper Near Me on Facebook"></amp-img></a>
+          <a class="social-link" rel="noopener" href="#" target="_blank" aria-label="Helper Near Me on Facebook" style="background:#3b5998"><amp-img layout="fixed" width="40" height="40" src="{{url('/front-assets')}}/images/icons/facebook.svg" alt="Helper Near Me on Facebook"></amp-img></a>
         </li>
         <li class="social-list-item">
           <a class="social-link" rel="noopener" href="#" target="_blank" aria-label="Helper Near Me on Twitter" style="background:#00aced"><amp-img layout="fixed" width="40" height="40" src="icons/twitter-x.png" alt="Helper Near Me on Twitter"></amp-img></a>
         </li>
         <li class="social-list-item">
-          <a class="social-link" rel="noopener" href="#" target="_blank" aria-label="Helper Near Me on Youtube" style="background:#bb0000"><amp-img layout="fixed" width="40" height="40" src="images/icons/youtube.svg" alt="Helper Near Me on Youtube"></amp-img></a>
+          <a class="social-link" rel="noopener" href="#" target="_blank" aria-label="Helper Near Me on Youtube" style="background:#bb0000"><amp-img layout="fixed" width="40" height="40" src="{{url('/front-assets')}}/images/icons/youtube.svg" alt="Helper Near Me on Youtube"></amp-img></a>
         </li> 
         <li class="social-list-item">
-          <a class="social-link" rel="noopener" href="#" target="_blank" aria-label="Helper Near Me on WhatsApp" style="background:#55EB4C"><amp-img layout="fixed" width="40" height="40" src="images/icons/whatsapp.svg" alt="WhatsApp Us"></amp-img></a>
+          <a class="social-link" rel="noopener" href="#" target="_blank" aria-label="Helper Near Me on WhatsApp" style="background:#55EB4C"><amp-img layout="fixed" width="40" height="40" src="{{url('/front-assets')}}/images/icons/whatsapp.svg" alt="WhatsApp Us"></amp-img></a>
         </li>
 		  </ul>
 		</nav>

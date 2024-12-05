@@ -26,7 +26,7 @@
                                 <a class="text-decoration-none" href="find-helpersd22b.html?group=1">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/house.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/house.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -40,7 +40,7 @@
                           <a class="text-decoration-none" href="find-helperse026.html?group=2">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/chair.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/chair.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -54,7 +54,7 @@
                           <a class="text-decoration-none" href="find-helpers5848.html?group=15">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/luggage.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/luggage.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -68,7 +68,7 @@
                           <a class="text-decoration-none" href="find-helpers106a.html?group=8">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/car.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/car.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -82,7 +82,7 @@
                           <a class="text-decoration-none" href="find-helpers2f2b.html?group=4">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/hospital.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/hospital.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -96,7 +96,7 @@
                           <a class="text-decoration-none" href="find-helpers4b69.html?group=3">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/shop.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/shop.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -110,7 +110,7 @@
                           <a class="text-decoration-none" href="find-helpers1c34.html?group=7">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/food.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/food.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -124,7 +124,7 @@
                           <a class="text-decoration-none" href="find-helpers9244.html?group=6">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/barbershop1.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/barbershop1.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -138,7 +138,7 @@
                           <a class="text-decoration-none" href="find-helpers7383.html?group=16">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/school.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/school.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -152,7 +152,7 @@
                           <a class="text-decoration-none" href="find-helpers61b9.html?group=5">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/factory2.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/factory2.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -166,7 +166,7 @@
                           <a class="text-decoration-none" href="find-helperscdac.html?group=18">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/workers.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/workers.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -180,7 +180,7 @@
                           <a class="text-decoration-none" href="find-helpers921f.html?group=19">
                         <div style="width:100px;margin:5px" class="card box-hover-effect">
                 <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
-                  <amp-img src="images/icons/car2.svg"
+                  <amp-img src="{{url('/front-assets')}}/images/icons/car2.svg"
                     width="60"
                     height="60"
                     alt="Steps"></amp-img>
@@ -482,10 +482,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/responsive.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/responsive.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">Convenient, Easy &amp; Organized</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -494,10 +494,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/shield2.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/shield2.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">Professionally Verified Workers only</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -506,10 +506,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/destination.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/destination.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">Connect with nearby Workers</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -518,10 +518,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/team.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/team.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">Speak to multiple Workers at a time</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -530,10 +530,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/nominal.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/nominal.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">Find &amp; Hire Workers at a nominal fee only</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -542,10 +542,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/badge.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/badge.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">Get the best-shortlisted Workers from a vast pool</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -554,10 +554,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/covid.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/covid.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">Ensuring a Covid-19 safe Workers Connect</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -566,10 +566,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/feminist.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/feminist.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">Empowers the Workers to connect with you directly</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -578,10 +578,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/no-stopping.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/no-stopping.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">No middlemen &amp; commissions in between</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -590,10 +590,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/salary.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/salary.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">Worker gets to earn one&#039;s full salary</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -602,10 +602,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/credit-card.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/credit-card.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">Safe &amp; Secure Payment</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -614,10 +614,10 @@
                       <section class="card p0 mb1">
                 <header class="card-header md-list">
                   <div class="md-list-item">                
-                    <amp-img layout="fixed" src="images/icons/money-back-guarantee.svg" width="40" height="40" alt=""></amp-img>
+                    <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/money-back-guarantee.svg" width="40" height="40" alt=""></amp-img>
                     <p class="px2">100% Refund Policy</p>
                     <span>
-                                        <amp-img layout="fixed" src="images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
+                                        <amp-img layout="fixed" src="{{url('/front-assets')}}/images/icons/ic_keyboard_arrow_down.svg" width="24" height="24" alt=""></amp-img>
                                     </span>
                   </div>
                 </header>
@@ -636,7 +636,7 @@
             <div class="row mb3">
                 <div class="sm-col-12 md-col-4 md-col lg-col lg-col-4">
                     <div class="p3 card text-center">
-                        <amp-img src="images/NSDC_logo.png"
+                        <amp-img src="{{url('/front-assets')}}/images/NSDC_logo.png"
                             width="111" 
                             height="100"
                             alt="National Skill Development Corporation"></amp-img>
@@ -649,7 +649,7 @@
                 </div>
                 <div class="sm-col-12 md-col-4 md-col lg-col lg-col-4">
                     <div class="p3 card text-center">
-                        <amp-img src="images/sewa-logo.jpg"
+                        <amp-img src="{{url('/front-assets')}}/images/sewa-logo.jpg"
                             width="100"
                             height="100"
                             alt="SEWA Bharat"></amp-img>
@@ -662,7 +662,7 @@
                 </div>
                 <div class="sm-col-12 md-col-4 md-col lg-col lg-col-4">
                     <div style="min-height:407px" class="p3 card text-center">
-                        <amp-img src="images/dwssc_logo.png"
+                        <amp-img src="{{url('/front-assets')}}/images/dwssc_logo.png"
                             width="133"
                             height="100"
                             alt="Domestic Workers Sector Skill Council"></amp-img>
@@ -691,7 +691,7 @@
               <a style="text-decoration:none;padding:2px" href="find-helpers.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/destination.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/destination.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -705,7 +705,7 @@
               <a style="text-decoration:none;padding:2px" href="verifications.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/shield2.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/shield2.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -719,7 +719,7 @@
               <a style="text-decoration:none;padding:2px" href="salary-tracker.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/trending.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/trending.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -733,7 +733,7 @@
               <a style="text-decoration:none;padding:2px" href="https://worker.helpersnearme.com/">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/join_us.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/join_us.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -747,7 +747,7 @@
               <a style="text-decoration:none;padding:2px" href="my-orders.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/your_orders.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/your_orders.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -761,7 +761,7 @@
               <a style="text-decoration:none;padding:2px" href="customer-reviews.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/customer-review.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/customer-review.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -775,7 +775,7 @@
               <a style="text-decoration:none;padding:2px" href="refer-your-friends.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/chat.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/chat.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -789,7 +789,7 @@
               <a style="text-decoration:none;padding:2px" href="refer-a-worker.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/referral.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/referral.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -803,7 +803,7 @@
               <a style="text-decoration:none;padding:2px" href="mailto:">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/contact-us.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/contact-us.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -829,7 +829,7 @@
                                       <div class="card" style="margin:6px;background:#c9ddf1">
                 <div class="card-body">
                   <h4 class="text-center mb3">Follow<br/>`Find & Hire Now`</h4>
-                  <amp-img src="images/step_00.png"
+                  <amp-img src="{{url('/front-assets')}}/images/step_00.png"
                     width="220"
                     height="340"
                     alt="Steps">
@@ -839,7 +839,7 @@
                                       <div class="card" style="margin:6px;background:#c9ddf1">
                 <div class="card-body">
                   <h4 class="text-center mb3">Login with a valid<br/>Phone number</h4>
-                  <amp-img src="images/step_02.png"
+                  <amp-img src="{{url('/front-assets')}}/images/step_02.png"
                     width="220"
                     height="340"
                     alt="Steps">
@@ -849,7 +849,7 @@
                                       <div class="card" style="margin:6px;background:#c9ddf1">
                 <div class="card-body">
                   <h4 class="text-center mb3">Enter the<br/>Profile of worker</h4>
-                  <amp-img src="images/step_03.png"
+                  <amp-img src="{{url('/front-assets')}}/images/step_03.png"
                     width="220"
                     height="340"
                     alt="Steps">
@@ -859,7 +859,7 @@
                                       <div class="card" style="margin:6px;background:#c9ddf1">
                 <div class="card-body">
                   <h4 class="text-center mb3">Enter your<br/>Location</h4>
-                  <amp-img src="images/step_04.png"
+                  <amp-img src="{{url('/front-assets')}}/images/step_04.png"
                     width="220"
                     height="340"
                     alt="Steps">
@@ -869,7 +869,7 @@
                                       <div class="card" style="margin:6px;background:#c9ddf1">
                 <div class="card-body">
                   <h4 class="text-center mb3">View shortlisted<br/>workers from nearby</h4>
-                  <amp-img src="images/step_05.png"
+                  <amp-img src="{{url('/front-assets')}}/images/step_05.png"
                     width="220"
                     height="340"
                     alt="Steps">
@@ -879,7 +879,7 @@
                                       <div class="card" style="margin:6px;background:#c9ddf1">
                 <div class="card-body">
                   <h4 class="text-center mb3">Tap on profiles<br/>to view their details</h4>
-                  <amp-img src="images/step_06.png"
+                  <amp-img src="{{url('/front-assets')}}/images/step_06.png"
                     width="220"
                     height="340"
                     alt="Steps">
@@ -889,7 +889,7 @@
                                       <div class="card" style="margin:6px;background:#c9ddf1">
                 <div class="card-body">
                   <h4 class="text-center mb3">Pay, connect & hire<br/>anyone you like</h4>
-                  <amp-img src="images/step_07.png"
+                  <amp-img src="{{url('/front-assets')}}/images/step_07.png"
                     width="220"
                     height="340"
                     alt="Steps">
@@ -912,7 +912,7 @@
             alt="Verify your worker, Legally"
             width="300"
             height="180"
-            src="images/bg_min.jpg" />
+            src="{{url('/front-assets')}}/images/bg_min.jpg" />
             </div>
             <div class="flex-item" style="padding:25px;text-align:center">
               <h3 class="text-center mt0 mb0" style="font-size:28px;line-height:32px">Verify the background of your Workers today.</h3>
@@ -1132,7 +1132,7 @@
               <a style="text-decoration:none;padding:2px" href="find-helpers.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/destination.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/destination.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -1146,7 +1146,7 @@
               <a style="text-decoration:none;padding:2px" href="verifications.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/shield2.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/shield2.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -1160,7 +1160,7 @@
               <a style="text-decoration:none;padding:2px" href="salary-tracker.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/trending.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/trending.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -1174,7 +1174,7 @@
               <a style="text-decoration:none;padding:2px" href="https://worker.helpersnearme.com/">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/join_us.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/join_us.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -1188,7 +1188,7 @@
               <a style="text-decoration:none;padding:2px" href="my-orders.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/your_orders.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/your_orders.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -1202,7 +1202,7 @@
               <a style="text-decoration:none;padding:2px" href="customer-reviews.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/customer-review.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/customer-review.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -1216,7 +1216,7 @@
               <a style="text-decoration:none;padding:2px" href="refer-your-friends.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/chat.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/chat.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -1230,7 +1230,7 @@
               <a style="text-decoration:none;padding:2px" href="refer-a-worker.html">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/referral.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/referral.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
@@ -1244,7 +1244,7 @@
               <a style="text-decoration:none;padding:2px" href="mailto:">
             <div style="min-width:125px" class="card box-hover-effect">
               <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                <amp-img src="images/icons/contact-us.svg"
+                <amp-img src="{{url('/front-assets')}}/images/icons/contact-us.svg"
                     width="75"
                     height="75"
                     alt="Steps"></amp-img>
