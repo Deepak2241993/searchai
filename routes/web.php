@@ -1,5 +1,8 @@
 <?php
 use App\Http\Controllers\HomeController;
+
+use App\Http\Controllers\Admin\AuthController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +20,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', [HomeController::class, 'index']);
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth:admin')->name('admin.dashboard');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+});
