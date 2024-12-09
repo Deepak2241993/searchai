@@ -3,8 +3,13 @@
     Admin Dashboard
 @endsection
 @section('content') 
+<<<<<<< HEAD
     <div class="app-content-header"> 
         <div class="container-fluid"> 
+=======
+    <div class="app-content-header"> <!--begin::Container-->
+        <div class="container-fluid"> <!--begin::Row-->
+>>>>>>> a933a96767ce16e656bf5e513c1449a2c95fbed9
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="mb-0">Dashboard</h3>
@@ -17,9 +22,16 @@
                         </li>
                     </ol>
                 </div>
+<<<<<<< HEAD
             </div> 
         </div> 
     </div> 
+=======
+            </div> <!--end::Row-->
+        </div> <!--end::Container-->
+    </div> 
+    <!--end::App Content Header--> <!--begin::App Content-->
+>>>>>>> a933a96767ce16e656bf5e513c1449a2c95fbed9
     <div class="app-content"> <!--begin::Container-->
         <div class="container-fluid"> <!--begin::Row-->
             <div class="row"> <!--begin::Col-->

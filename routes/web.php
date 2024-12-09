@@ -2,8 +2,11 @@
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\Admin\AuthController;
+<<<<<<< HEAD
 use App\Http\Controllers\Auth\RegisterController;
 
+=======
+>>>>>>> a933a96767ce16e656bf5e513c1449a2c95fbed9
 
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcom');
 // });
+<<<<<<< HEAD
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // register
@@ -55,4 +59,14 @@ Route::prefix('admin')->group(function () {
 
 
 
+=======
+Route::get('/', [HomeController::class, 'index']);
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth:admin')->name('admin.dashboard');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+>>>>>>> a933a96767ce16e656bf5e513c1449a2c95fbed9
 });
