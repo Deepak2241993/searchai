@@ -41,18 +41,16 @@ Route::get('reset-password/{token}', [RegisterController::class, 'showResetForm'
 Route::post('reset-password', [RegisterController::class, 'reset'])->name('password.update');
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
-    
+    // Public Routes (Login and Logout)
+    Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // Protected Routes (Requires Admin Authentication)
     Route::middleware('auth:admin')->group(function () {
-        Route::get('/dashboard', [AuthController::class, 'dashboard'])
-            ->name('admin.dashboard');
-    
+        Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
     });
-
-
 
 });
