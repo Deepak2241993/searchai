@@ -3,25 +3,16 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<<<<<<< HEAD
     <title>Search AI | Admin Login </title><!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="title" content="Search AI |Admin Login ">
     <meta name="author" content="ColorlibHQ">
     <meta name="description" content="Search Ai">
     <meta name="keywords" content="search ai">
-=======
-    <title>Search AI | Login Page</title><!--begin::Primary Meta Tags-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="Search AI | Login Page">
-    <meta name="author" content="ColorlibHQ">
-    <meta name="description" content="Search Ai">
-    <meta name="keywords" content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard">
->>>>>>> a933a96767ce16e656bf5e513c1449a2c95fbed9
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ URL::asset('admin-assets/css/adminlte.css') }}">
+    <link rel="stylesheet" href="{{url('/')}}/admin-assets/css/adminlte.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 </head> 
@@ -31,15 +22,11 @@
         <div class="card">
             <div class="login-logo">
                 <a href="#">
-                    <img src="{{ asset('admin-assets/assets/img/searchai.png') }}" alt="Search AI Admin Logo" />
+                    <img src="{{url('/')}}/admin-assets/assets/img/searchai.png" alt="Search AI Admin Logo" />
                 </a>
             </div>
             <div class="card-body login-card-body">
-<<<<<<< HEAD
                 <p class="login-box-msg"><strong>Admin Login</strong></p>
-=======
-                <p class="login-box-msg">Sign in to start your session</p>
->>>>>>> a933a96767ce16e656bf5e513c1449a2c95fbed9
         
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -54,7 +41,7 @@
 
             
         
-                <form action="{{ route('admin.login') }}" method="POST">
+                <form action="{{ route('admin.login.submit') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required>
@@ -71,11 +58,7 @@
                     </div>
         
                     <div class="row">
-<<<<<<< HEAD
                         <div class="col-12">
-=======
-                        <div class="col-4">
->>>>>>> a933a96767ce16e656bf5e513c1449a2c95fbed9
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">Sign In</button>
                             </div>
@@ -84,15 +67,11 @@
                 </form>
             </div>
         </div>        
-<<<<<<< HEAD
     </div> 
-=======
-    </div> <!-- /.login-box --> <!--begin::Third Party Plugin(OverlayScrollbars)-->
->>>>>>> a933a96767ce16e656bf5e513c1449a2c95fbed9
     <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script> <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha256-whL0tQWoY1Ku1iskqPFvmZ+CHsvmRWx/PIoEvIeWh4I=" crossorigin="anonymous"></script> <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="{{ URL::asset('admin-assets/js/adminlte.js') }}"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <script src="{{url('/')}}/admin-assets/js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
         const Default = {
