@@ -16,10 +16,10 @@
                             </a> </li>
                     </ul>
                 </li>
-                <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-palette"></i>
+                <li class="nav-item"> <a href="{{ route('admin.user-list') }}" class="nav-link"> <i class="nav-icon bi bi-palette"></i>
                         <p>User</p>
                     </a> </li>
-                <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i class="nav-icon bi bi-palette"></i>
+                {{-- <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i class="nav-icon bi bi-palette"></i>
                         <p>Theme Generate</p>
                     </a> </li>
                 <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-box-seam-fill"></i>
@@ -253,7 +253,7 @@
                     </a> </li>
                 <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-circle text-info"></i>
                         <p>Informational</p>
-                    </a> </li>
+                    </a> </li> --}}
             </ul> <!--end::Sidebar Menu-->
         </nav>
     </div> <!--end::Sidebar Wrapper-->

@@ -4,7 +4,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
 
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +50,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Protected Routes (Requires Admin Authentication)
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+
+        // User 
+        Route::get('/user-list', [AuthController::class, 'userList'])->name('user-list');
+        Route::get('/user-edit/{id}', [AuthController::class, 'userEdit'])->name('user.edit');
+        Route::put('/user-update/{id}', [AuthController::class, 'userUpdate'])->name('user.update');
+        Route::delete('/user-delete/{id}', [AuthController::class, 'userDelete'])->name('user.delete');
     });
 
 });

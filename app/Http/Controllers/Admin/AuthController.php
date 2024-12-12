@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class AuthController extends Controller
 {
@@ -34,14 +36,64 @@ class AuthController extends Controller
     // Admin dashboard
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $countUser = User::count();
+        return view('admin.dashboard', compact('countUser'));
     }
-
+    
     // Logout
     public function logout()
     {
         Auth::logout();
         return redirect()->route('admin.login');
     }
+
+    public function userList(Request $request)
+    {
+        $sortOrder = $request->get('sort', 'desc');
+        $userResult = User::orderBy('created_at', $sortOrder)->paginate(10);
+        return view('admin.user.index', compact('userResult', 'sortOrder'));
+    }
+    public function userEdit(Request $request, $id)
+    {
+        $userResult = User::findOrFail($id); 
+        return view('admin.user.edit', compact('userResult'));
+    }
+    public function userUpdate(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'password' => 'nullable|min:8', 
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password); 
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.user-list')->with('success', 'User updated successfully.');
+    }
+    public function userDelete($id)
+    {
+        $user = User::findOrFail($id);
+
+        if ($user->is_admin) {
+            return response()->json(['success' => false, 'message' => 'Admin users cannot be deleted.']);
+        }
+
+        $user->delete();
+
+        return response()->json(['success' => true, 'message' => 'User deleted successfully.']);
+    }
+
+
+
+
 }
 
