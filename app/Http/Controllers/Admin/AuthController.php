@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\GiftCoupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -37,7 +38,8 @@ class AuthController extends Controller
     public function dashboard()
     {
         $countUser = User::count();
-        return view('admin.dashboard', compact('countUser'));
+        $giftCoupon = GiftCoupon::count();
+        return view('admin.dashboard', compact('countUser','giftCoupon'));
     }
     
     // Logout

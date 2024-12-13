@@ -56,6 +56,20 @@
                             More info <i class="bi bi-link-45deg"></i> </a>
                     </div> <!--end::Small Box Widget 3-->
                 </div> <!--end::Col-->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <a href="{{ route('admin.coupon.list') }}">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-info elevation-1"><i class="nav-icon fa fa-barcode"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text"> View Coupon</span>
+                                <span class="info-box-number">{{ $giftCoupon }}</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </a>
+                </div>
                 {{-- <div class="col-lg-3 col-6"> <!--begin::Small Box Widget 4-->
                     <div class="small-box text-bg-danger">
                         <div class="inner">

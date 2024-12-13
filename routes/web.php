@@ -2,8 +2,9 @@
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\GiftCouponController;
 use App\Http\Controllers\Auth\RegisterController;
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/user-edit/{id}', [AuthController::class, 'userEdit'])->name('user.edit');
         Route::put('/user-update/{id}', [AuthController::class, 'userUpdate'])->name('user.update');
         Route::delete('/user-delete/{id}', [AuthController::class, 'userDelete'])->name('user.delete');
+
+        //Coupon
+        Route::get('/coupon-list', [GiftCouponController::class, 'couponList'])->name('coupon.list');
+        Route::get('/coupon-create', [GiftCouponController::class, 'couponCreate'])->name('coupon.create');
+        Route::post('/coupon-store', [GiftCouponController::class, 'couponStore'])->name('coupon.store');
+        Route::get('/coupon-edit/{id}', [GiftCouponController::class, 'couponEdit'])->name('coupon.edit');
+        Route::put('/coupon-update/{id}', [GiftCouponController::class, 'couponUpdate'])->name('coupon.update');
+        Route::delete('/coupon-delete/{id}', [GiftCouponController::class, 'couponDelete'])->name('coupon.delete');
     });
 
 });
