@@ -14,6 +14,9 @@
                 <li class="nav-item"> <a href="{{ route('admin.coupon.list') }}" class="nav-link"> <i class="nav-icon fa fa-barcode"></i>
                         <p>Coupon Management</p>
                     </a> </li>
+                <li class="nav-item"> <a href="{{ route('admin.faq.index') }}" class="nav-link"> <i class="nav-icon fa fa-barcode"></i>
+                        <p>FAQs Management</p>
+                    </a> </li>
                 {{-- <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i class="nav-icon bi bi-palette"></i>
                         <p>Theme Generate</p>
                     </a> </li>

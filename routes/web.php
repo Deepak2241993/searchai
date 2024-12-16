@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\GiftCouponController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,6 +66,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/coupon-edit/{id}', [GiftCouponController::class, 'couponEdit'])->name('coupon.edit');
         Route::put('/coupon-update/{id}', [GiftCouponController::class, 'couponUpdate'])->name('coupon.update');
         Route::delete('/coupon-delete/{id}', [GiftCouponController::class, 'couponDelete'])->name('coupon.delete');
+
+        // faqs
+        Route::resource('faq', FaqController::class);
     });
 
 });
