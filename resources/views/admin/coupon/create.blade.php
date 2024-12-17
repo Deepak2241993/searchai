@@ -1,19 +1,19 @@
 @extends('layouts.admin-master')
 @section('title')
-Coupon Create
+{{ isset($pageTitle) ? $pageTitle : 'Coupon Create' }}
 @endsection
 @section('content')
     <div class="app-content-header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Coupon Create</h3>
+                    <h3 class="mb-0">{{ isset($pageTitle) ? $pageTitle : 'Coupon Create' }}</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard')}}">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Coupon Create
+                        {{ isset($pageTitle) ? $pageTitle : 'Coupon Create' }}
                         </li>
                     </ol>
                 </div>
@@ -24,7 +24,7 @@ Coupon Create
         <div class="container-fluid">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body d-flex justify-content-between align-items-center rounded">
-                    <h4 class="card-title mb-0">Coupon Create</h4>
+                    <h4 class="card-title mb-0">{{ isset($pageTitle) ? $pageTitle : 'Coupon Create' }}</h4>
                     <a href="{{ route('admin.coupon.list') }}" class="btn btn-warning ms-auto">Back</a>
                 </div>
             </div> 
@@ -32,7 +32,7 @@ Coupon Create
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h3 class="card-title">Coupon Create</h3>
+                            <h3 class="card-title">{{ isset($pageTitle) ? $pageTitle : 'Coupon Create' }}</h3>
                         </div>
                         @if (session('error'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">

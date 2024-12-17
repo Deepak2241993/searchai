@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\GiftCouponController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,6 +70,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // faqs
         Route::resource('faq', FaqController::class);
+        //banner
+        Route::resource('banner', BannerController::class);
     });
 
 });

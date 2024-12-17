@@ -1,19 +1,19 @@
 @extends('layouts.admin-master')
 @section('title')
-Faq Create
+{{ isset($pageTitle) ? $pageTitle : 'Faq Create' }}
 @endsection
 @section('content')
     <div class="app-content-header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Faq Create</h3>
+                    <h3 class="mb-0">{{ isset($pageTitle) ? $pageTitle : 'Faq Create' }}</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                        Faq Create
+                        {{ isset($pageTitle) ? $pageTitle : 'Faq Create' }}
                         </li>
                     </ol>
                 </div>
@@ -24,7 +24,7 @@ Faq Create
         <div class="container-fluid">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body d-flex justify-content-between align-items-center rounded">
-                    <h4 class="card-title mb-0">Faq Create</h4>
+                    <h4 class="card-title mb-0">{{ isset($pageTitle) ? $pageTitle : 'Faq Create' }}</h4>
                     <a href="{{ route('admin.faq.index') }}" class="btn btn-warning ms-auto">Back</a>
                 </div>
             </div> 
@@ -32,7 +32,7 @@ Faq Create
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h3 class="card-title">Faq Create</h3>
+                            <h3 class="card-title">{{ isset($pageTitle) ? $pageTitle : 'Faq Create' }}</h3>
                         </div>
                         @if (session('error'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">

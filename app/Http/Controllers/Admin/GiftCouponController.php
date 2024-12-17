@@ -15,7 +15,7 @@ class GiftCouponController extends Controller
     }
     public function couponCreate()
     {
-        return view('admin.coupon.create');
+        return view('admin.coupon.create')->with('pageTitle' , 'Create Coupon');
     }
     public function couponStore(Request $request,GiftCoupon $coupon)
     {
@@ -26,7 +26,7 @@ class GiftCouponController extends Controller
     public function couponEdit(Request $request,$coupon)
     {
        $giftCoupon=GiftCoupon::where('status','1')->find($coupon);
-       return view('admin.coupon.create',compact('giftCoupon'));
+       return view('admin.coupon.create',compact('giftCoupon'))->with('pageTitle' , 'Update Coupon');;
     }
     public function couponUpdate(Request $request,GiftCoupon $giftCoupon,$coupen_id)
     {
