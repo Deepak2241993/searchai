@@ -2,18 +2,21 @@
 @section('body')
 
 <main id="content">
-
-  <section id="slider" class="">
-    <div class="slider-content m-auto text-center">
-      <h1 class="text-shadow light">An easy way to find & hire local workers</h1>
-      <div class="briefing">
-        <h2 class="text-shadow light">Quick & Affordable</h2>
-        <hr class="m-auto" style="width:280px;border:0;border-top:1px solid #fff" />
-        <h2 class="text-shadow light">Legally Verified Workers</h2>
-      </div>
-      <h4 class="text-shadow light" style="max-width:780px">Finding the perfect worker is always a hit-and-trial experience. With Helpers Near Me, you make the whole process easy for yourself. Find multiple legally verified Workers near you, select a plan, pay a nominal fee, connect with them directly & hire anyone you like. And if it doesn't work out, ask for a 100% refund within 15 days of your order.</h4>
+<section id="slider">
+    <div class="owl-carousel owl-theme">
+        @foreach ($bannerData as $banner)
+            <div class="slider-item" style="background-image: url('{{ asset('storage/' . $banner->image) }}');">
+                <div class="slider-content m-auto text-center">
+                    <h1 class="text-shadow light">{{ $banner->title }}</h1>
+                    <h4 class="text-shadow light" style="max-width:780px">{{ $banner->description }}</h4>
+                </div>
+            </div>
+        @endforeach
     </div>
-  </section>
+</section>
+
+
+
 
   <div class="action-bar text-center">
     <a href="find-helpers.html">Find & Hire now <span class="font-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
