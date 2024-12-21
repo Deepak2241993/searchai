@@ -20,6 +20,9 @@
                 <li class="nav-item"> <a href="{{ route('admin.banner.index') }}" class="nav-link"> <i class="nav-icon fa fa-barcode"></i>
                         <p>Banner Management</p>
                     </a> </li>
+                <li class="nav-item"> <a href="{{ route('admin.service.index') }}" class="nav-link"> <i class="nav-icon fa fa-barcode"></i>
+                        <p>Service Management</p>
+                    </a> </li>
                 {{-- <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i class="nav-icon bi bi-palette"></i>
                         <p>Theme Generate</p>
                     </a> </li>

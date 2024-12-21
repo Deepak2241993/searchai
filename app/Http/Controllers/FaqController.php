@@ -48,7 +48,7 @@ class FaqController extends Controller
     public function edit($faq_id)
     {
         $faqData=Faq::where('status','1')->find($faq_id);
-        return view('admin.faq.create', compact('faqData'))->with('pageTitle', 'Edit Faq');;
+        return view('admin.faq.create', compact('faqData'))->with('pageTitle', 'Edit Faq');
     }
 
     
