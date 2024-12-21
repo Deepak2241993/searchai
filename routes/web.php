@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\GiftCouponController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
@@ -75,6 +76,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('banner', BannerController::class);
         // service
         Route::resource('service', ServiceController::class);
+        //blog
+        Route::resource('blog', BlogController::class);
     });
 
 });
