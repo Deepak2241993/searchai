@@ -38,9 +38,9 @@ class BlogController extends Controller
     {
         //
     }
-    public function edit($blog_id)
+    public function edit($blogId)
     {
-        $blogData = Blog::where('status', 'draft')->findOrFail($blog_id);
+        $blogData = Blog::where('status', 'published')->findOrFail($blogId);
         return view('admin.blog.create', compact('blogData'))->with('pageTitle', 'Edit Blog');
     }
 
