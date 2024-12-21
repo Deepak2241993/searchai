@@ -14,16 +14,16 @@
                 <li class="nav-item"> <a href="{{ route('admin.coupon.list') }}" class="nav-link"> <i class="nav-icon fa fa-barcode"></i>
                         <p>Coupon Management</p>
                     </a> </li>
-                <li class="nav-item"> <a href="{{ route('admin.faq.index') }}" class="nav-link"> <i class="nav-icon fa fa-barcode"></i>
+                <li class="nav-item"> <a href="{{ route('admin.faq.index') }}" class="nav-link"> <i class="bi bi-blockquote-left"></i>
                         <p>FAQs Management</p>
                     </a> </li>
-                <li class="nav-item"> <a href="{{ route('admin.banner.index') }}" class="nav-link"> <i class="nav-icon fa fa-barcode"></i>
+                <li class="nav-item"> <a href="{{ route('admin.banner.index') }}" class="nav-link"> <i class="bi bi-layout-sidebar"></i>
                         <p>Banner Management</p>
                     </a> </li>
-                <li class="nav-item"> <a href="{{ route('admin.service.index') }}" class="nav-link"> <i class="nav-icon fa fa-barcode"></i>
+                <li class="nav-item"> <a href="{{ route('admin.service.index') }}" class="nav-link"> <i class="bi bi-gear-wide-connected"></i>
                         <p>Service Management</p>
                     </a> </li>
-                <li class="nav-item"> <a href="{{ route('admin.blog.index') }}" class="nav-link"> <i class="nav-icon fa fa-barcode"></i>
+                <li class="nav-item"> <a href="{{ route('admin.blog.index') }}" class="nav-link"> <i class="bi bi-calendar2-minus"></i>
                         <p>Blog Management</p>
                     </a> </li>
                 {{-- <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i class="nav-icon bi bi-palette"></i>
