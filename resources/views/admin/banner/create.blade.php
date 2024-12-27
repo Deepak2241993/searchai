@@ -86,7 +86,7 @@
                                         accept="image/*">
                                     @if(isset($bannerData) && $bannerData->image)
                                         <div class="mt-2">
-                                            <img src="{{ asset('storage/' . $bannerData->image) }}" alt="Image Preview" width="100">
+                                            <img src="{{ url('/').'/'.('storage/' . $bannerData->image) }}" alt="Image Preview" width="100">
                                         </div>
                                     @endif
                                 </div>
