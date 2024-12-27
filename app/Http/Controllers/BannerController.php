@@ -38,15 +38,18 @@ class BannerController extends Controller
             'status'      => 'required|boolean',
             'order'       => 'required|integer',
         ]);
-    
+
         // Handle the image upload
         if ($request->hasFile('image')) {
-            $validatedData['image'] = $request->file('image')->store('banners', 'public'); // Save the image in the "banners" directory on the public disk
+            $image = $request->file('image');
+            $filename = time() . '_' . $image->getClientOriginalName(); // Generate a unique filename
+            $path = $image->storeAs('banners', $filename, 'public'); // Store the file with the desired name
+            $validatedData['image'] = $filename; // Save only the filename in the database
         }
-    
+
         // Create a new banner
         $banner->create($validatedData);
-    
+
         // Redirect to the index route with a success message
         return redirect()->route('admin.banner.index')->with('message', 'Banner Created Successfully');
     }
@@ -82,19 +85,34 @@ class BannerController extends Controller
             'status'      => 'required|boolean',
             'order'       => 'required|integer',
         ]);
+
+        // Update basic fields
         $banner->title = $validatedData['title'];
         $banner->description = $validatedData['description'];
         $banner->status = $validatedData['status'];
         $banner->order = $validatedData['order'];
+
+        // Handle the image upload
         if ($request->hasFile('image')) {
-            if ($banner->image && Storage::exists($banner->image)) {
-                Storage::delete($banner->image);
+            // Delete the existing image if it exists
+            if ($banner->image && Storage::exists('public/banners/' . $banner->image)) {
+                Storage::delete('public/banners/' . $banner->image);
             }
-            $banner->image = $request->file('image')->store('banners', 'public');
+
+            // Store the new image with a unique name
+            $image = $request->file('image');
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('banners', $filename, 'public'); // Store with custom filename
+
+            $banner->image = $filename; // Save only the filename
         }
+
+        // Save the updated banner
         $banner->save();
+
         return redirect()->route('admin.banner.index')->with('success', 'Banner updated successfully!');
     }
+
 
 
     /**
