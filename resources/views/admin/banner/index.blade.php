@@ -54,7 +54,7 @@ Banners List
                                         <td>{{ $banner->title }}</td>
                                         <td>
                                             @if ($banner->image)
-                                                <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" style="width: 80px; height: auto;">
+                                                <img src="{{ url('/')."/".('storage/' . $banner->image) }}" alt="{{ $banner->title }}" style="width: 80px; height: auto;">
                                             @else
                                                 <p>No image available</p>
                                             @endif
