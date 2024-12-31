@@ -54,7 +54,7 @@ Blog List
                                                 <td>{{ $blog->title }}</td>
                                                 <td>
                                                     @if ($blog->blog_image)
-                                                        <img src="{{ asset('storage/' . $blog->blog_image) }}" alt="{{ $blog->title }}" style="width: 80px; height: auto;">
+                                                        <img src="{{ url('/').'/'.('storage/' . $blog->blog_image) }}" alt="{{ $blog->title }}" style="width: 80px; height: auto;">
                                                     @else
                                                         <p>No image available</p>
                                                     @endif

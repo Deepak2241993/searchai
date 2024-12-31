@@ -1,11 +1,47 @@
 @extends('layouts.master')
 @section('body')
+<style>
+  .button-container {
+            background: #ffffff;
+            padding: 30px;
+            border: 2px solid #74ebd5;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .button-container h3 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #333;
+            font-family: "Poppins", Sans-serif;
+        }
+        .button-container button {
+            background-color: #ED760D;
+            color: #000000;
+            border-color: #ffffff;
+            -webkit-transition-duration: 0.1s;
+            transition-duration: 0.1s;
+            font-family: "Poppins", Sans-serif;
+            font-weight: 600;
+            padding: 12px 25px;
+            margin: 0 10px;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button-container button:hover {
+            background-color: #000000;
+            color: #FFFFFF;
+            border-color: #000000;
+        }
+</style>
 
 <main id="content">
 <section id="slider">
     <div class="owl-carousel owl-theme">
         @foreach ($bannerData as $banner)
-            <div class="slider-item" style="background-image: url('{{ asset('storage/' . $banner->image) }}');">
+        <div class="slider-item" style="background-image: url('{{ url('/') . '/' . ('storage/' . $banner->image) }}')">
                 <div class="slider-content m-auto text-center">
                     <h1 class="text-shadow light">{{ $banner->title }}</h1>
                     <h4 class="text-shadow light" style="max-width:780px">{{ $banner->description }}</h4>
@@ -14,7 +50,15 @@
         @endforeach
     </div>
 </section>
-
+<div class="button-container">
+  <h3>Token Purchase</h3>
+    <a href="{{ route('kyc.verification') }}">
+        <button class="btn-submit">KYC Verification</button>
+    </a>
+    <a href="{{ route('kyc.criminal-verification') }}">
+        <button class="btn-cancel">KYC + Criminal Background Verification</button>
+    </a>
+</div>
 
 
 

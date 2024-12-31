@@ -101,7 +101,7 @@
                                                accept="image/*">
                                         @if (isset($blogData->blog_image) && $blogData->blog_image)
                                             <div class="mt-2">
-                                                <img src="{{ asset('storage/' . $blogData->blog_image) }}" alt="Image Preview" width="100">
+                                                <img src="{{ url('/').'/'.('storage/' . $blogData->blog_image) }}" alt="Image Preview" width="100">
                                             </div>
                                         @endif
                                     </div>

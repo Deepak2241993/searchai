@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\GiftCouponController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\TokenController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,26 @@ Route::post('forgot-password', [RegisterController::class, 'sendResetLinkEmail']
 // Reset Password
 Route::get('reset-password/{token}', [RegisterController::class, 'showResetForm'])->name('password.reset');
 Route::post('reset-password', [RegisterController::class, 'reset'])->name('password.update');
+
+
+Route::get('/kyc-verification', function () {
+    return view('frontend.kyc-verification');
+})->name('kyc.verification');
+
+Route::get('/services', [TokenController::class, 'services'])->name('services');
+Route::post('/cart', [TokenController::class, 'addToCart'])->name('cart.add');
+// Display the cart page
+Route::get('/cart', [TokenController::class, 'viewCart'])->name('cart');
+
+// Handle adding tokens to the cart
+Route::post('/cart', [TokenController::class, 'addToCart']);
+Route::match(['get', 'post'], '/checkout', [TokenController::class, 'checkout'])->name('checkout');
+Route::post('/payment', [TokenController::class, 'processPayment'])->name('payment.process');
+
+
+Route::get('/kyc-criminal-verification', function () {
+    return view('frontend.kyc-criminal-verification');
+})->name('kyc.criminal-verification');
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
