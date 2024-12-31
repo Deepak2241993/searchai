@@ -57,9 +57,14 @@
                                            id="name" required>
                                 </div>
                                 <div class="mb-3 col-lg-6">
-                                    <label for="description" class="form-label">Service Description</label>
-                                    <textarea class="form-control" name="description" id="description" rows="5" 
-                                              placeholder="Describe the service">{{ isset($serviceData) ? $serviceData->description : '' }}</textarea>
+                                    <label for="short_description" class="form-label">Short Description</label>
+                                    <textarea class="form-control" name="short_description" id="short_description" rows="5" 
+                                            placeholder="Shortly describe the service">{{ isset($serviceData) ? $serviceData->short_description : '' }}</textarea>
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <label for="long_description" class="form-label">Long Description</label>
+                                    <textarea class="form-control" name="long_description" id="long_description" rows="5" 
+                                            placeholder="Describe the service">{{ isset($serviceData) ? $serviceData->long_description : '' }}</textarea>
                                 </div>
                                 <div class="mb-3 col-lg-6">
                                     <label for="price" class="form-label">Price</label>
@@ -77,6 +82,12 @@
                                             value="0"{{ isset($serviceData->status) && $serviceData->status == 0 ? 'selected' : '' }}>
                                             Inactive</option>
                                     </select>
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <label for="images" class="form-label">Upload Images</label>
+                                    <input class="form-control" type="file" name="images[]" id="images" multiple>
+                                    <!-- Preview uploaded images dynamically -->
+                                    <small class="form-text text-muted">You can upload multiple images.</small>
                                 </div>
                                 <div class="mb-3 col-lg-6 mt-4">
         
