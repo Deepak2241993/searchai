@@ -46,24 +46,35 @@ Route::get('reset-password/{token}', [RegisterController::class, 'showResetForm'
 Route::post('reset-password', [RegisterController::class, 'reset'])->name('password.update');
 
 
+// KYC Verification Pages
 Route::get('/kyc-verification', function () {
     return view('frontend.kyc-verification');
 })->name('kyc.verification');
 
-Route::get('/services', [TokenController::class, 'services'])->name('services');
-Route::post('/cart', [TokenController::class, 'addToCart'])->name('cart.add');
-// Display the cart page
-Route::get('/cart', [TokenController::class, 'viewCart'])->name('cart');
-
-// Handle adding tokens to the cart
-Route::post('/cart', [TokenController::class, 'addToCart']);
-Route::match(['get', 'post'], '/checkout', [TokenController::class, 'checkout'])->name('checkout');
-Route::post('/payment', [TokenController::class, 'processPayment'])->name('payment.process');
-
-
 Route::get('/kyc-criminal-verification', function () {
     return view('frontend.kyc-criminal-verification');
 })->name('kyc.criminal-verification');
+
+// Services
+Route::get('/services', [TokenController::class, 'services'])->name('services');
+
+// Cart
+Route::post('/cart', [TokenController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [TokenController::class, 'viewCart'])->name('cart');
+
+// Checkout
+Route::get('/checkout', [TokenController::class, 'showCheckoutForm'])
+    ->name('checkout');
+    // Protect with authentication
+
+Route::post('/checkout', [TokenController::class, 'processCheckout'])
+    ->name('checkout.process');
+
+
+// Payment
+Route::post('/payment', [TokenController::class, 'processPayment'])
+    ->name('payment.process')
+    ->middleware('auth');
 
 
 Route::prefix('admin')->name('admin.')->group(function () {

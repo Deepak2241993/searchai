@@ -1,266 +1,284 @@
 @extends('layouts.master')
+
 @section('body')
 <style>
-    /* General Styling */
+    /* General Styling for Checkout */
     #content {
-        background: linear-gradient(135deg, #FF7E5F, #ED760D);
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
         padding: 40px;
+        background: #f9f9f9;
         border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        margin-top: 40px;
-        width: 100%;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
 
-    #content h1 {
-        font-size: 2.8em;
-        margin-bottom: 20px;
-        color: #000000;
-        font-weight: bold;
-    }
-
-    #content p {
-        font-size: 1.2em;
-        line-height: 1.6;
-        color: #000000;
-    }
-
-    .table-wrap {
-        margin: 30px auto;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        background: #fff;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th,
-    td {
-        padding: 15px;
-        text-align: center;
-        border-bottom: 1px solid #ddd;
-    }
-
-    th {
-        background: #ED760D;
-        color: #fff;
-        font-weight: bold;
-    }
-
-    .product-info ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .product-info ul li {
-        display: inline-block;
-        margin: 0 5px;
-    }
-
-    .product-image img {
-        width: 100px;
-        height: auto;
+    /* Billing details section on left side */
+    .billing-details {
+        flex: 1;
+        background-color: #fff;
+        padding: 30px;
         border-radius: 8px;
-        margin-bottom: 10px;
-    }
-
-    .btn-container {
-        margin-top: 30px;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .btn-back,
-    .btn-primary,
-    .btn-default {
-        background: #0B7CA1;
-        color: #fff;
-        padding: 12px 30px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 1em;
-        cursor: pointer;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-
-    .btn-back:hover,
-    .btn-primary:hover,
-    .btn-default:hover {
-        background: #fff;
-        color: #0B7CA1;
-        border: 1px solid #ED760D;
-    }
-
-    .total-cost-bar {
-        background: #f7f7f7;
-        border-radius: 10px;
-        padding: 20px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-right: 30px;
     }
 
-    .total-cost-bar .title-text {
-        font-size: 1.5em;
+    .billing-details h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+    }
+
+    .billing-details label {
         font-weight: bold;
-        margin-bottom: 15px;
-        color: #ED760D;
+        margin-bottom: 5px;
+        display: inline-block;
+        color: #555;
     }
 
-    .total-cost-bar ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+    .billing-details input,
+    .billing-details textarea {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 1em;
+        color: #333;
     }
 
-    .total-cost-bar ul li {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 0;
-        font-size: 1.1em;
+    .billing-details textarea {
+        height: 100px;
     }
 
-    .total-cost-bar ul li span {
-        font-weight: bold;
-    }
-
-    .btn-wrap {
+    .billing-details button {
+        background-color: #ED760D;
+        color: white;
+        font-size: 1.2em;
+        padding: 15px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        border: none;
+        width: 100%;
         margin-top: 20px;
     }
 
-    .btn-wrap a {
-        background: #0B7CA1;
-        color: #fff;
-        padding: 15px 30px;
-        border-radius: 10px;
-        font-size: 1.2em;
-        font-weight: bold;
-        text-decoration: none;
-        display: inline-block;
-        transition: all 0.3s ease;
+    .billing-details button:hover {
+        background-color: #FF7E5F;
     }
 
-    .btn-wrap a:hover {
-        background: #fff;
-        color: #0B7CA1;
-        border: 2px solid #0B7CA1;
+    /* Order Summary Section on right side */
+    .order-summary {
+        flex: 1;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-summary h3 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+    }
+
+    .order-summary ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .order-summary ul li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        font-size: 1.2em;
+        border-bottom: 1px solid #eee;
+    }
+
+    .order-summary .total-cost {
+        font-weight: bold;
+        font-size: 1.4em;
+        text-align: center;
+        padding-top: 20px;
+    }
+
+    /* Payment Method Section */
+    .payment-method {
+        text-align: center;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-method h4 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .stripe-button {
+        background-color: #6772e5;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.2em;
+        cursor: pointer;
+        border: none;
+        width: 100%;
+    }
+
+    .stripe-button:hover {
+        background-color: #5362c6;
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* Two columns */
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 1em;
+        color: #333;
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    button {
+        background-color: #ED760D;
+        color: white;
+        font-size: 1.2em;
+        padding: 15px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        border: none;
+        grid-column: span 2;
+        /* Makes button span across both columns */
+        margin-top: 20px;
+    }
+
+    button:hover {
+        background-color: #FF7E5F;
+    }
+
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+        #content {
+            flex-direction: column;
+        }
+
+        .billing-details,
+        .order-summary {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
     }
 </style>
 
 <main id="content">
-    <h1>Your Cart</h1>
-    <p>Review your selected items below.</p>
-
-    <div class="container">
-        <!-- Table Wrap -->
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="product-info">
-                                <ul>
-                                    <li>
-                                        <button type="button" class="remove-btn" onclick="deleteItem('f976c0bf8e64aeda8d59434b5ff0f097');">
-                                            <i class="las la-times"></i>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <div class="product-image">
-                                            <h2>KYC VERIFICATION TOKENS</h2>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>
-                            <table class="quote-results">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="2"><strong>Quantity:</strong></td>
-                                        <!-- Show tokens value -->
-                                        <td>
-                                            <input
-                                                type="number"
-                                                id="quantity-input"
-                                                name="tokens"
-                                                value="{{ old('tokens', session('tokens', $tokens)) }}"
-                                                min="1"
-                                                class="form-control text-center"
-                                                style="width: 80px;"
-                                                onchange="updateTotalPrice();">
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td colspan="2"><strong>Item Price:</strong></td>
-                                        <td id="item-price">${{ number_format($pricePerItem) }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Total Cost Bar -->
-        <div class="row justify-content-end">
-            <div class="col-lg-6">
-                <div class="total-cost-bar">
-                    <h3 class="title-text">Total Cost</h3>
-                    <ul>
-                        <li><strong>Subtotal</strong> <span id="subtotal">${{ number_format($pricePerItem * $tokens, 2) }}</span></li>
-
-                    </ul>
-                    <div class="total-cost">
-                        <strong>Total</strong>
-                        <span id="total">${{ number_format($pricePerItem * $tokens * 1.10, 2) }}</span>
-                    </div>
-                </div>
-                <div class="btn-wrap text-right">
-                    <a href="#" rel="nofollow">Proceed to Checkout</a>
-                </div>
+    <!-- Billing Details Section -->
+    <div class="billing-details">
+        <h2>Billing Details</h2>
+        <form action="{{ route('checkout.process') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="name">Name*</label>
+                <input type="text" id="name" name="name" value="{{ old('name', 'Admin') }}" required>
             </div>
-        </div>
 
-        <!-- Continue Shopping Button -->
-        <!-- <div class="btn-container">
-            <a href="https://readytoprint.com.au/product-list" class="btn-back">Continue Shopping</a>
-        </div> -->
+            <div class="form-group">
+                <label for="company_name">Company Name (Optional)</label>
+                <input type="text" id="company_name" name="company_name" value="{{ old('company_name', 'Company Name') }}">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number*</label>
+                <input type="tel" id="phone" name="phone" value="{{ old('phone', 'Phone Number') }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address*</label>
+                <input type="email" id="email" name="email" value="{{ old('email', 'admin@gmail.com') }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address*</label>
+                <input type="text" id="address" name="address" value="{{ old('address', 'Add min') }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="alternate_address">Alternate Address*</label>
+                <input type="text" id="alternate_address" name="alternate_address" value="{{ old('alternate_address', 'e.g. Alternate Address') }}">
+            </div>
+
+            <div class="form-group">
+                <label for="order_notes">Order Notes (Optional)</label>
+                <textarea id="order_notes" name="order_notes" placeholder="Note about your order e.g. special note for your delivery">{{ old('order_notes') }}</textarea>
+            </div>
+
+            <button type="submit">Proceed to Payment</button>
+        </form>
+
     </div>
 
-    <script>
-        function updateTotalPrice() {
-            var quantity = document.getElementById('quantity-input').value; // Get the updated quantity
-            var pricePerItem = parseFloat(document.getElementById('item-price').innerText.replace('$', '').trim()); // Get dynamic price per item
-            var subtotal = pricePerItem * quantity;
-            var total = subtotal;
+    <!-- Order Summary Section -->
+    <div class="order-summary">
+        <h3>Your Order</h3>
+        <ul>
+            <li>
+                <span>Service</span>
+                <span>{{ $serviceName }}</span>
+            </li>
+            <li>
+                <span>Price Per Item</span>
+                <span>${{ number_format($pricePerItem, 2) }}</span>
+            </li>
+            <li>
+                <span>Tokens</span>
+                <span>{{ $tokens }}</span>
+            </li>
+        </ul>
+        <div class="total-cost">
+            <ul>
+                <li><strong>Subtotal:</strong> ${{ number_format($tokens * $pricePerItem, 2) }}</li>
+                <!-- <li><strong>GST (10%):</strong> ${{ number_format($tokens * $pricePerItem * 0.10, 2) }}</li> -->
+            </ul>
+            <div><strong>Total:</strong> ${{ number_format($tokens * $pricePerItem , 2) }}</div>
+        </div>
+        <!-- Payment Method Section -->
+        <div class="payment-method">
+            <h4>Credit Card (Razorpay)</h4>
+            <button class="stripe-button" type="submit">Proceed to Payment</button>
+        </div>
+    </div>
 
-            // Update the displayed prices
-            document.getElementById('subtotal').innerText = '$' + subtotal.toFixed(2);
-            document.getElementById('total').innerText = '$' + total.toFixed(2);
-        }
-
-        function deleteItem(itemId) {
-            if (confirm('Are you sure you want to remove this item?')) {
-                // Logic to remove the item, e.g., sending an AJAX request to update session/cart
-                console.log(`Item ${itemId} removed.`); // Placeholder for actual removal logic
-                // Redirect or refresh the page after removal
-            }
-        }
-    </script>
 
 </main>
-
 @endsection
