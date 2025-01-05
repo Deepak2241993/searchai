@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 
 class TokenController extends Controller
 {
-    /**
-     * Handle adding tokens to the cart.
-     */
+    
     public function addToCart(Request $request)
     {
         // Validate input
@@ -33,6 +31,7 @@ class TokenController extends Controller
      */
     public function showCheckoutForm()
     {
+        // dd('hello');
         // Retrieve tokens and price from the session
         $tokens = session('cart.tokens', 0); // Default value is 0 if no tokens exist in session
         $pricePerItem = session('cart.pricePerItem', 849.00); // Default price is 849.00 if no price exists in session

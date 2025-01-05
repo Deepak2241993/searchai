@@ -10,7 +10,13 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Http\Controllers\PaymentController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,35 +52,43 @@ Route::get('reset-password/{token}', [RegisterController::class, 'showResetForm'
 Route::post('reset-password', [RegisterController::class, 'reset'])->name('password.update');
 
 
-// KYC Verification Pages
-Route::get('/kyc-verification', function () {
-    return view('frontend.kyc-verification');
-})->name('kyc.verification');
-
-Route::get('/kyc-criminal-verification', function () {
-    return view('frontend.kyc-criminal-verification');
-})->name('kyc.criminal-verification');
-
-// Services
-Route::get('/services', [TokenController::class, 'services'])->name('services');
-
-// Cart
-Route::post('/cart', [TokenController::class, 'addToCart'])->name('cart.add');
-Route::get('/cart', [TokenController::class, 'viewCart'])->name('cart');
-
-// Checkout
-Route::get('/checkout', [TokenController::class, 'showCheckoutForm'])
-    ->name('checkout');
-    // Protect with authentication
-
-Route::post('/checkout', [TokenController::class, 'processCheckout'])
-    ->name('checkout.process');
+Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 
 
-// Payment
-Route::post('/payment', [TokenController::class, 'processPayment'])
-    ->name('payment.process')
-    ->middleware('auth');
+//cart
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/remove/{itemId}', [CartController::class, 'remove'])->name('cart.remove');
+
+// Checkout Routes
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::post('/payment/create-order', [PaymentController::class, 'createOrder'])->name('payment.createOrder');
+
+// Payment Routes
+Route::get('/pay/{order}', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
+Route::post('/payment/callback', [PaymentController::class, 'paymentCallback'])->name('payment.callback');
+
+
+
+// Success and failure routes
+Route::get('/payment/success', function () {
+    return "Payment successful!";
+})->name('payment.success');
+
+Route::get('/payment/failure', function () {
+    return "Payment failed.";
+})->name('failure.failure');
+
+Route::get('/clear-cart', function() {
+    session()->forget('cart'); // Or use session()->flush();
+    return 'Cart cleared';
+});
+
+
+
+
+
+
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -108,8 +122,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('banner', BannerController::class);
         // service
         Route::resource('service', ServiceController::class);
+        Route::get('/admin/get-slug', [ServiceController::class, 'getSlug'])->name('getslug');
         //blog
         Route::resource('blog', BlogController::class);
-    });
 
+       
+    });
 });

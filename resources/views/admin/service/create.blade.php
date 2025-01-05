@@ -57,6 +57,13 @@
                                            id="name" required>
                                 </div>
                                 <div class="mb-3 col-lg-6">
+                                    <label for="service_slug" class="form-label">Service Slug</label>
+                                    <input class="form-control" readonly type="text" name="service_slug" 
+                                           value="{{ isset($serviceData) ? $serviceData->service_slug : '' }}" placeholder="Service Slug" 
+                                           id="service_slug" required>
+                                </div>                                
+
+                                <div class="mb-3 col-lg-6">
                                     <label for="short_description" class="form-label">Short Description</label>
                                     <textarea class="form-control" name="short_description" id="short_description" rows="5" 
                                             placeholder="Shortly describe the service">{{ isset($serviceData) ? $serviceData->short_description : '' }}</textarea>
@@ -105,5 +112,34 @@
     </div>    
 @endsection
 @section('scripts')
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $("#name").on("change", function () {
+        var element = $(this);
+        $("button[type=submit]").prop("disabled", true);
+
+        $.ajax({
+            url: "{{ route('admin.getslug') }}",
+            type: "GET",
+            data: {
+                title: element.val(),
+            },
+            dataType: "json",
+            success: function (response) {
+                $("button[type=submit]").prop("disabled", false);
+                
+                if (response.status === true) {
+                    $("#service_slug").val(response.slug);
+                }
+            },
+            error: function (jqXHR, exception) {
+                console.error("Something went wrong");
+                $("button[type=submit]").prop("disabled", false);
+            },
+        });
+    });
+
+</script>
 
 @endsection

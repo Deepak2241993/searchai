@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
@@ -13,7 +14,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $data = Service::where('status', 1)->paginate(5); 
+        $data = Service::where('status', 1)->paginate(10);
         return view('admin.service.index', compact('data'));
     }
 
@@ -33,11 +34,12 @@ class ServiceController extends Controller
         // Validate incoming data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'service_slug' => 'required|unique:services',
             'short_description' => 'nullable|string|max:255',
             'long_description' => 'nullable|string',
             'price' => 'required|numeric',
             'status' => 'required|boolean',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image files
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
 
         $uploadedImages = [];
@@ -69,15 +71,19 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
+        // dd($request->all());
         // Validate incoming data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'service_slug' => 'required|unique:services,service_slug,' . $service->id,
             'short_description' => 'nullable|string|max:255',
             'long_description' => 'nullable|string',
             'price' => 'required|numeric',
             'status' => 'required|boolean',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate image files
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
+
+        // dd($validatedData);
 
         $uploadedImages = json_decode($service->images, true) ?? [];
         if ($request->hasFile('images')) {
@@ -112,4 +118,15 @@ class ServiceController extends Controller
             'message' => 'Service deleted successfully.',
         ]);
     }
+    public function getSlug(Request $request)
+    {
+        $slug = Str::slug($request->title);
+        return response()->json(['status' => true, 'slug' => $slug]);
+    }
+    public function show($slug)
+    {
+        $services = Service::where('service_slug', $slug)->get();
+        return view('frontend.services', compact('services'));
+    }
+
 }

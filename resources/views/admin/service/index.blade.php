@@ -53,7 +53,7 @@ Service List
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $service->name }}</td>
-                                                <td>{{ $service->description }}</td>
+                                                <td>{{ $service->short_description}}</td>
                                                 <td>{{ $service->price }}</td>
                                                 <td> {{ $service->status == 1 ? 'Active' : 'Inactive' }}</td>
                                                 <td class="text-center">

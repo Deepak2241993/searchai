@@ -553,6 +553,7 @@ class ComposerStaticInitbfe12996eeecb6fdc8713a9fd9d431f8
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\BannerController' => __DIR__ . '/../..' . '/app/Http/Controllers/BannerController.php',
         'App\\Http\\Controllers\\BlogController' => __DIR__ . '/../..' . '/app/Http/Controllers/BlogController.php',
+        'App\\Http\\Controllers\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/CartController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FaqController' => __DIR__ . '/../..' . '/app/Http/Controllers/FaqController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',

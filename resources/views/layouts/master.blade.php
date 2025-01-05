@@ -37,6 +37,7 @@
   
   <link as="script" href="{{url('/')}}/cdn.ampproject.org/v0.js" rel="preload">
 	<script async="" src="{{url('/')}}/cdn.ampproject.org/v0.js"></script>
+	@yield('style')
 
 	<style amp-boilerplate="">body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
 	<noscript>
@@ -223,6 +224,7 @@
 	<!-- Owl Carousel JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+@yield('script')
 <!-- Add this script to initialize Owl Carousel -->
 <script>
     $(document).ready(function(){
