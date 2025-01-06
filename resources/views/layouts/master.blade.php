@@ -34,6 +34,7 @@
 	<link rel="dns-prefetch" href="http://use.fontawesome.com/" crossorigin>
 	
 	<meta name="amp-experiments-opt-in" content="experiment-a,experiment-b">
+
   
   <link as="script" href="{{url('/')}}/cdn.ampproject.org/v0.js" rel="preload">
 	<script async="" src="{{url('/')}}/cdn.ampproject.org/v0.js"></script>

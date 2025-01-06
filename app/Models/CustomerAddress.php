@@ -14,6 +14,7 @@ class CustomerAddress extends Model
         'phone',
         'address',
         'alternate_address',
+        'note',
     ];
     public function user()
     {
