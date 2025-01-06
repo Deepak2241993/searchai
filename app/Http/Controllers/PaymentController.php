@@ -5,18 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\User;
-use App\Models\Payments;
-use App\Models\CustomerAddress;
+use App\Models\Token;
 use Razorpay\Api\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
     public function createOrder(Request $request)
     {
-        // Validate the incoming request data
+        // dd($request->all());
         $validated = $request->validate([
             'amount' => 'required|numeric|min:1',
             'name' => 'required|string|max:255',
@@ -24,9 +24,9 @@ class PaymentController extends Controller
             'phone' => 'required|string|max:20',
             'address' => 'required|string|max:255',
             'alternateaddress' => 'nullable|string|max:255',
+            'buyTokens' => 'required|string|max:255',
         ]);
 
-        // Update the user's name and email
         $user = User::find(auth()->id());
 
         if (!$user) {
@@ -38,9 +38,8 @@ class PaymentController extends Controller
             'email' => $validated['email'],
         ]);
 
-        // Update or create customer address
         $user->customerAddress()->updateOrCreate(
-            ['user_id' => $user->id], // Match condition
+            ['user_id' => $user->id],
             [
                 'phone' => $validated['phone'],
                 'address' => $validated['address'],
@@ -48,45 +47,44 @@ class PaymentController extends Controller
             ]
         );
 
-        // Create a Razorpay order
         try {
-            // Initialize Razorpay API instance
             $api = new Api(env('RAZORPAY_KEY_ID'), env('RAZORPAY_KEY_SECRET'));
 
-            // Amount in paise (1 INR = 100 paise)
             $amountInPaise = $validated['amount'] * 100;
 
-            // Razorpay order data
             $orderData = [
                 'amount' => $amountInPaise,
                 'currency' => 'INR',
                 'receipt' => 'order_rcptid_' . uniqid(),
-                'payment_capture' => 1, // Auto capture payment
+                'payment_capture' => 1,
             ];
 
-            // Create Razorpay order
             $razorpayOrder = $api->order->create($orderData);
+            $tokensToBuy = $validated['buyTokens'];
 
-            // Log the Razorpay order creation
-            Log::info("Razorpay order created successfully", [
-                'order_id' => $razorpayOrder['id'],
-                'amount' => $amountInPaise,
-                'currency' => 'INR',
-            ]);
-
-            // Save Razorpay order ID to the local database (orders table)
+           
             $order = Order::create([
                 'user_id' => $user->id,
                 'razorpay_order_id' => $razorpayOrder['id'],
                 'amount' => $validated['amount'],
-                'currency' => 'INR', // Add the currency field here
-                'status' => 'pending', // Customize this according to your logic
+                'currency' => 'INR',
+                'status' => 'pending',
+                'tokens_purchased' => $tokensToBuy,
             ]);
 
-            // Return the Razorpay order details as a response
+            // dd($order);
+            Log::info("Razorpay order created successfully", [
+                'order_id' => $razorpayOrder['id'],
+                'amount' => $amountInPaise,
+                'tokens_purchased' => $tokensToBuy,
+                'currency' => 'INR',
+            ]);
+
+
             return response()->json([
-                'orderId' => $razorpayOrder['id'], // Razorpay order ID
-                'amount' => $validated['amount'], // Amount in INR
+                'orderId' => $razorpayOrder['id'],
+                'amount' => $validated['amount'],
+                
             ], 201);
         } catch (\Exception $e) {
             Log::error("Error creating Razorpay order", [
@@ -98,45 +96,33 @@ class PaymentController extends Controller
         }
     }
 
-
     public function initiatePayment($orderId)
     {
-        // Retrieve the order from the database
         $order = Order::findOrFail($orderId);
 
-        // Initialize Razorpay API
         $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
 
-        // Create an order with Razorpay
         $razorpayOrder = $api->order->create([
-            'amount' => $order->amount * 100, // Amount in paise (e.g., 500.00 INR = 50000 paise)
+            'amount' => $order->amount * 100,
             'currency' => 'INR',
-            'receipt' => 'order_rcptid_' . $order->id, // Unique receipt
+            'receipt' => 'order_rcptid_' . $order->id,
         ]);
 
-        // Update the order with the Razorpay order_id
         $order->razorpay_order_id = $razorpayOrder->id;
         $order->save();
 
-        // Return a view with the Razorpay order details to initiate the payment
         return view('payment', ['order' => $razorpayOrder]);
     }
 
-
-
     public function paymentCallback(Request $request)
     {
-        // Initialize Razorpay API
         $api = new Api(env('RAZORPAY_KEY_ID'), env('RAZORPAY_KEY_SECRET'));
 
-        // Retrieve Razorpay payment data from the callback
         $razorpayPaymentId = $request->razorpay_payment_id;
         $razorpayOrderId = $request->razorpay_order_id;
         $razorpaySignature = $request->razorpay_signature;
 
-        // Validate the payment signature
         if ($this->verifySignature($razorpayPaymentId, $razorpayOrderId, $razorpaySignature)) {
-            // Retrieve the order from the database
             $order = Order::where('razorpay_order_id', $razorpayOrderId)->first();
 
             if (!$order) {
@@ -145,37 +131,42 @@ class PaymentController extends Controller
             }
 
             try {
-                // Fetch payment details using Razorpay API
                 $payment = $api->payment->fetch($razorpayPaymentId);
 
-                // Check if payment is successful
                 if ($payment->status === 'captured') {
-                    // Create a new payment record
                     $paymentRecord = new Payment();
                     $paymentRecord->order_id = $order->id;
                     $paymentRecord->razorpay_payment_id = $razorpayPaymentId;
                     $paymentRecord->razorpay_order_id = $razorpayOrderId;
-                    $paymentRecord->status = 'success'; // Payment status
+                    $paymentRecord->status = 'success';
                     $paymentRecord->amount = $order->amount;
                     $paymentRecord->currency = $order->currency;
                     $paymentRecord->save();
 
-                    // Update order status to 'paid'
-                    $order->status = 'paid'; 
+                    $numberOfTokens = $order->tokens_purchased;
+                    // dd($numberOfTokens); 
+                    $user = User::find($order->user_id); 
+                    $expiresAt = Carbon::now()->addDays(600);
+
+                    for ($i = 0; $i < $numberOfTokens; $i++) {
+                        $newToken = new Token();
+                        $newToken->user_id = $user->id;
+                        
+                        $newToken->token = Str::random(32);
+                        $newToken->expires_at = $expiresAt;
+                        $newToken->status = 'active';
+                        $newToken->save();
+                    }
+
+                    $order->status = 'paid';
                     $order->save();
 
-                    // Post-payment actions like sending confirmation emails
-                    // Example: Mail::to($order->email)->send(new PaymentSuccessMail($order));
-
-                    // Redirect to success page
                     return response()->json(['success' => true, 'message' => 'Payment successful']);
                 } else {
-                    // Handle payment failure
                     Log::error('Payment failed', ['razorpay_payment_id' => $razorpayPaymentId]);
                     return response()->json(['error' => 'Payment failed'], 400);
                 }
             } catch (\Exception $e) {
-                // Log any exceptions
                 Log::error('Error verifying payment', [
                     'error_message' => $e->getMessage(),
                     'razorpay_payment_id' => $razorpayPaymentId,
@@ -185,7 +176,6 @@ class PaymentController extends Controller
                 return response()->json(['error' => 'Payment verification failed'], 500);
             }
         } else {
-            // If signature verification fails, log and return an error
             Log::error('Signature verification failed', [
                 'razorpay_payment_id' => $razorpayPaymentId,
                 'razorpay_order_id' => $razorpayOrderId,
@@ -194,7 +184,6 @@ class PaymentController extends Controller
             return response()->json(['error' => 'Payment verification failed'], 400);
         }
     }
-
 
     private function verifySignature($razorpayPaymentId, $razorpayOrderId, $razorpaySignature)
     {

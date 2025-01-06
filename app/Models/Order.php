@@ -14,5 +14,6 @@ class Order extends Model
         'amount',
         'currency',
         'status',
+        'tokens_purchased',
     ];
 }

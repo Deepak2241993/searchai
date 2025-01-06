@@ -293,6 +293,7 @@
                                                 @foreach ($carts as $item)
                                                     @php
                                                         $amount += $item['pricePerItem'] * $item['tokens'];
+                                                        $totalTokens = $item['tokens'];
                                                     @endphp
                                                     <li class="d-flex justify-content-between align-items-center mb-2">
                                                         <div>
@@ -315,6 +316,8 @@
                                                     class="form-check-input" checked>
                                                 <input type="hidden" id="order-amount" name="amount"
                                                     value="{{ $amount }}">
+                                                <input type="hidden" id="buy-tokens" name="buy-tokens"
+                                                    value="{{ $totalTokens }}">
                                                 <label for="credit-card" class="form-check-label">Credit Card
                                                     (Stripe)</label>
                                             </div>
@@ -348,6 +351,7 @@
             const phone = document.getElementById('phone').value;
             const address = document.getElementById('address').value;
             const alternateAddress = document.getElementById('alternateaddress').value;
+            const buyTokens = document.getElementById('buy-tokens').value;
 
             if (!amount || !name || !email || !phone || !address) {
                 alert('Please fill all the required fields.');
@@ -376,7 +380,8 @@
                         email,
                         phone,
                         address,
-                        alternateaddress: alternateAddress
+                        alternateaddress: alternateAddress,
+                        buyTokens
                     })
                 });
 
