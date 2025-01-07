@@ -13,8 +13,8 @@
         @auth
         <div id="user-info" style="display: block;">
             <span id="user-name">{{ Auth::user()->name }}</span> 
-            <a class="navbar-link pr3" href="#">Dashboard</a>
-            <a class="navbar-link pr3" href="#">Settings</a>
+            <a class="navbar-link pr3" href="{{ route('dashboard') }}">Dashboard</a>
+            <a class="navbar-link pr3" href="{{ route('settings') }}">Settings</a>
             <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                 @csrf
                 <button type="submit" class="navbar-link pr3">Logout</button>
