@@ -11,6 +11,7 @@ class CustomerAddress extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
+        'profile_pic',
         'phone',
         'address',
         'alternate_address',

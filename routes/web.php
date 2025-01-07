@@ -98,7 +98,9 @@ Route::get('/clear-cart', function() {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [RegisterController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [RegisterController::class, 'profile'])->name('profile');
+    Route::post('/profile/update', [RegisterController::class, 'updateProfile'])->name('profile.update');
     Route::get('/settings', [RegisterController::class, 'settings'])->name('settings');
+    Route::put('/updatePassword', [RegisterController::class, 'updatePassword'])->name('updatePassword');
 
 
     Route::get('/my-orders', [RegisterController::class, 'orders'])->name('orders');

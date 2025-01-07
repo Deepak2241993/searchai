@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\CustomerAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -137,15 +138,68 @@ class RegisterController extends Controller
     }
     public function profile()
     {
-        return view('auth.profile');
+        $user = User::with('customerAddress')->find(Auth::id());
+        if (!$user) {
+            abort(403, 'Unauthorized');
+        }
+        return view('auth.profile', ['user' => $user]);
     }
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:15',
+            'address' => 'nullable|string|max:255',
+            'alternate_address' => 'nullable|string|max:255',
+
+        ]);
+
+        // Handle profile picture upload
+        if ($request->hasFile('profile_pic')) {
+            $destinationPath = public_path('uploads/profile_pics');
+            $customerAddress = $user->customerAddress;
+            if ($customerAddress && $customerAddress->profile_pic && file_exists($destinationPath . '/' . $customerAddress->profile_pic)) {
+                unlink($destinationPath . '/' . $customerAddress->profile_pic);
+            }
+            $profilePicName = time() . '_' . $request->file('profile_pic')->getClientOriginalName();
+            $request->file('profile_pic')->move($destinationPath, $profilePicName);
+            if ($customerAddress) {
+                $customerAddress->profile_pic = $profilePicName;
+                $customerAddress->save();
+            }
+        }
+        $user->update($request->only('name', 'email'));
+        $customerAddressData = $request->only('phone', 'address', 'profile_pic', 'alternate_address');
+        if ($user->customerAddress) {
+            $user->customerAddress->update($customerAddressData);
+        } else {
+            $user->customerAddress()->create($customerAddressData);
+        }
+        return redirect()->route('profile')->with('success', 'Profile updated successfully.');
+    }
+
+
     public function settings()
     {
         return view('auth.settings');
     }
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'new_password' => 'required|min:8|confirmed',
+        ]);
+        $user = Auth::user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        return redirect()->back()->with('success', 'Password changed successfully.');
+    }
+
     public function orders()
     {
-        $data = Order::where('user_id', auth()->id())->paginate(5); 
+        $data = Order::where('user_id', auth()->id())->paginate(5);
         return view('auth.orders', compact('data'));
     }
     public function show($id)
@@ -162,11 +216,9 @@ class RegisterController extends Controller
                 ],
             ]);
         }
-
         return response()->json([
             'success' => false,
             'message' => 'Token not found.',
         ]);
     }
-
 }
