@@ -1,14 +1,34 @@
-       <!-- Start Navbar -->
-       <header class="ampstart-headerbar fixed flex justify-start items-center top-0 left-0 right-0 pl3 pr3">
-        <a style="line-height:13px" class="my0 mr-auto" href="index.html"><amp-img src="images/logo.png" width="200" height="40" layout="fixed" alt="Helpers near me"></amp-img></a>
-        <a class="navbar-link text-right pr3" href="about-us.html">About<br/>Helpers Near Me</a>
-        <a class="navbar-link text-right pr3" rel="noopener" href="hnm.html">Join us as a Helper /<br/>सहायक के रूप में हमसे जुड़ें</a>
-        <a class="navbar-link text-right pr3" href="verifications.html">Verify your<br/>Worker, Legally</a>
-        <div role="button" aria-label="open sidebar" on="tap:header-sidebar.toggle" tabindex="0" class="ampstart-navbar-trigger">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-        <path fill="none" d="M0 0h24v24H0z"></path>
-        <path fill="#fff" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
-        </svg>
+<!-- Start Navbar -->
+<header class="ampstart-headerbar fixed flex justify-start items-center top-0 left-0 right-0 pl3 pr3">
+    <a style="line-height:13px" class="my0 mr-auto" href="index.html">
+        <amp-img src="images/logo.png" width="200" height="40" layout="fixed" alt="Helpers near me"></amp-img>
+    </a>
+    <a class="navbar-link text-right pr3" href="about-us.html">About<br/>Helpers Near Me</a>
+    <a class="navbar-link text-right pr3" rel="noopener" href="hnm.html">Join us as a Helper /<br/>सहायक के रूप में हमसे जुड़ें</a>
+    <a class="navbar-link text-right pr3" href="verifications.html">Verify your<br/>Worker, Legally</a>
+
+    <!-- Start Login/Register buttons -->
+    <div class="navbar-auth">
+        <!-- If user is logged in, show username and options -->
+        @auth
+        <div id="user-info" style="display: block;">
+            <span id="user-name">{{ Auth::user()->name }}</span> 
+            <a class="navbar-link pr3" href="#">Dashboard</a>
+            <a class="navbar-link pr3" href="#">Settings</a>
+            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                @csrf
+                <button type="submit" class="navbar-link pr3">Logout</button>
+            </form>
+        </div>
+        @else
+        <!-- If user is not logged in, show login/register buttons -->
+        <div id="auth-buttons" style="display: block;">
+            <a class="navbar-link pr3" href="{{ route('login') }}">Login</a>
+            <a class="navbar-link pr3" href="{{ route('register') }}">Register</a>
+        </div>
+        @endauth
     </div>
-    </header>
-<!-- Start Sidebar -->
+    <!-- End Login/Register buttons -->
+</header>
+<!-- End Navbar -->
+

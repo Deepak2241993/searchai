@@ -4,7 +4,7 @@
 <style>
     #content {
         display: flex;
-        max-width: 1200px;
+        
         margin: 0 auto;
         padding: 40px;
         background: #f9f9f9;
@@ -139,7 +139,7 @@
         grid-template-columns: 1fr 1fr;
         /* Two columns */
         gap: 20px;
-        max-width: 800px;
+        margin-top: 50px !important;
         margin: 0 auto;
     }
 
@@ -205,7 +205,7 @@
 <main id="content">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="col-lg-12 col-md-10 col-sm-12">
                 <div class="row">
                     @auth
                     @if (Auth::user()->is_admin == '')
@@ -309,7 +309,7 @@
                                             <li class="d-flex justify-content-between align-items-center mb-2">
                                                 <div>
                                                     <h5>{{ $item['serviceName'] }}</h5>
-                                                    <span class="text-muted">${{ $item['pricePerItem'] }} x
+                                                    <span class="text-muted">Rs.{{ $item['pricePerItem'] }} x
                                                         {{ $item['tokens'] }} tokens</span>
                                                 </div>
                                                 <button type="button" class="btn btn-sm btn-danger"
@@ -323,14 +323,13 @@
 
                                     <div class="payment-information mb-4">
                                         <div class="form-check">
-                                            <input id="credit-card" type="radio" name="payment_method" value="stripe"
+                                            <input id="credit-card" hidden type="radio" name="payment_method" value="stripe"
                                                 class="form-check-input" checked>
                                             <input type="hidden" id="order-amount" name="amount"
                                                 value="{{ $amount }}">
                                             <input type="hidden" id="buy-tokens" name="buy-tokens"
                                                 value="{{ $totalTokens }}">
-                                            <label for="credit-card" class="form-check-label">Credit Card
-                                                (Stripe)</label>
+                                            
                                         </div>
                                     </div>
 

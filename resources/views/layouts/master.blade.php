@@ -252,6 +252,31 @@
         });
     });
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Check if the user is logged in using Laravel's Blade syntax
+        const userLoggedIn = {{ Auth::check() ? 'true' : 'false' }}; // Dynamically check if the user is logged in
+        const userName = "{{ Auth::user()->name ?? 'Guest' }}"; // Get the user's name if logged in, else show 'Guest'
+
+        // Get the DOM elements
+        const authButtons = document.getElementById("auth-buttons");
+        const userInfo = document.getElementById("user-info");
+        const userNameElement = document.getElementById("user-name");
+
+        // Check the login status
+        if (userLoggedIn) {
+            // Show logged-in user details
+            authButtons.style.display = "none"; 
+            userInfo.style.display = "block"; 
+            userNameElement.textContent = userName; 
+        } else {
+            // Show login/register buttons
+            authButtons.style.display = "block"; 
+            userInfo.style.display = "none"; 
+        }
+    });
+</script>
+
 
 </body>
 

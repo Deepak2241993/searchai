@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Token;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -39,6 +41,13 @@ class RegisterController extends Controller
 
     public function showLoginForm()
     {
+        // Check if the user is already logged in
+        if (Auth::check()) {
+            // Redirect to home page if the user is logged in
+            return redirect()->route('home');
+        }
+
+        // If the user is not logged in, show the login form
         return view('auth.login');
     }
 
@@ -48,13 +57,13 @@ class RegisterController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
-        $credentials = $request->only('email', 'password');        
+        $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             // Redirect to home if authentication is successful
             return redirect()->route('home');
         }
         $errorMessages = [];
-    
+
         $user = User::where('email', $request->email)->first();
         if (!$user) {
             $errorMessages['email'] = 'Incorrect email';
@@ -64,12 +73,12 @@ class RegisterController extends Controller
         }
         return back()->withErrors($errorMessages)->withInput();
     }
-    
+
 
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 
     // Handling Forgot Password
@@ -122,6 +131,42 @@ class RegisterController extends Controller
             ? redirect()->route('login')->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
     }
+    public function dashboard()
+    {
+        return view('auth.dashboad');
+    }
+    public function profile()
+    {
+        return view('auth.profile');
+    }
+    public function settings()
+    {
+        return view('auth.settings');
+    }
+    public function orders()
+    {
+        $data = Order::where('user_id', auth()->id())->paginate(5); 
+        return view('auth.orders', compact('data'));
+    }
+    public function show($id)
+    {
+        $token = Token::find($id);
+        if ($token) {
+            return response()->json([
+                'success' => true,
+                'token' => [
+                    'id' => $token->id,
+                    'tokens_purchased' => $token->tokens_purchased,
+                    'status' => $token->status,
+                    'created_at' => $token->created_at->format('d-m-Y H:i A'),
+                ],
+            ]);
+        }
 
+        return response()->json([
+            'success' => false,
+            'message' => 'Token not found.',
+        ]);
+    }
 
 }

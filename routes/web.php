@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\AadhaarOCRController;
 
 
 
@@ -87,7 +88,23 @@ Route::get('/clear-cart', function() {
 
 
 
+  // aadhar_card 
+  Route::get('/aadhaar-ocr', [AadhaarOCRController::class, 'performOCR']);
 
+
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [RegisterController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profile', [RegisterController::class, 'profile'])->name('profile');
+    Route::get('/settings', [RegisterController::class, 'settings'])->name('settings');
+
+
+    Route::get('/my-orders', [RegisterController::class, 'orders'])->name('orders');
+    Route::get('/User/token/{id}', [TokenController::class, 'show'])->name('token.show');
+
+});
 
 
 
@@ -125,6 +142,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/admin/get-slug', [ServiceController::class, 'getSlug'])->name('getslug');
         //blog
         Route::resource('blog', BlogController::class);
+
+        // aadhar_card 
+        Route::post('/aadhaar-ocr', [AadhaarOCRController::class, 'performOCR']);
 
        
     });

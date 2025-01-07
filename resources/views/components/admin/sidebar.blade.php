@@ -1,10 +1,10 @@
 <!--begin::Sidebar-->
-<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> 
-    <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="{{ route('home') }}" class="brand-link"> <!--begin::Brand Image--> <img src="{{url('/')}}/admin-assets/assets/img/searchai.png" alt="search ai logo" class="brand-image opacity-75 shadow"> <span class="brand-text fw-light"></span>  </a> </div> 
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+    <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="{{ route('home') }}" class="brand-link"> <!--begin::Brand Image--> <img src="{{url('/')}}/admin-assets/assets/img/searchai.png" alt="search ai logo" class="brand-image opacity-75 shadow"> <span class="brand-text fw-light"></span> </a> </div>
     <div class="sidebar-wrapper">
         <nav class="mt-2"> <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
-                
+                @if(auth()->user() && auth()->user()->isAdmin())
                 <li class="nav-item"> <a href="{{ route('admin.dashboard') }}" class="nav-link active"> <i class="nav-icon fa fa-circle"></i>
                         <p>Dashboard</p>
                     </a> </li>
@@ -22,10 +22,38 @@
                     </a> </li>
                 <li class="nav-item"> <a href="{{ route('admin.service.index') }}" class="nav-link"> <i class="bi bi-gear-wide-connected"></i>
                         <p>Service Management</p>
-                    </a> </li>
                 <li class="nav-item"> <a href="{{ route('admin.blog.index') }}" class="nav-link"> <i class="bi bi-calendar2-minus"></i>
                         <p>Blog Management</p>
                     </a> </li>
+                        @else
+                <li class="nav-item">
+                    <a href="{{ route('dashboard') }}" class="nav-link active">
+                        <i class="nav-icon fa fa-circle"></i>
+                        <p>User Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('orders') }}" class="nav-link">
+                        <i class="nav-icon fa fa-circle"></i>
+                        <p>My Tokens</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('profile') }}" class="nav-link">
+                        <i class="nav-icon fa fa-user"></i>
+                        <p>My Profile</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('settings') }}" class="nav-link">
+                        <i class="nav-icon fa fa-cog"></i>
+                        <p>Settings</p>
+                    </a>
+                </li>
+               
+                @endif
+                </a> </li>
+               
                 {{-- <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i class="nav-icon bi bi-palette"></i>
                         <p>Theme Generate</p>
                     </a> </li>
@@ -264,4 +292,4 @@
             </ul> <!--end::Sidebar Menu-->
         </nav>
     </div> <!--end::Sidebar Wrapper-->
-</aside> <!--end::Sidebar--> 
+</aside> <!--end::Sidebar-->
