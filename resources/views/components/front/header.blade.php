@@ -15,6 +15,13 @@
             <span id="user-name">{{ Auth::user()->name }}</span> 
             <a class="navbar-link pr3" href="{{ route('dashboard') }}">Dashboard</a>
             <a class="navbar-link pr3" href="{{ route('settings') }}">Settings</a>
+            <a class="navbar-link cart-button btn btn-success position-relative btn-sm px-4" href="{{ route('cart.index') }}">
+                <i class="bi bi-cart4"></i> Cart
+                <span class="badge position-absolute top-0 start-100 translate-middle bg-danger rounded-circle">
+                    {{ getTotalCartItems() }}
+                </span>
+            </a>
+
             <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                 @csrf
                 <button type="submit" class="navbar-link pr3">Logout</button>

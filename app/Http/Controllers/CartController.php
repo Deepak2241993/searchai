@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CustomerAddress;
+use Illuminate\Support\Facades\Log;
+
 
 class CartController extends Controller
 {
@@ -18,16 +20,35 @@ class CartController extends Controller
             'serviceName' => 'required|string',
         ]);
 
+        // Retrieve the current cart from the session
         $cart = session()->get('cart', []);
+
+        // Generate a unique ID for the new item
         $itemId = uniqid();
-        // Add the new item to the cart
-        $cart[] = [
-            'id' => $itemId,
-            'serviceName' => $validated['serviceName'],
-            'tokens' => $validated['tokens'],
-            'pricePerItem' => $validated['pricePerItem'],
-            'total_price' => $validated['tokens'] * $validated['pricePerItem'],
-        ];
+
+        // Check if the item already exists in the cart
+        $itemExists = false;
+        foreach ($cart as &$item) {
+            if ($item['serviceName'] === $validated['serviceName']) {
+                // If the item exists, update its tokens and total price
+                $item['tokens'] += $validated['tokens'];
+                $item['total_price'] = $item['tokens'] * $validated['pricePerItem'];
+                $itemExists = true;
+                break;
+            }
+        }
+
+        // If the item does not exist, add it as a new entry
+        if (!$itemExists) {
+            $cart[] = [
+                'id' => $itemId,
+                'serviceName' => $validated['serviceName'],
+                'tokens' => $validated['tokens'],
+                'pricePerItem' => $validated['pricePerItem'],
+                'total_price' => $validated['tokens'] * $validated['pricePerItem'],
+                'totalItems' => 1, // Track the count of unique items
+            ];
+        }
 
         // Store the updated cart in the session
         session()->put('cart', $cart);
@@ -35,6 +56,7 @@ class CartController extends Controller
         // Redirect back to the cart page with a success message
         return redirect()->route('cart.index')->with('success', 'Item added to cart.');
     }
+
 
 
     // View Cart
@@ -46,7 +68,7 @@ class CartController extends Controller
         // Calculate the subtotal
         foreach ($cart as $item) {
             if (is_array($item)) {
-                $subtotal += $item['pricePerItem'] * $item['tokens']; 
+                $subtotal += $item['pricePerItem'] * $item['tokens'];
             }
         }
 
@@ -55,20 +77,22 @@ class CartController extends Controller
         return view('frontend.cart', compact('cart', 'subtotal', 'total'));
     }
 
-    // Remove an item from the cart
-    public function remove($itemId)
+    public function remove(Request $request, $itemId)
     {
         $cart = session()->get('cart', []);
-        if (isset($cart[$itemId])) {
-            unset($cart[$itemId]);
-            session()->put('cart', $cart);
+        foreach ($cart as $key => $item) {
+            if ($item['id'] === $itemId) {
+                unset($cart[$key]);
+                session()->put('cart', array_values($cart));
+                return response()->json(['success' => true, 'message' => 'Item removed from cart.']);
+            }
         }
 
-        return redirect()->route('cart.index')->with('success', 'Item removed from cart.');
+        return response()->json(['success' => false, 'message' => 'Item not found in cart.']);
     }
-
     // Proceed to Checkout
-    public function checkout(Request $request) {
+    public function checkout(Request $request)
+    {
 
         // dd($request->all());
         $carts = session()->get('cart', []);
@@ -78,7 +102,7 @@ class CartController extends Controller
         }
         // dd($cart);
         if (Auth::check() == false) {
-            if(!session()->has('url.intended')) {
+            if (!session()->has('url.intended')) {
 
                 session(['url.intended' => url()->current()]);
             }
@@ -89,11 +113,18 @@ class CartController extends Controller
         session()->forget('url.intended');
 
         return view('frontend.checkout', compact('customerAddress', 'carts'));
-
     }
+    public function getTotalItems()
+    {
+        $cart = session()->get('cart', []);
+        $totalItems = 0;
 
-   
+        foreach ($cart as $item) {
+            if (is_array($item)) {
+                $totalItems += $item['tokens'];
+            }
+        }
 
-
-    
+        return $totalItems;
+    }
 }

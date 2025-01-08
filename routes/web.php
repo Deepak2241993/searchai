@@ -56,10 +56,8 @@ Route::post('reset-password', [RegisterController::class, 'reset'])->name('passw
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 
 
-//cart
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/remove/{itemId}', [CartController::class, 'remove'])->name('cart.remove');
+
+
 
 // Checkout Routes
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
@@ -94,6 +92,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/update', [RegisterController::class, 'updateProfile'])->name('profile.update');
     Route::get('/settings', [RegisterController::class, 'settings'])->name('settings');
     Route::put('/updatePassword', [RegisterController::class, 'updatePassword'])->name('updatePassword');
+
+
+    //cart
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/remove/{itemId}', [CartController::class, 'remove'])->name('cart.remove');
 
 
     Route::get('/my-orders', [RegisterController::class, 'orders'])->name('orders');
