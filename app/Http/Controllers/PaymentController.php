@@ -207,4 +207,12 @@ class PaymentController extends Controller
             return false; // Signature is invalid
         }
     }
+    public function success()
+    {
+        return view('payment.success');
+    }
+    public function failure()
+    {
+        return view('payment.failure');
+    }
 }

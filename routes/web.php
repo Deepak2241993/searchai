@@ -68,20 +68,13 @@ Route::post('/payment/create-order', [PaymentController::class, 'createOrder'])-
 // Payment Routes
 Route::get('/pay/{order}', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
 Route::post('/payment/callback', [PaymentController::class, 'paymentCallback'])->name('payment.callback');
+Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/payment/failure', [PaymentController::class, 'failure'])->name('payment.failure');
 
 
-
-// Success and failure routes
-Route::get('/payment/success', function () {
-    return "Payment successful!";
-})->name('payment.success');
-
-Route::get('/payment/failure', function () {
-    return "Payment failed.";
-})->name('failure.failure');
 
 Route::get('/clear-cart', function() {
-    session()->forget('cart'); // Or use session()->flush();
+    session()->forget('cart');
     return 'Cart cleared';
 });
 
