@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use App\Models\CustomerAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -42,13 +43,9 @@ class RegisterController extends Controller
 
     public function showLoginForm()
     {
-        // Check if the user is already logged in
         if (Auth::check()) {
-            // Redirect to home page if the user is logged in
             return redirect()->route('home');
         }
-
-        // If the user is not logged in, show the login form
         return view('auth.login');
     }
 
@@ -58,13 +55,25 @@ class RegisterController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            // Redirect to home if authentication is successful
-            return redirect()->route('home');
-        }
-        $errorMessages = [];
 
+        $credentials = $request->only('email', 'password');
+        if (!Auth::check()) {
+            if (session()->has('cart')) {
+                Session::put('cart_data', session()->get('cart'));
+            }
+        }
+        if (Auth::attempt($credentials)) {
+            if (Session::has('cart_data')) {
+                session()->put('cart', Session::get('cart_data'));
+                Session::forget('cart_data');
+                
+                return redirect()->route('cart.index');
+            } else {
+                return redirect()->route('home');
+            }
+        }
+
+        $errorMessages = [];
         $user = User::where('email', $request->email)->first();
         if (!$user) {
             $errorMessages['email'] = 'Incorrect email';
@@ -72,6 +81,7 @@ class RegisterController extends Controller
         if ($user && !Auth::attempt($credentials)) {
             $errorMessages['password'] = 'Incorrect Password';
         }
+
         return back()->withErrors($errorMessages)->withInput();
     }
 
@@ -79,8 +89,8 @@ class RegisterController extends Controller
     public function logout()
     {
         Auth::logout();
-        session()->invalidate(); 
-        session()->regenerateToken(); 
+        session()->invalidate();
+        session()->regenerateToken();
         return redirect()->route('login');
     }
 
@@ -136,9 +146,9 @@ class RegisterController extends Controller
     }
     public function dashboard()
     {
-        $user = auth()->user(); 
-        $orderCount = Order::where('user_id', $user->id)->count(); 
-        $tokenCount = Token::where('user_id', $user->id)->count(); 
+        $user = auth()->user();
+        $orderCount = Order::where('user_id', $user->id)->count();
+        $tokenCount = Token::where('user_id', $user->id)->count();
 
         return view('auth.dashboad', compact('orderCount', 'tokenCount'));
     }

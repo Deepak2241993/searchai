@@ -13,7 +13,6 @@ class CartController extends Controller
     // Add to Cart
     public function add(Request $request)
     {
-        // dd($request->all());
         // Validate the incoming request data
         $validated = $request->validate([
             'tokens' => 'required|integer|min:1',

@@ -76,6 +76,8 @@ Route::get('/clear-cart', function() {
     return 'Cart cleared';
 });
 
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+
 
 
 
@@ -95,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     //cart
-    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/remove/{itemId}', [CartController::class, 'remove'])->name('cart.remove');
 
@@ -148,6 +150,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // aadhar_card 
         Route::post('/aadhaar-ocr', [AadhaarOCRController::class, 'performOCR']);
+
+        Route::get('/my-orders', [RegisterController::class, 'orders'])->name('orders');
 
        
     });
