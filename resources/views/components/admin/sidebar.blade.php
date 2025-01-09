@@ -22,8 +22,10 @@
                     </a> </li>
                 <li class="nav-item"> <a href="{{ route('admin.service.index') }}" class="nav-link"> <i class="bi bi-gear-wide-connected"></i>
                         <p>Service Management</p>
-                <li class="nav-item"> <a href="{{ route('admin.blog.index') }}" class="nav-link"> <i class="bi bi-calendar2-minus"></i>
-                        <p>Blog Management</p>
+                <li class="nav-item"> <a href="{{ route('admin.service.index') }}" class="nav-link"> <i class="bi bi-gear-wide-connected"></i>
+                        <p>Service Management</p>
+                <li class="nav-item"> <a href="{{ route('admin.ordersDetails') }}" class="nav-link"> <i class="bi bi-calendar2-minus"></i>
+                        <p>Orders Details</p>
                     </a> </li>
                         @else
                 <li class="nav-item">

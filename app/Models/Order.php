@@ -16,4 +16,8 @@ class Order extends Model
         'status',
         'tokens_purchased',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

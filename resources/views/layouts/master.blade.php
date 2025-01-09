@@ -102,7 +102,8 @@
 		#slider {
     position: relative;
     width: 100%;
-	height: 67vh;
+	height: 100vh;
+	max-width: 880px;
     overflow: hidden;
 }
 

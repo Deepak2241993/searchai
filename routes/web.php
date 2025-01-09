@@ -10,6 +10,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\OrderRecordsController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -151,7 +152,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // aadhar_card 
         Route::post('/aadhaar-ocr', [AadhaarOCRController::class, 'performOCR']);
 
-        Route::get('/my-orders', [RegisterController::class, 'orders'])->name('orders');
+        Route::get('/orders-details', [OrderRecordsController::class, 'ordersDetails'])->name('ordersDetails');
 
        
     });
