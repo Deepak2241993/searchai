@@ -103,6 +103,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my-orders', [RegisterController::class, 'orders'])->name('orders');
     Route::get('/User/token/{id}', [TokenController::class, 'show'])->name('token.show');
 
+    // Checkout Routes
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::post('/payment/create-order', [PaymentController::class, 'createOrder'])->name('payment.createOrder');
+
 });
 
 

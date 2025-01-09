@@ -79,7 +79,9 @@ class RegisterController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('home');
+        session()->invalidate(); 
+        session()->regenerateToken(); 
+        return redirect()->route('login');
     }
 
     // Handling Forgot Password
@@ -134,8 +136,13 @@ class RegisterController extends Controller
     }
     public function dashboard()
     {
-        return view('auth.dashboad');
+        $user = auth()->user(); 
+        $orderCount = Order::where('user_id', $user->id)->count(); 
+        $tokenCount = Token::where('user_id', $user->id)->count(); 
+
+        return view('auth.dashboad', compact('orderCount', 'tokenCount'));
     }
+
     public function profile()
     {
         $user = User::with('customerAddress')->find(Auth::id());
