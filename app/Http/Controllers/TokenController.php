@@ -78,4 +78,10 @@ class TokenController extends Controller
         // Render the cart view
         return view('frontend.cart', compact('tokens', 'pricePerItem'));
     }
+
+    public function tokenList()
+    {
+        return view('token.index');
+    }
+
 }

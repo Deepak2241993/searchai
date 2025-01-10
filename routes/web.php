@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\AadhaarOCRController;
+use App\Http\Controllers\AadhaarController;
 
 
 
@@ -87,6 +88,20 @@ Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
 
 
+  Route::get('/aadhaar-form', function () {
+    return view('aadhaar_form');
+});
+  Route::get('/aadhaar-form-verify', function () {
+    return view('aadhaar_verify');
+});
+
+
+Route::get('/aadhaar/form', [AadhaarController::class, 'showForm'])->name('aadhaar.form');
+Route::post('/aadhaar/generate', [AadhaarController::class, 'generateOtp'])->name('aadhaar.generate');
+Route::get('/aadhaar/verify', [AadhaarController::class, 'showVerifyForm'])->name('aadhaar.verify');
+Route::post('/aadhaar/submit', [AadhaarController::class, 'submitOtp'])->name('aadhaar.submit');
+Route::get('/aadhaar/success', [AadhaarController::class, 'success'])->name('aadhaar.success');
+
 
 
 Route::middleware(['auth'])->group(function () {
@@ -105,6 +120,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/my-orders', [RegisterController::class, 'orders'])->name('orders');
     Route::get('/User/token/{id}', [TokenController::class, 'show'])->name('token.show');
+    Route::get('/token-views', [TokenController::class, 'tokenList'])->name('token.index');
 
     // Checkout Routes
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
@@ -153,6 +169,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/aadhaar-ocr', [AadhaarOCRController::class, 'performOCR']);
 
         Route::get('/orders-details', [OrderRecordsController::class, 'ordersDetails'])->name('ordersDetails');
+        Route::get('/tokens', [OrderRecordsController::class, 'ordersDetails'])->name('ordersDetails');
 
        
     });

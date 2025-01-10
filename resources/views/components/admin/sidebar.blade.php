@@ -35,9 +35,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('token.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-circle"></i>
+                        <p>Tokens</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('orders') }}" class="nav-link">
                         <i class="nav-icon fa fa-circle"></i>
-                        <p>My Tokens</p>
+                        <p>Orders</p>
                     </a>
                 </li>
                 <li class="nav-item">
