@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Token;
 
 class TokenController extends Controller
 {
@@ -81,7 +82,9 @@ class TokenController extends Controller
 
     public function tokenList()
     {
-        return view('token.index');
+        $userId = auth()->id();
+        $data = Token::where('user_id', $userId)->paginate(10);
+        return view('token.index', ['data' => $data]);
     }
 
 }

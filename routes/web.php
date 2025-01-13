@@ -104,6 +104,8 @@ Route::get('/aadhaar/success', [AadhaarController::class, 'success'])->name('aad
 
 
 
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [RegisterController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [RegisterController::class, 'profile'])->name('profile');
@@ -120,6 +122,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/my-orders', [RegisterController::class, 'orders'])->name('orders');
     Route::get('/User/token/{id}', [TokenController::class, 'show'])->name('token.show');
+
     Route::get('/token-views', [TokenController::class, 'tokenList'])->name('token.index');
 
     // Checkout Routes
