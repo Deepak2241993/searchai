@@ -164,46 +164,59 @@
         color: #fff;
     }
 </style>
+<main id="content" style="padding: 20px; font-family: Arial, sans-serif;">
+    <h1 style="text-align: center; margin-bottom: 20px;">Your Cart</h1>
+    <p style="text-align: center; color: #555;">Review your selected items below and proceed to checkout.</p>
 
-<main id="content">
-    <h1>Your Cart</h1>
-    <p>Review your selected items below and proceed to checkout.</p>
-
-    <div class="container">
+    <div class="container" style="max-width: 800px; margin: 0 auto;">
         @if (empty($cart) || count($cart) == 0)
-        <div class="no-items">
-            <p>No items added to your cart.</p>
-            <a href="{{ route('home') }}" class="btn-primary">Add Items</a>
+        <div class="no-items" style="text-align: center; margin-top: 50px;">
+            <p style="font-size: 18px; color: #888;">No items added to your cart.</p>
+            <a href="{{ route('home') }}" class="btn-primary" style="padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">Add Items</a>
         </div>
         @else
-        <div class="table-wrap">
-            <table>
-                <thead>
+        <div class="table-wrap" style="margin-top: 30px; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; box-shadow: 0px 2px 5px rgba(0,0,0,0.1);">
+                <thead style="background: #f8f9fa;">
                     <tr>
-                        <th>Service Name</th>
-                        <th>Tokens </th>
-                        <th>Action</th>
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Service Name</th>
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Price Per Token</th>
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Tokens</th>
+                        <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
+
+                   
                     @foreach ($cart as $item)
                     @if (is_array($item))
-                    <tr id="cart-item-{{ $item['id'] }}">
-                        <td>
-                            <div class="product-info">
-                                <!-- <img src="{{ $item['image'] ?? 'placeholder.jpg' }}" alt="{{ $item['serviceName'] }}"> -->
+                    <tr id="cart-item-{{ $item['id'] }}" data-price-per-item="{{ $item['pricePerItem'] }}" style="border-bottom: 1px solid #dee2e6;">
+                        <td style="padding: 10px;">
+                            <div class="product-info" style="font-weight: bold;">
                                 <h2>{{ $item['serviceName'] }}</h2>
                             </div>
                         </td>
-                        <td>
-                            <p><strong>Quantity:</strong>
-                                <input type="number" value="{{ $item['tokens'] }}" min="1"
-                                    onchange="updateTotalPrice(this, {{ $item['pricePerItem'] }}, '{{ $item['id'] }}')">
-                            </p>
-                            <p><strong>Price:</strong> Rs.{{ number_format($item['pricePerItem'], 2) }}</p>
+                        <td style="padding: 10px;">
+                            <div class="product-info">
+                                <h2>{{ $item['pricePerItem'] }}</h2>
+                            </div>
                         </td>
-                        <td>
-                            <button onclick="deleteItem('{{ $item['id'] }}')">Remove</button>
+                        <td style="padding: 10px;">
+                          
+                                <strong>Quantity:</strong>
+                                <input
+                                    type="number"
+                                    value="{{ $item['tokens'] }}"
+                                    min="1"
+                                    style="width: 50px; text-align: center; margin: 0 10px;"
+                                    onchange="updateTotalPrice(this, {{ $item['pricePerItem'] }}, '{{ $item['id'] }}')">
+                       
+                            <p style="margin-top: 5px; font-size: 14px;">
+                                <strong>Price:</strong> Rs.<span class="item-total">{{ number_format($item['tokens'] * $item['pricePerItem'], 2) }}</span>
+                            </p>
+                        </td>
+                        <td style="padding: 10px;">
+                            <button onclick="deleteItem('{{ $item['id'] }}')" style="padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer;">Remove</button>
                         </td>
                     </tr>
                     @endif
@@ -212,58 +225,76 @@
             </table>
         </div>
 
-        <div class="total-cost-bar">
+        <div class="total-cost-bar" style="margin-top: 20px; text-align: right;">
             <h3>Total Cost</h3>
-            <ul>
-                <li><strong>Total:</strong> <span id="subtotal">Rs.{{ number_format($subtotal, 2) }}</span></li>
+            <ul style="list-style: none; padding: 0; font-size: 16px; color: #555;">
+                <li><strong>Total:</strong> <span id="subtotal" style="font-size: 18px; color: #000;">Rs.{{ number_format($subtotal, 2) }}</span></li>
             </ul>
         </div>
 
-        <div class="btn-wrap">
-            <form action="{{ route('checkout') }}" method="get">
+        <div class="btn-wrap" style="margin-top: 20px; text-align: center;">
+            <form action="{{ route('checkout') }}" method="get" style="display: inline-block;">
                 @csrf
-                <input type="hidden" name="cart" value="{{ json_encode($cart) }}">
-                <button type="submit">Proceed to Checkout</button>
+                <input type="hidden" id="cart-data" name="cart" value="{{ json_encode($cart) }}">
+                <button type="submit" style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Proceed to Checkout</button>
             </form>
         </div>
         @endif
     </div>
 </main>
 
-
 <script>
     function updateTotalPrice(input, pricePerItem, itemId) {
-        const quantity = parseInt(input.value) || 1; // Default to 1 if input is invalid
+        const quantity = parseInt(input.value) || 1;
         const itemTotal = pricePerItem * quantity;
-
-        // Update item total price display
-        const itemPriceElement = document.getElementById(`item-price-${itemId}`);
-        if (itemPriceElement) {
-            itemPriceElement.innerText = `$${itemTotal.toFixed(2)}`;
+        const itemRow = document.querySelector(`#cart-item-${itemId}`);
+        const priceElement = itemRow.querySelector('.item-total');
+        if (priceElement) {
+            priceElement.innerText = `Rs.${itemTotal.toFixed(2)}`;
         }
-
-        // Update subtotal and total dynamically
+        updateCartData();
         updateSubtotalAndTotal();
+    }
+
+    function updateCartData() {
+        const cart = [];
+        document.querySelectorAll('tr[id^="cart-item-"]').forEach(row => {
+            const itemId = row.id.replace('cart-item-', '');
+            const quantityInput = row.querySelector('input[type="number"]');
+            const pricePerItem = parseFloat(row.dataset.pricePerItem);
+            const quantity = parseInt(quantityInput.value) || 1;
+            const serviceName = row.querySelector('.product-info h2').innerText;
+            cart.push({
+                id: itemId,
+                serviceName: serviceName,
+                tokens: quantity,
+                pricePerItem: pricePerItem,
+                totalPrice: pricePerItem * quantity
+            });
+        });
+        const cartDataInput = document.getElementById('cart-data');
+        if (cartDataInput) {
+            cartDataInput.value = JSON.stringify(cart);
+        }
+    }
+
+    function updateSubtotalAndTotal() {
+        let subtotal = 0;
+        document.querySelectorAll('tr[id^="cart-item-"]').forEach(row => {
+            const quantityInput = row.querySelector('input[type="number"]');
+            const pricePerItem = parseFloat(row.dataset.pricePerItem);
+            const quantity = parseInt(quantityInput.value) || 1;
+            subtotal += pricePerItem * quantity;
+        });
+        const subtotalElement = document.getElementById('subtotal');
+        if (subtotalElement) {
+            subtotalElement.innerText = `Rs.${subtotal.toFixed(2)}`;
+        }
     }
 
     function deleteItem(itemId) {
         if (confirm('Are you sure you want to remove this item?')) {
-            // Remove the item from the cart (via session)
-            removeFromCart(itemId);
-
-            // Remove the item row from the table
-            const itemRow = document.querySelector(`#cart-item-${itemId}`);
-            if (itemRow) {
-                itemRow.remove();
-            }
-
-            // Update subtotal and total after deletion
-            updateSubtotalAndTotal();
-        }
-    }
-
-    function deleteItem(itemId) {
-        fetch(`/cart/remove/${itemId}`, {
+            fetch(`/cart/remove/${itemId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -277,44 +308,19 @@
                 return response.json();
             })
             .then(data => {
-                console.log('Item removed:', data);
-                location.reload();
+                const itemRow = document.querySelector(`#cart-item-${itemId}`);
+                if (itemRow) {
+                    itemRow.remove();
+                }
+                updateSubtotalAndTotal();
+                updateCartData();
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-    }
-
-
-
-    function validateQuantity(input) {
-        if (input.value < 1) {
-            alert('Quantity must be at least 1.');
-            input.value = 1; // Reset to minimum value
         }
     }
-
-    function updateSubtotalAndTotal() {
-        let subtotal = 0;
-
-        // Calculate subtotal by iterating over all input elements with the name "tokens"
-        document.querySelectorAll('input[name="tokens"]').forEach((inputElement) => {
-            const quantity = parseInt(inputElement.value) || 1; // Default to 1 if input is invalid
-            const pricePerItem = getPricePerItemFromInput(inputElement);
-            subtotal += quantity * pricePerItem;
-        });
-
-        // Update subtotal and total in the DOM
-        document.getElementById('subtotal').innerText = `$${subtotal.toFixed(2)}`;
-        document.getElementById('total').innerText = `$${(subtotal * 1.1).toFixed(2)}`; // Assuming 10% tax
-    }
-
-    function getPricePerItemFromInput(inputElement) {
-        // Extract pricePerItem from the onchange attribute (assuming it exists)
-        const onchangeAttribute = inputElement.getAttribute('onchange');
-        const priceMatch = onchangeAttribute && onchangeAttribute.match(/, (\d+(\.\d+)?),/);
-        return priceMatch ? parseFloat(priceMatch[1]) : 0;
-    }
 </script>
+
 </main>
 @endsection

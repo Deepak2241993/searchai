@@ -91,29 +91,64 @@ class CartController extends Controller
         return response()->json(['success' => false, 'message' => 'Item not found in cart.']);
     }
     // Proceed to Checkout
+    // public function checkout(Request $request)
+    // {
+
+    //     dd($request->all());
+    //     $carts = session()->get('cart', []);
+
+    //     if (empty($carts)) {
+    //         return redirect()->route('front.cart')->with('error', 'Your cart is empty. Please add items to proceed.');
+    //     }
+    //     // dd($cart);
+    //     if (Auth::check() == false) {
+    //         if (!session()->has('url.intended')) {
+
+    //             session(['url.intended' => url()->current()]);
+    //         }
+    //         return redirect()->route('login');
+    //     }
+    //     $customerAddress = CustomerAddress::where('user_id', Auth::user()->id)->first();
+    //     // dd($customerAddress);
+    //     session()->forget('url.intended');
+
+    //     return view('frontend.checkout', compact('customerAddress', 'carts'));
+    // }
     public function checkout(Request $request)
     {
-
         // dd($request->all());
-        $carts = session()->get('cart', []);
+        // Retrieve the cart data from the request
+        $cartData = json_decode($request->input('cart'), true);
+        // dd($cartData);
 
-        if (empty($carts)) {
+        // Ensure cart data is available and not empty
+        if (empty($cartData)) {
             return redirect()->route('front.cart')->with('error', 'Your cart is empty. Please add items to proceed.');
         }
-        // dd($cart);
-        if (Auth::check() == false) {
-            if (!session()->has('url.intended')) {
 
+        // Check if the user is authenticated
+        if (!Auth::check()) {
+            if (!session()->has('url.intended')) {
                 session(['url.intended' => url()->current()]);
             }
             return redirect()->route('login');
         }
-        $customerAddress = CustomerAddress::where('user_id', Auth::user()->id)->first();
-        // dd($customerAddress);
+
+        // Retrieve the customer address for the authenticated user
+        $customerAddress = CustomerAddress::where('user_id', Auth::id())->first();
+
+        // Forget the intended URL session key
         session()->forget('url.intended');
 
-        return view('frontend.checkout', compact('customerAddress', 'carts'));
+        // dd($cartData);
+
+        // Pass the cart data and customer address to the checkout view
+        return view('frontend.checkout', [
+            'customerAddress' => $customerAddress,
+            'carts' => $cartData,
+        ]);
     }
+
     public function getTotalItems()
     {
         $cart = session()->get('cart', []);

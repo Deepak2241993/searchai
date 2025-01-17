@@ -5,29 +5,55 @@
         <nav class="mt-2"> <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 @if(auth()->user() && auth()->user()->isAdmin())
-                <li class="nav-item"> <a href="{{ route('admin.dashboard') }}" class="nav-link active"> <i class="nav-icon fa fa-circle"></i>
+                <li class="nav-item">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link active">
+                        <i class="nav-icon fa fa-circle"></i>
                         <p>Dashboard</p>
-                    </a> </li>
-                <li class="nav-item"> <a href="{{ route('admin.user-list') }}" class="nav-link"> <i class="nav-icon fa fa-user"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.user-list') }}" class="nav-link">
+                        <i class="nav-icon fa fa-user"></i>
                         <p>User Management</p>
-                    </a> </li>
-                <li class="nav-item"> <a href="{{ route('admin.coupon.list') }}" class="nav-link"> <i class="nav-icon fa fa-barcode"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.coupon.list') }}" class="nav-link">
+                        <i class="nav-icon fa fa-barcode"></i>
                         <p>Coupon Management</p>
-                    </a> </li>
-                <li class="nav-item"> <a href="{{ route('admin.faq.index') }}" class="nav-link"> <i class="bi bi-blockquote-left"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.faq.index') }}" class="nav-link">
+                        <i class="bi bi-blockquote-left"></i>
                         <p>FAQs Management</p>
-                    </a> </li>
-                <li class="nav-item"> <a href="{{ route('admin.banner.index') }}" class="nav-link"> <i class="bi bi-layout-sidebar"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.banner.index') }}" class="nav-link">
+                        <i class="bi bi-layout-sidebar"></i>
                         <p>Banner Management</p>
-                    </a> </li>
-                <li class="nav-item"> <a href="{{ route('admin.service.index') }}" class="nav-link"> <i class="bi bi-gear-wide-connected"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.service.index') }}" class="nav-link">
+                        <i class="bi bi-gear-wide-connected"></i>
                         <p>Service Management</p>
-                <li class="nav-item"> <a href="{{ route('admin.service.index') }}" class="nav-link"> <i class="bi bi-gear-wide-connected"></i>
-                        <p>Service Management</p>
-                <li class="nav-item"> <a href="{{ route('admin.ordersDetails') }}" class="nav-link"> <i class="bi bi-calendar2-minus"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.blog.index') }}" class="nav-link">
+                        <i class="bi bi-gear-wide-connected"></i>
+                        <p>Blogs</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.ordersDetails') }}" class="nav-link">
+                        <i class="bi bi-calendar2-minus"></i>
                         <p>Orders Details</p>
-                    </a> </li>
-                        @else
+                    </a>
+                </li>
+                @else
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}" class="nav-link active">
                         <i class="nav-icon fa fa-circle"></i>
@@ -58,10 +84,8 @@
                         <p>Settings</p>
                     </a>
                 </li>
-               
                 @endif
-                </a> </li>
-               
+
                 {{-- <li class="nav-item"> <a href="./generate/theme.html" class="nav-link"> <i class="nav-icon bi bi-palette"></i>
                         <p>Theme Generate</p>
                     </a> </li>

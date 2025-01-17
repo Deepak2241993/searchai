@@ -91,17 +91,17 @@
 
 
 
-    <div class="action-bar text-center">
+    <!-- <div class="action-bar text-center">
         <a href="find-helpers.html">Find & Hire now <span class="font-icon"><svg xmlns="http://www.w3.org/2000/svg"
                     height="24" viewBox="0 0 24 24" width="24">
                     <path d="M0 0h24v24H0z" fill="none" />
                     <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
                 </svg></span></a>
-    </div>
+    </div> -->
 
     <section id="categories">
         <div class="container">
-            <h2 class="text-center pb1">Find & Hire</h2>
+            <h2 class="text-center pb1">Get Verification Done Today</h2>
             <div class="layout-wrap layout-row layout-align-center-center text-center">
                 <a class="text-decoration-none" href="find-helpersd22b.html?group=1">
                     <div style="width:100px;margin:5px" class="card box-hover-effect">
@@ -270,8 +270,7 @@
                                 </span>
                             </div>
                         </header>
-                        <div class="card-body">It is an Easier, Simpler & Better way of finding Workers. 5 minutes and
-                            just a click of a few buttons, that’s all it takes to find Workers at Helpers Near Me.</div>
+                        <div class="card-body">a. It is an Easier, Simpler & Better way of verifying Workers. 5 minutes and just a click of a few buttons, that’s all it takes to verify Workers at SearchAPI.</div>
                     </section>
                     <section class="card p0 mb1">
                         <header class="card-header md-list">
@@ -286,17 +285,16 @@
                                 </span>
                             </div>
                         </header>
-                        <div class="card-body">Helpers Near Me follows a 2/3 Step Verification Process for every Worker
-                            registered with the platform. Everyone’s IDs & Court/Criminal Records are checked in detail.
-                            <a href="verifications.html">Read more ></a>
+                        <div class="card-body">SearchAPI follows a 2/3 Step Verification Process for every Worker registered with the platform. Everyone’s IDs & Court/Criminal Records are checked in detail.
+
                         </div>
                     </section>
                     <section class="card p0 mb1">
                         <header class="card-header md-list">
                             <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/destination.svg"
+                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/fast_1.svg"
                                     width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Connect with nearby Workers</p>
+                                <p class="px2">Quick Turnaround Time</p>
                                 <span>
                                     <amp-img layout="fixed"
                                         src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
@@ -304,15 +302,15 @@
                                 </span>
                             </div>
                         </header>
-                        <div class="card-body">Helpers Near Me connects you with Workers in the vicinity, preferably
-                            within 1-2 km of your search location</div>
+                        <div class="card-body">
+                            Get the Background Verification report in about 10-15 minutes.</div>
                     </section>
                     <section class="card p0 mb1">
                         <header class="card-header md-list">
                             <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/team.svg"
+                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/empty-inbox_2.svg"
                                     width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Speak to multiple Workers at a time</p>
+                                <p class="px2">Absolutely Hasslefree</p>
                                 <span>
                                     <amp-img layout="fixed"
                                         src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
@@ -320,97 +318,14 @@
                                 </span>
                             </div>
                         </header>
-                        <div class="card-body">If available, Helpers Near Me connects you with multiple Workers from
-                            nearby, and not just one or two</div>
-                    </section>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/nominal.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Find &amp; Hire Workers at a nominal fee only</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">At Helpers Near Me, you get to connect with multiple Workers at a
-                            starting fee of ₹99 only</div>
-                    </section>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/badge.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Get the best-shortlisted Workers from a vast pool</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">A unique rating system allows Helpers Near Me to connect you with the
-                            best Workers from around</div>
-                    </section>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/covid.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Ensuring a Covid-19 safe Workers Connect</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">At Helpers Near Me, we are taking every initiative to ensure a Covid-19
-                            Safe Employers-Workers Connect. <a href="blog/our-response-to-covid-19/index.html">Read
-                                more ></a></div>
-                    </section>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/feminist.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Empowers the Workers to connect with you directly</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">Helpers Near Me supports the Workers in finding nearby Work
-                            Opportunities and connecting with you directly. Workers join Helpers Near Me free of cost,
-                            and on their free will.</div>
-                    </section>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/no-stopping.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">No middlemen &amp; commissions in between</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">At Helpers Near Me, you get to connect with the Workers directly, so
-                            there are no middlemen & commissions in between</div>
+                        <div class="card-body">Get the detailed Background Verification report directly in your email inbox. You are not required to go anywhere for the checks or submit a document anywhere. The whole process is hasslefree and online - end to end.</div>
                     </section>
                     <section class="card p0 mb1">
                         <header class="card-header md-list">
                             <div class="md-list-item">
                                 <amp-img layout="fixed" src="{{ url('/front-assets') }}/images/icons/salary.svg"
                                     width="40" height="40" alt=""></amp-img>
-                                <p class="px2">Worker gets to earn one&#039;s full salary</p>
+                                <p class="px2">Very Cost-Effective</p>
                                 <span>
                                     <amp-img layout="fixed"
                                         src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
@@ -418,9 +333,9 @@
                                 </span>
                             </div>
                         </header>
-                        <div class="card-body">Every Worker who gets hired through Helpers Near Me gets an opportunity
-                            to earn one's full salary, without having to pay someone else in between</div>
+                        <div class="card-body">Get the professional background verification of your workers done in as low as ₹300 only.</div>
                     </section>
+
                     <section class="card p0 mb1">
                         <header class="card-header md-list">
                             <div class="md-list-item">
@@ -434,29 +349,9 @@
                                 </span>
                             </div>
                         </header>
-                        <div class="card-body">Every transaction processed at Helpers Near Me goes through the
-                            recognised payment gateways like Paytm, PayU & others. Your details are entirely secured &
-                            protected against any unauthorised transactions.</div>
+                        <div class="card-body">Every transaction processed at SearchAPI goes through the recognised payment gateways like Paytm, PayU & others. Your details are entirely secured & protected against any unauthorised transactions.</div>
                     </section>
-                    <section class="card p0 mb1">
-                        <header class="card-header md-list">
-                            <div class="md-list-item">
-                                <amp-img layout="fixed"
-                                    src="{{ url('/front-assets') }}/images/icons/money-back-guarantee.svg"
-                                    width="40" height="40" alt=""></amp-img>
-                                <p class="px2">100% Refund Policy</p>
-                                <span>
-                                    <amp-img layout="fixed"
-                                        src="{{ url('/front-assets') }}/images/icons/ic_keyboard_arrow_down.svg"
-                                        width="24" height="24" alt=""></amp-img>
-                                </span>
-                            </div>
-                        </header>
-                        <div class="card-body">At Helpers Near Me, there's always an assurance of a happy experience.
-                            For every genuine reason, the refunds are processed without any questions asked. So, you
-                            either get to find a worker through the platform, or we make a 100% refund for you. <a
-                                href="refund-policy-details.html">Read more ></a></div>
-                    </section>
+
                 </amp-accordion>
             </div>
         </div>
@@ -469,18 +364,16 @@
     <section id="about-us">
         <h2 class="text-center m3">About Us</h2>
         <div class="container">
-            <p class="text-center">As the name suggests, Helpers Near Me (HNM) helps you find & hire workers near you.
-                HNM uses technology and a lot of groundwork to help you connect directly with workers without any
-                middlemen or commissions. On one end, HNM helps the underprivileged workers of India find local
-                employment, free of cost, directly from nearby employers like yourself. And on the other, the digital
-                infrastructure built around HNM makes it easy, quick, reliable & affordable for anyone to find & hire
-                100+ profiles of nearby workers. With a vision to end poverty, forced labour, worker exploitation, and
-                human trafficking, HNM is working towards building an unbiased and inclusive digital ecosystem where the
-                underprivileged workforce of India can join the platform easily and access local employment free of
-                cost, with or without smartphones.</p>
+            <p class="text-center">
+                SearchAPI, India’s most trusted background screening company, offers state-of-the-art solutions to ensure trust and safety in every interaction.
+                We provide compliant, robust, and efficient background screening processes tailored to meet the needs of large enterprises, small businesses, start-ups, and individuals.
+                By harnessing the power of Artificial Intelligence (AI) and Machine Learning (ML), SearchAPI delivers the fastest, most accurate, and fully compliant background verification solutions in the industry.
+                With SearchAPI, building trustworthy and successful relationships has never been easier.
+            </p>
             <div class="text-center block m3">
-                <a style="border-radius:4px" class="ampstart-btn btn btn-sm btn-outline-primary"
-                    href="about-us.html">Read more&nbsp;<i class="fa fa-arrow-circle-right"></i></a>
+                <a style="border-radius:4px" class="ampstart-btn btn btn-sm btn-outline-primary" href="about-us.html">
+                    Read more&nbsp;<i class="fa fa-arrow-circle-right"></i>
+                </a>
             </div>
         </div>
     </section>

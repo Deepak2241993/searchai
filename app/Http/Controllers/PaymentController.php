@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use App\Mail\TokenPurchaseEmail;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -25,7 +27,9 @@ class PaymentController extends Controller
             'address' => 'required|string|max:255',
             'alternateaddress' => 'nullable|string|max:255',
             'buyTokens' => 'required|string|max:255',
+            'serviceName' => 'required|string|max:255',
         ]);
+
 
         $user = User::find(auth()->id());
 
@@ -61,8 +65,9 @@ class PaymentController extends Controller
 
             $razorpayOrder = $api->order->create($orderData);
             $tokensToBuy = $validated['buyTokens'];
+            $serviceName = $validated['serviceName'];
 
-           
+            // dd($serviceName);
             $order = Order::create([
                 'user_id' => $user->id,
                 'razorpay_order_id' => $razorpayOrder['id'],
@@ -70,6 +75,7 @@ class PaymentController extends Controller
                 'currency' => 'INR',
                 'status' => 'pending',
                 'tokens_purchased' => $tokensToBuy,
+                'serviceName' => $serviceName,
             ]);
 
             // dd($order);
@@ -77,6 +83,7 @@ class PaymentController extends Controller
                 'order_id' => $razorpayOrder['id'],
                 'amount' => $amountInPaise,
                 'tokens_purchased' => $tokensToBuy,
+                'serviceName' => $serviceName,
                 'currency' => 'INR',
             ]);
 
@@ -84,7 +91,7 @@ class PaymentController extends Controller
             return response()->json([
                 'orderId' => $razorpayOrder['id'],
                 'amount' => $validated['amount'],
-                
+
             ], 201);
         } catch (\Exception $e) {
             Log::error("Error creating Razorpay order", [
@@ -116,6 +123,7 @@ class PaymentController extends Controller
 
     public function paymentCallback(Request $request)
     {
+        // dd($request->all());
         $api = new Api(env('RAZORPAY_KEY_ID'), env('RAZORPAY_KEY_SECRET'));
 
         $razorpayPaymentId = $request->razorpay_payment_id;
@@ -124,6 +132,8 @@ class PaymentController extends Controller
 
         if ($this->verifySignature($razorpayPaymentId, $razorpayOrderId, $razorpaySignature)) {
             $order = Order::where('razorpay_order_id', $razorpayOrderId)->first();
+
+            // dd($order);
 
             if (!$order) {
                 Log::error('Order not found', ['razorpay_order_id' => $razorpayOrderId]);
@@ -145,19 +155,31 @@ class PaymentController extends Controller
 
                     $numberOfTokens = $order->tokens_purchased;
                     // dd($numberOfTokens); 
-                    $user = User::find($order->user_id); 
+                    $user = User::find($order->user_id);
                     $expiresAt = Carbon::now()->addDays(600);
 
+                    $tokens = [];
                     for ($i = 0; $i < $numberOfTokens; $i++) {
                         $newToken = new Token();
                         $newToken->user_id = $user->id;
-                        
+                        $newToken->service_type = $order->serviceName;
                         $newToken->token = Str::random(32);
                         $newToken->expires_at = $expiresAt;
                         $newToken->status = 'active';
+                        $newToken->order_id = $order->id;;
                         $newToken->save();
                     }
 
+                    // Send the email with the PDF attachment and log success/failure
+                    try {
+                        Mail::to($user->email)->send(new TokenPurchaseEmail($user, $tokens));
+                        Log::info('Token purchase email sent successfully', ['user_email' => $user->email]);
+                    } catch (\Exception $e) {
+                        Log::error('Failed to send token purchase email', [
+                            'error_message' => $e->getMessage(),
+                            'user_email' => $user->email,
+                        ]);
+                    }
                     $order->status = 'paid';
                     $order->save();
 

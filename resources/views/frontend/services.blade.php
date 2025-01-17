@@ -1,15 +1,13 @@
 @extends('layouts.master')
 @section('body')
 <style>
-   
-
     #content {
         background: #ED760D;
         padding: 40px;
         border-radius: 12px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         text-align: center;
-       
+
         color: #fff;
     }
 
@@ -138,12 +136,15 @@
 <main id="content">
     <div class="container-fluid vh-100">
         <div class="row h-100">
+
+
             @foreach ($services as $item)
             <!-- Left side with the image -->
             <div class="col-md-6 p-0">
-                <img src="{{ $item->image_url ?? 'default-image.jpg' }}" alt="{{ $item->name }}" class="img-fluid h-100 w-100">
+                <img src="{{ isset($item->images) && !empty($item->images) ? url('/front-assets/' . json_decode($item->images, true)[0]) : url('/front-assets/default-image.jpg') }}"
+                    alt="{{ $item->name ?? 'Image' }}"
+                    class="img-fluid h-100 w-100">
             </div>
-
             <!-- Right side with the content -->
             <div class="col-md-6 d-flex align-items-center">
                 <div class="container py-5">
@@ -190,7 +191,7 @@
         </div>
     </div>
 
-    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>

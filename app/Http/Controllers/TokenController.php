@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Token;
+use PDF;
 
 class TokenController extends Controller
 {
-    
+
     public function addToCart(Request $request)
     {
         // Validate input
@@ -33,22 +34,11 @@ class TokenController extends Controller
     public function showCheckoutForm()
     {
         // dd('hello');
-        // Retrieve tokens and price from the session
-        $tokens = session('cart.tokens', 0); // Default value is 0 if no tokens exist in session
-        $pricePerItem = session('cart.pricePerItem', 849.00); // Default price is 849.00 if no price exists in session
-
-        // Assuming serviceName is available, or set a default
-        $serviceName = session('cart.serviceName', 'Aluminium Composite Panels'); // Example default service name
-
-        // Render the checkout view with dynamic values
+        $tokens = session('cart.tokens', 0); 
+        $pricePerItem = session('cart.pricePerItem', 849.00);
+        $serviceName = session('cart.serviceName', 'Aluminium Composite Panels'); 
         return view('frontend.checkout', compact('tokens', 'pricePerItem', 'serviceName'));
     }
-
-
-
-    /**
-     * Process the checkout form submission.
-     */
     public function processCheckout(Request $request)
     {
         // Validate input
@@ -66,15 +56,11 @@ class TokenController extends Controller
         // Redirect to cart page with success message
         return redirect()->route('cart')->with('success', "Successfully added $tokens token(s) to the cart.");
     }
-
-    /**
-     * Display the cart page.
-     */
     public function viewCart()
     {
         // Retrieve tokens and price from session
         $tokens = session('cart.tokens', 0);
-        $pricePerItem = session('cart.pricePerItem', 849.00); 
+        $pricePerItem = session('cart.pricePerItem', 849.00);
 
         // Render the cart view
         return view('frontend.cart', compact('tokens', 'pricePerItem'));
@@ -83,8 +69,25 @@ class TokenController extends Controller
     public function tokenList()
     {
         $userId = auth()->id();
-        $data = Token::where('user_id', $userId)->paginate(10);
-        return view('token.index', ['data' => $data]);
-    }
+        if (!$userId) {
+            return redirect()->route('login')->with('error', 'Please log in to access tokens.');
+        }
+        $data = Token::with('aadhaarData')
+            ->where('user_id', $userId)
+            ->paginate(10);
 
+        return view('token.index', compact('data'));
+    }
+    public function downloadPdf($id)
+    {
+        $token = Token::findOrFail($id);
+        $filteredAadhaarData = collect($token->aadhaarData)->except([
+            'photo_base64', 'mobile', 'landmark', 'reference_id', 'aadhaar_token', 'updated_at' ]);
+        $token->aadhaarData = $filteredAadhaarData;
+        $pdf = PDF::loadView('pdf.template', [
+            'token' => $token,
+        ]);
+        return $pdf->download('details_' . $token->id . '.pdf');
+        // dd($pdf->output());
+    }
 }

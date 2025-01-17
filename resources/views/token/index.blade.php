@@ -28,6 +28,23 @@ Token List
                 <h4 class="card-title mb-0">Token Management</h4>
             </div>
         </div>
+        <!-- Show success message -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Show error messages -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <div class="row">
             <div class="col-md-12">
@@ -54,9 +71,10 @@ Token List
                                     @forelse ($data as $key => $Token)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $Token->service_type ? 'KYC VERIFICATION' : 'KYC VERIFICATION' }}</td>
+                                        <td>{{ $Token->service_type }}</td>
                                         <td>{{ $Token->token }}</td>
                                         <td>{{ $Token->status == 'active' ? 'Active' : 'Expired' }}</td>
+                                        @if ($Token->status == 'active')
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-info me-2 open-modal-btn"
                                                 data-bs-toggle="modal"
@@ -67,6 +85,22 @@ Token List
                                                 Generate OTP
                                             </button>
                                         </td>
+                                        @else
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-primary view-data-btn"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#aadhaarDataModal"
+                                                data-id="{{ $Token->id }}"
+                                                data-token="{{ $Token->token }}"
+                                                data-service="{{ $Token->service_type }}"
+                                                data-aadhaar="{{ json_encode($Token->aadhaarData) }}">
+                                                View
+                                            </button>
+                                            <a href="{{ route('download.pdf', $Token->id) }}" class="btn btn-sm btn-secondary">
+                                                Download PDF
+                                            </a>
+                                        </td>
+                                        @endif
                                     </tr>
                                     @empty
                                     <tr>
@@ -74,6 +108,7 @@ Token List
                                     </tr>
                                     @endforelse
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -106,10 +141,10 @@ Token List
                     </div>
 
                     <!-- Share Code (4 characters) -->
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="share_code" class="form-label">Share Code (4 characters):</label>
                         <input type="text" name="share_code" id="share_code" maxlength="4" class="form-control" required>
-                    </div>
+                    </div> -->
 
                     <!-- Hidden fields for Token and Service Type -->
                     <input type="hidden" name="token" id="modalToken" value="">
@@ -123,7 +158,7 @@ Token List
 
                     <button type="submit" class="btn btn-primary">Generate OTP</button>
                 </form>
-                
+
                 <!-- Verify OTP Form (hidden initially) -->
                 <div id="verifyOtpForm" class="d-none">
                     <h3>Verify OTP</h3>
@@ -145,7 +180,43 @@ Token List
     </div>
 </div>
 
-
+<div class="modal fade" id="aadhaarDataModal" tabindex="-1" aria-labelledby="aadhaarDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aadhaarDataModalLabel">Aadhaar Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Aadhaar Number</th>
+                            <td id="aadhaarNumber"></td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td id="aadhaarName"></td>
+                        </tr>
+                        <tr>
+                            <th>Date of Birth</th>
+                            <td id="aadhaarDob"></td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td id="aadhaarGender"></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td id="aadhaarAddress"></td>
+                        </tr>
+                        <!-- Add more fields as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
@@ -156,7 +227,6 @@ Token List
             button.addEventListener('click', function() {
                 const serviceType = this.getAttribute('data-service');
                 const token = this.getAttribute('data-token');
-
                 // Set modal values
                 document.getElementById('modalServiceType').value = serviceType;
                 document.getElementById('modalToken').value = token;
@@ -171,31 +241,25 @@ Token List
         // Submit Aadhaar OTP Generation form via AJAX
         $('#aadhaarOtpForm').on('submit', function(e) {
             e.preventDefault();
-            
+
             var form = $(this);
-            var formData = form.serialize(); 
-            
+            var formData = form.serialize();
+
             $.ajax({
-                url: form.attr('action'), 
+                url: form.attr('action'),
                 type: 'POST',
                 data: formData,
                 success: function(response) {
-                    // Assume response contains the share code and transaction ID
-                    if(response.success) {
-                        // Store the transaction ID and share code in session or directly
+                    if (response.success) {
                         $('#transaction_id').val(response.transaction_id);
                         $('#verify_share_code').val(response.share_code);
-                        
-                        // Hide the OTP generation form and show the verify OTP form
                         $('#aadhaarOtpForm').addClass('d-none');
                         $('#verifyOtpForm').removeClass('d-none');
                     } else {
-                        // Handle failure response
                         alert('OTP generation failed: ' + response.message);
                     }
                 },
                 error: function(xhr, status, error) {
-                    // Handle error
                     alert('An error occurred while generating OTP: ' + error);
                 }
             });
@@ -204,16 +268,15 @@ Token List
         // Submit Verify OTP form via AJAX
         $('#verifyOtpSubmitForm').on('submit', function(e) {
             e.preventDefault();
-            
+
             var form = $(this);
-            var formData = form.serialize(); // Get form data
-            
+            var formData = form.serialize();
             $.ajax({
-                url: form.attr('action'), // The action URL
+                url: form.attr('action'),
                 type: 'POST',
                 data: formData,
                 success: function(response) {
-                    if(response.success) {
+                    if (response.success) {
                         alert('OTP verification successful!');
                         // Redirect or show success message
                         window.location.href = response.redirect_url;
@@ -224,6 +287,32 @@ Token List
                 error: function(xhr, status, error) {
                     alert('An error occurred while verifying OTP: ' + error);
                 }
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.view-data-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const aadhaarData = JSON.parse(this.getAttribute('data-aadhaar'));
+                document.getElementById('aadhaarNumber').textContent = aadhaarData.aadhaar_number || 'N/A';
+                document.getElementById('aadhaarName').textContent = aadhaarData.name || 'N/A';
+                document.getElementById('aadhaarDob').textContent = aadhaarData.date_of_birth || 'N/A';
+                document.getElementById('aadhaarGender').textContent = aadhaarData.gender || 'N/A';
+                const addressParts = [
+                    aadhaarData.care_of,
+                    aadhaarData.house,
+                    aadhaarData.street,
+                    aadhaarData.district,
+                    aadhaarData.sub_district,
+                    aadhaarData.landmark,
+                    aadhaarData.post_office_name,
+                    aadhaarData.state
+                ];
+                const fullAddress = addressParts.filter(part => part).join(', ');
+                document.getElementById('aadhaarAddress').textContent = fullAddress || 'N/A';
             });
         });
     });

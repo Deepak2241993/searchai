@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url('/')}}/admin-assets/css/adminlte.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 
 </head> 
 
@@ -53,10 +55,18 @@
                         </div>
                     </div>
                 </form>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" onclick="location.href='{{ url('/') }}'">Home</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-12 mt-4 text-center">
-                    <p class="mb-1"> <a href="{{ route('login') }}">Login</a> </p>
-                    <p class="mb-0 mt-2"> <a href="{{ route('register') }}" class="text-center">
-                        Register a new membership</a> 
+                    <p class="mb-0 mt-2">
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow-lg transition-all duration-300 hover:scale-105">
+                            <i class="fas fa-sign-in-alt me-2"></i> Login
+                        </a>
                     </p>
                 </div>
             </div>

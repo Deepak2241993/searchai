@@ -15,4 +15,12 @@ class Token extends Model
         'expires_at',
         'status',
     ];
+    public function aadhaarData()
+    {
+        return $this->hasOne(AadhaarData::class, 'id_token', 'id');
+    }
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

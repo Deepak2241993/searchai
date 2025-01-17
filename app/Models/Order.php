@@ -15,9 +15,14 @@ class Order extends Model
         'currency',
         'status',
         'tokens_purchased',
+        'serviceName',
     ];
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function tokens()
+    {
+        return $this->hasMany(Token::class);
     }
 }

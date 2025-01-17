@@ -4,7 +4,7 @@
 <style>
     #content {
         display: flex;
-        
+
         margin: 0 auto;
         padding: 40px;
         background: #f9f9f9;
@@ -200,6 +200,65 @@
         }
     }
 </style>
+<!-- CSS for Additional Styling -->
+<style>
+    .title-text {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #007bff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .btn-sm {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+
+    .transition-all:hover {
+        transform: scale(1.05);
+    }
+
+    .cart-items-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .cart-items-list li button {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .cart-items-list li button:hover {
+        background-color: #c82333;
+    }
+
+    .text-muted {
+        color: #6c757d !important;
+    }
+
+    .font-weight-bold {
+        font-weight: 700;
+    }
+</style>
 @endsection
 @section('body')
 <main id="content">
@@ -292,10 +351,10 @@
 
 
                         <!-- Order Details Section -->
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-12 mb-4">
                             <div class="card shadow-lg border-light">
                                 <div class="card-body">
-                                    <h3 class="title-text mb-4">Your Order</h3>
+                                    <h3 class="title-text mb-4 text-center text-primary">Your Order</h3>
                                     <div class="cart-items-list mb-4">
                                         <ul class="list-unstyled">
                                             @php
@@ -306,39 +365,47 @@
                                             $amount += $item['pricePerItem'] * $item['tokens'];
                                             $totalTokens = $item['tokens'];
                                             @endphp
-                                            <li class="d-flex justify-content-between align-items-center mb-2">
+                                            <li class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-3">
                                                 <div>
-                                                    <h5>{{ $item['serviceName'] }}</h5>
-                                                    <span class="text-muted">Rs.{{ $item['pricePerItem'] }} x
-                                                        {{ $item['tokens'] }} tokens</span>
+                                                    <h5 class="font-weight-bold">{{ $item['serviceName'] }}</h5>
+                                                    <input type="hidden" id="serviceName" name="serviceName" value="{{ $item['serviceName'] }}">
+                                                    <span class="text-muted">Rs.{{ $item['pricePerItem'] }} x {{ $item['tokens'] }} tokens</span>
                                                 </div>
-                                                <button type="button" class="btn btn-sm btn-danger"
-                                                    onclick="deleteItem('{{ $item['id'] }}');">
-                                                    <i class="las la-times"></i>
+                                                <div class="text-right">
+                                                <!-- <span class="text-muted">Rs.{{ $item['pricePerItem'] }} x {{ $item['tokens'] }} tokens</span> -->
+                                                    <!-- <strong>Amount: Rs.{{ $item['pricePerItem'] * $item['tokens'] }}</strong> -->
+                                                </div>
+                                                <button type="button" class="btn btn-sm btn-danger mt-2" data-item-id="{{ $item['id'] }}">
+                                                    <i class="las la-times"></i> Remove
                                                 </button>
                                             </li>
                                             @endforeach
                                         </ul>
                                     </div>
 
+                                    <!-- Total Amount Section -->
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <h5 class="font-weight-bold">Total Amount</h5>
+                                        <span class="text-right">Rs.{{ $amount }}</span>
+                                    </div>
+
                                     <div class="payment-information mb-4">
-                                        <div class="form-check">
-                                            <input id="credit-card" hidden type="radio" name="payment_method" value="stripe"
-                                                class="form-check-input" checked>
-                                            <input type="hidden" id="order-amount" name="amount"
-                                                value="{{ $amount }}">
-                                            <input type="hidden" id="buy-tokens" name="buy-tokens"
-                                                value="{{ $totalTokens }}">
-                                            
+                                        <div class="form-check mb-3">
+                                            <input id="credit-card" hidden type="radio" name="payment_method" value="stripe" class="form-check-input" checked>
+                                            <input type="hidden" id="order-amount" name="amount" value="{{ $amount }}">
+                                            <input type="hidden" id="buy-tokens" name="buy-tokens" value="{{ $totalTokens }}">
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-lg btn-primary w-100 btn-rounded shadow-lg">
-                                        Place Order
-                                    </button>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-lg btn-primary w-100 btn-rounded shadow-lg transition-all">
+                                            <i class="las la-check-circle"></i> Place Order
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
 
                     </form>
                 </div>
@@ -362,6 +429,7 @@
         const address = document.getElementById('address').value;
         const alternateAddress = document.getElementById('alternateaddress').value;
         const buyTokens = document.getElementById('buy-tokens').value;
+        const serviceName = document.getElementById('serviceName').value;
 
         if (!amount || !name || !email || !phone || !address) {
             alert('Please fill all the required fields.');
@@ -391,7 +459,8 @@
                     phone,
                     address,
                     alternateaddress: alternateAddress,
-                    buyTokens
+                    buyTokens,
+                    serviceName
                 })
             });
 
@@ -455,6 +524,51 @@
         } catch (error) {
             console.error('Error creating order:', error);
             alert('An error occurred. Please try again.');
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all remove buttons
+        const removeButtons = document.querySelectorAll('.btn-danger');
+
+        // Loop through each button and add a click event listener
+        removeButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const itemId = this.getAttribute('data-item-id'); // Get the item ID from the data attribute
+                deleteItem(itemId); // Call the deleteItem function with the ID
+            });
+        });
+
+        // Define the deleteItem function
+        function deleteItem(itemId) {
+            if (confirm('Are you sure you want to remove this item?')) {
+                fetch(`/cart/remove/${itemId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        },
+                        body: JSON.stringify({
+                            id: itemId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const itemRow = document.querySelector(`#cart-item-${itemId}`);
+                            if (itemRow) {
+                                itemRow.remove();
+                            }
+                            updateSubtotalAndTotal();
+                            updateCartData();
+                        } else {
+                            alert('Failed to remove item.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while removing the item. Please try again.');
+                    });
+            }
         }
     });
 </script>

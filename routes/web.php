@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\Admin\AuthController;
@@ -73,7 +74,7 @@ Route::get('/payment/failure', [PaymentController::class, 'failure'])->name('pay
 
 
 
-Route::get('/clear-cart', function() {
+Route::get('/clear-cart', function () {
     session()->forget('cart');
     return 'Cart cleared';
 });
@@ -83,15 +84,15 @@ Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
 
 
-  // aadhar_card 
-  Route::get('/aadhaar-ocr', [AadhaarOCRController::class, 'performOCR']);
+// aadhar_card 
+Route::get('/aadhaar-ocr', [AadhaarOCRController::class, 'performOCR']);
 
 
 
-  Route::get('/aadhaar-form', function () {
+Route::get('/aadhaar-form', function () {
     return view('aadhaar_form');
 });
-  Route::get('/aadhaar-form-verify', function () {
+Route::get('/aadhaar-form-verify', function () {
     return view('aadhaar_verify');
 });
 
@@ -115,20 +116,21 @@ Route::middleware(['auth'])->group(function () {
 
 
     //cart
-    
+
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/remove/{itemId}', [CartController::class, 'remove'])->name('cart.remove');
 
 
     Route::get('/my-orders', [RegisterController::class, 'orders'])->name('orders');
-    Route::get('/User/token/{id}', [TokenController::class, 'show'])->name('token.show');
+    Route::get('admin/token/{id}', [RegisterController::class, 'show'])->name('admin.token.show');
+    // Route::get('/User/token/{id}', [TokenController::class, 'show'])->name('token.show');
 
     Route::get('/token-views', [TokenController::class, 'tokenList'])->name('token.index');
+    Route::get('/download-pdf/{id}', [TokenController::class, 'downloadPdf'])->name('download.pdf');
 
     // Checkout Routes
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::post('/payment/create-order', [PaymentController::class, 'createOrder'])->name('payment.createOrder');
-
 });
 
 
@@ -172,8 +174,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/aadhaar-ocr', [AadhaarOCRController::class, 'performOCR']);
 
         Route::get('/orders-details', [OrderRecordsController::class, 'ordersDetails'])->name('ordersDetails');
+        Route::get('/orders/{id}', [OrderRecordsController::class, 'show'])->name('orders.show');
         Route::get('/tokens', [OrderRecordsController::class, 'ordersDetails'])->name('ordersDetails');
-
-       
     });
 });

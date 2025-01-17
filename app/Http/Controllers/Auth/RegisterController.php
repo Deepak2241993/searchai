@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegistrationEmail;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -28,13 +31,23 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'is_admin' => 0,
         ]);
+
+        try {
+            $password = $request->password;
+            Mail::to($user->email)->send(new RegistrationEmail($user, $password));
+
+            // Log email sent success
+            Log::info('Registration email sent successfully to ' . $user->email);
+        } catch (\Exception $e) {
+            // Log email sending failure
+            Log::error('Failed to send registration email to ' . $user->email . '. Error: ' . $e->getMessage());
+        }
 
         auth()->login($user);
 
@@ -66,7 +79,7 @@ class RegisterController extends Controller
             if (Session::has('cart_data')) {
                 session()->put('cart', Session::get('cart_data'));
                 Session::forget('cart_data');
-                
+
                 return redirect()->route('cart.index');
             } else {
                 return redirect()->route('home');
@@ -216,26 +229,40 @@ class RegisterController extends Controller
 
     public function orders()
     {
-        $data = Order::where('user_id', auth()->id())->paginate(5);
+
+        $data = Order::with('tokens')
+            ->where('user_id', auth()->id())
+            ->paginate(5);
+
+        // dd($data);
+
         return view('auth.orders', compact('data'));
     }
-    public function show($id)
+
+    public function show($orderId)
     {
-        $token = Token::find($id);
-        if ($token) {
+        $tokens = Token::where('order_id', $orderId)->get();
+
+        if ($tokens->isNotEmpty()) {
+            $tokens = $tokens->map(function ($token) {
+                return [
+                    'id' => $token->id,
+                    'service_type' => $token->service_type,
+                    'token' => $token->token,
+                    'status' => $token->status,
+                    'created_at' => $token->created_at ? $token->created_at->format('Y-m-d') : 'N/A',
+                ];
+            });
+
             return response()->json([
                 'success' => true,
-                'token' => [
-                    'id' => $token->id,
-                    'tokens_purchased' => $token->tokens_purchased,
-                    'status' => $token->status,
-                    'created_at' => $token->created_at->format('d-m-Y H:i A'),
-                ],
+                'tokens' => $tokens,
             ]);
         }
+
         return response()->json([
             'success' => false,
-            'message' => 'Token not found.',
+            'message' => 'No tokens found for this order ID.',
         ]);
     }
 }

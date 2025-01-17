@@ -11,12 +11,12 @@
 
     <script>
         var options = {
-            "key": "{{ env('RAZORPAY_KEY') }}", // Razorpay Key ID
-            "amount": "{{ $order->amount }}", // Amount in paise
+            "key": "{{ env('RAZORPAY_KEY') }}", 
+            "amount": "{{ $order->amount }}", 
             "currency": "{{ $order->currency }}",
             "name": "Your Company Name",
             "description": "Test Transaction",
-            "order_id": "{{ $order->id }}", // Order ID
+            "order_id": "{{ $order->id }}", 
             "callback_url": "{{ route('payment.callback') }}",
             "prefill": {
                 "name": "Test User",

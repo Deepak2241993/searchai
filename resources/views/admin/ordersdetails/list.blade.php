@@ -45,11 +45,11 @@ Total Orders List
                                         <th>User Name</th>
                                         <th>Razorpay Order ID</th>
                                         <th>Amount</th>
-                                        <th>Currency</th>
+                                        <!-- <th>Currency</th> -->
                                         <th>Status</th>
-                                        <th>Tokens Purchased</th>
                                         <th>Service Name</th>
                                         <th>Created At</th>
+                                        <th>Tokens View</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,12 +59,16 @@ Total Orders List
                                         <!-- <td>{{ $order->id }}</td> -->
                                         <td>{{ $order->user->name ?? 'N/A' }}</td>
                                         <td>{{ $order->razorpay_order_id }}</td>
-                                        <td>${{ number_format($order->amount, 2) }}</td>
-                                        <td>{{ strtoupper($order->currency) }}</td>
+                                        <td>Rs.{{ number_format($order->amount, 2) }}</td>
+                                        <!-- <td>{{ strtoupper($order->currency) }}</td> -->
                                         <td>{{ ucfirst($order->status) }}</td>
-                                        <td>{{ $order->tokens_purchased ?? 'N/A' }}</td>
                                         <td>{{ $order->serviceName ?? 'N/A' }}</td>
                                         <td>{{ $order->created_at ? $order->created_at->format('d-m-Y H:i') : 'N/A' }}</td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm view-order-btn" data-id="{{ $order->id }}" data-bs-toggle="modal" data-bs-target="#orderDetailsModal">
+                                                View
+                                            </button>
+                                        </td>
                                     </tr>
                                     @empty
                                     <tr>
@@ -86,7 +90,74 @@ Total Orders List
         </div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderDetailsModalLabel">Order Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Order details will be dynamically loaded here -->
+                <div id="orderDetailsContent">
+                    <p class="text-center">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const modalContent = document.getElementById('orderDetailsContent');
+    const buttons = document.querySelectorAll('.view-order-btn');
 
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            const orderId = this.dataset.id;
+
+            // Clear previous content and show a loading indicator
+            modalContent.innerHTML = '<p class="text-center">Loading...</p>';
+
+            // Fetch order details via AJAX
+            fetch(`/orders/${orderId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Populate modal with order details
+                    modalContent.innerHTML = `
+                        <h5>Order ID: ${data.id}</h5>
+                        <p><strong>User:</strong> ${data.user.name ?? 'N/A'}</p>
+                        <p><strong>Total Tokens:</strong> ${data.tokens_total ?? 'N/A'}</p>
+                        <h6>Tokens:</h6>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Token ID</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.tokens.map(token => `
+                                    <tr>
+                                        <td>${token.id}</td>
+                                        <td>${token.quantity}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                })
+                .catch(error => {
+                    modalContent.innerHTML = `<p class="text-danger">Failed to load order details. Please try again.</p>`;
+                });
+        });
+    });
+});
+
+</script>
 @endsection
