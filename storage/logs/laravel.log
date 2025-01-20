@@ -73,3 +73,18 @@
 [2025-01-20 09:46:43] local.INFO: Razorpay order created successfully {"order_id":"order_PleZ1nVdhXhaTS","amount":100000,"tokens_purchased":"2","serviceName":"Aadhar KYC","currency":"INR"} 
 [2025-01-20 09:47:02] local.INFO: Razorpay order created successfully {"order_id":"order_PleZNMhyJMUVb5","amount":150000,"tokens_purchased":"3","serviceName":"Aadhar KYC","currency":"INR"} 
 [2025-01-20 09:47:32] local.INFO: Token purchase email sent successfully {"user_email":"sushobhan@thetemz.com"} 
+[2025-01-20 09:55:12] local.ERROR: There are no commands defined in the "vroute" namespace.
+
+Did you mean this?
+    route {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"vroute\" namespace.
+
+Did you mean this?
+    route at C:\\xampp\\htdocs\\searchai\\vendor\\symfony\\console\\Application.php:669)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\searchai\\vendor\\symfony\\console\\Application.php(720): Symfony\\Component\\Console\\Application->findNamespace('vroute')
+#1 C:\\xampp\\htdocs\\searchai\\vendor\\symfony\\console\\Application.php(266): Symfony\\Component\\Console\\Application->find('vroute:clear')
+#2 C:\\xampp\\htdocs\\searchai\\vendor\\symfony\\console\\Application.php(175): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\xampp\\htdocs\\searchai\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\xampp\\htdocs\\searchai\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
