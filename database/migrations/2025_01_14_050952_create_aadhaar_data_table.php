@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('aadhaar_data', function (Blueprint $table) {
             $table->id();
-            $table->string('aadhaar_number');
+            $table->string('aadhaar_number')->nullable();
             $table->string('reference_id')->unique();
-            $table->string('id_token');
+            $table->string('id_token')->nullable();
             $table->string('aadhaar_token')->nullable();
-            $table->string('name');
-            $table->date('date_of_birth');
+            $table->string('name')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->enum('gender', ['MALE', 'FEMALE', 'OTHER'])->nullable();;
             $table->string('mobile')->nullable();
             $table->string('care_of')->nullable();

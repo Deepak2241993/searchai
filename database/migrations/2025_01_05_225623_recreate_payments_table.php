@@ -18,12 +18,12 @@ class RecreatePaymentsTable extends Migration
 
         // Recreate the payments table
         Schema::create('payments', function (Blueprint $table) {
-            $table->bigIncrements('payment_id'); // primary key and auto increment
-            $table->string('razorpay_order_id');
-            $table->string('razorpay_payment_id');
-            $table->string('razorpay_signature');
-            $table->decimal('amount', 10, 2);
-            $table->string('currency');
+            $table->bigIncrements('payment_id')->nullable(); // primary key and auto increment
+            $table->string('razorpay_order_id')->nullable();
+            $table->string('razorpay_payment_id')->nullable();
+            $table->string('razorpay_signature')->nullable();
+            $table->decimal('amount', 10, 2)->nullable();
+            $table->string('currency')->nullable();
             $table->enum('status', ['success', 'failed', 'pending']);
             $table->timestamps();
 

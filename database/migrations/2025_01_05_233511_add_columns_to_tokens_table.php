@@ -12,7 +12,7 @@ return new class extends Migration
             // Add the columns you need
             $table->unsignedBigInteger('user_id')->after('id');
             $table->string('service_type')->after('user_id')->nullable();
-            $table->string('token')->unique()->after('service_type');
+            $table->string('token')->unique()->after('service_type')->nullable();
             $table->timestamp('expires_at')->nullable()->after('token');
             $table->enum('status', ['active', 'expired'])->default('active')->after('expires_at');
         });
