@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Faq;
 use App\Models\Banner;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +13,9 @@ class HomeController extends Controller
     {
         $faqData = Faq::where('status', 1)->get(); 
         $bannerData = Banner::where('status', 1)->get(); 
-        return view('frontend.home', compact('faqData', 'bannerData'));
+        $serviceData = Service::where('status', 1)->get(); 
+        return view('frontend.home', compact('faqData', 'bannerData', 'serviceData'));
     }
+    
     
 }
