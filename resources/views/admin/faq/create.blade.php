@@ -49,23 +49,21 @@
                                     <form method="post" action="{{ route('admin.faq.store') }}" enctype="multipart/form-data">
                             @endif
                             @csrf
-                            <div class="row">
-                                <div class="mb-3 col-lg-6 self">
-                                    <label for="question" class="form-label">Question</label>
-                                    <input class="form-control" type="text" name="question"
+                            <div class="row col-md-6">
+                                <div class="mb-3 col-lg-12 self">
+                                    <label for="question" class="form-label">Question<span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text required" name="question"
                                         value="{{ isset($faqData) ? $faqData->question : '' }}" placeholder="Question"
                                         id="question" required>
                                 </div>
-                                <div class="mb-3 col-lg-6 self">
-                                    <label for="answer" class="form-label">Answer</label>
+                                <div class="mb-3 col-lg-12 self">
+                                    <label for="answer" class="form-label">Answer<span class="text-danger">*</span></label>
                                     <textarea onKeyDown="textCounter(this,60);" onKeyUp="textCounter(this,'q17length' ,60)" class="form-control"
-                                        name="answer" id="answer" rows="5" cols="">{{ isset($faqData) ? $faqData->answer : '' }}</textarea><br>
-                                    <i>Maximum of 60 characters - <input style="color:red;font-size:12pt;font-style:italic;"
-                                            readonly type="text" id='q17length' name="q17length" size="3" maxlength="3"
-                                            value="60"> characters left</i>
+                                        name="answer" id="answer" required rows="5" cols="">{{ isset($faqData) ? $faqData->answer : '' }}</textarea><br>
+                                   
         
                                 </div>
-                                <div class="mb-3 col-lg-6">
+                                <div class="mb-3 col-lg-12">
                                     <label for="status" class="form-label">Status</label>
                                     <select class="form-control" name="status" id='status'>
                                         <option

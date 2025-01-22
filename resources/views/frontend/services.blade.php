@@ -141,7 +141,7 @@
             @foreach ($services as $item)
             <!-- Left side with the image -->
             <div class="col-md-6 p-0">
-                <img src="{{ isset($item->images) && !empty($item->images) ? url('/front-assets/' . json_decode($item->images, true)[0]) : url('/front-assets/default-image.jpg') }}"
+                <img src="{{ isset($item->images) && !empty($item->images) ? url('/storage/uploads/' . json_decode($item->images, true)[0]) : url('/front-assets/default-image.jpg') }}"
                     alt="{{ $item->name ?? 'Image' }}"
                     class="img-fluid h-100 w-100">
             </div>

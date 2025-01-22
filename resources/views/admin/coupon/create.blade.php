@@ -51,8 +51,7 @@
                             @csrf
                             <div class="row">
                                 <div class="mb-3 col-lg-6 self">
-                                    <label for="title" class="form-label">Coupon Title<span class="text-danger"><i> Characters
-                                                Limit max 20 *</i></span></label>
+                                    <label for="title" class="form-label">Coupon Title</label>
                                     <input class="form-control" type="text" name="title"
                                         value="{{ isset($giftCoupon) ? $giftCoupon->title : '' }}" placeholder="Coupon Title"
                                         maxlength="20" id="title" required>
@@ -101,11 +100,6 @@
                                     <textarea onKeyDown="textCounter(this,60);" onKeyUp="textCounter(this,'q17length' ,60)" class="form-control"
                                         name="redeem_description" id="redeem_description" rows="5" cols="">{{ isset($giftCoupon) ? $giftCoupon->redeem_description : '' }}</textarea><br>
         
-                                    {{-- <textarea onKeyDown="textCounter(this,500);"
-                                onKeyUp="textCounter(this,'q17length' ,500)" class="scanwid" name="q17" id="q17" rows="5" cols=""></textarea> --}}
-                                    <i>Maximum of 60 characters - <input style="color:red;font-size:12pt;font-style:italic;"
-                                            readonly type="text" id='q17length' name="q17length" size="3" maxlength="3"
-                                            value="60"> characters left</i>
         
                                 </div>
                                 <div class="mb-3 col-lg-6">
