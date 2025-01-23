@@ -81,21 +81,21 @@
     
         <div class="carousel-inner">
             @foreach ($bannerData as $key => $banner)
-                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                    <img src="{{ url('/storage/' . $banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
-                    <div class="carousel-caption d-none d-md-block">
-                        <div class="container h-100">
-                            <div class="row h-100 align-items-center justify-content-start">
-                                <div class="col-md-6 text-start">
-                                    <h4 class="fw-bold">{{ $banner->title }}</h4>
-                                    <p>{{ $banner->description }}</p>
-                                </div>
+            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                <img src="{{ url('/storage/' . $banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
+                <div class="carousel-caption d-none d-md-block" style="top: 50%; transform: translateY(-50%); left: 0; right: 0;">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-md-6 text-start">
+                                <h4 class="fw-bold">{{ $banner->title }}</h4>
+                                <p>{{ $banner->description }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
+    </div>
     
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
