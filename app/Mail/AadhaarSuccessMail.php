@@ -38,7 +38,8 @@ class AadhaarSuccessMail extends Mailable
             'tokenId' => $this->tokenId,
             'service_type' => $this->service_type,
         ]);
-        return $this->view('emails.aadhaar-success')
+        return $this->subject('Your Background Verification Report is Ready')
+        ->view('emails.aadhaar-success')
                     ->with([
                         'aadhaarData' => $this->aadhaarData,
                         'customerName' => $this->customerName,

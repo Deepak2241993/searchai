@@ -94,7 +94,6 @@ class AadhaarController extends Controller
             Log::warning('Transaction ID is missing in session.');
             return redirect()->route('aadhaar.form')->withErrors('Transaction ID is missing.');
         }
-
         // Pass the session data to the view
         return view('aadhaar.verify', compact('transactionId', 'tokenShareCode', 'aadhaarNumber', 'serviceType'));
     }
