@@ -113,7 +113,7 @@
 		</nav>
 	  </div>	
 	</div>
-	<div style="background:#2e2d2d;color:#fff;padding:15px 15px 100px;" class="copyright">
+	<div style="background:#2e2d2d;color:#fff;padding:1px 0px 1px" class="copyright">
 		{{-- <nav class="ampstart-footer-nav">
 		  <ul class="social-list">
         <li class="social-list-item">
