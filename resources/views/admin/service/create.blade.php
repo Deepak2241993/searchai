@@ -99,12 +99,14 @@
                                     <input class="form-control" type="file" name="images[]" id="images" multiple>
                                     <!-- Preview uploaded images dynamically -->
                                     <small class="form-text text-muted">You can upload multiple images.</small>
-                                    @php
+                                   @if(isset($serviceData))
+                                   @php
                                         $image = explode('|', $serviceData->images);
                                     @endphp
                                     @foreach ($image as $value)
                                         <image src="{{ $value }}" height="100" width="100">
                                     @endforeach
+                                    @endif
                                 </div>
                                 <div class="mb-3 col-lg-6 mt-4">
 

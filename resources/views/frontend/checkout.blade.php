@@ -369,7 +369,7 @@
                                                 <div>
                                                     <h5 class="font-weight-bold">{{ $item['serviceName'] }}</h5>
                                                     <input type="hidden" id="serviceName" name="serviceName" value="{{ $item['serviceName'] }}">
-                                                    <span class="text-muted">Rs.{{ $item['pricePerItem'] }} x {{ $item['tokens'] }} tokens</span>
+                                                    <span class="text-muted">&#8377;{{ $item['pricePerItem'] }} x {{ $item['tokens'] }} tokens</span>
                                                 </div>
                                                 <div class="text-right">
                                                 <!-- <span class="text-muted">Rs.{{ $item['pricePerItem'] }} x {{ $item['tokens'] }} tokens</span> -->
@@ -386,7 +386,7 @@
                                     <!-- Total Amount Section -->
                                     <div class="d-flex justify-content-between mb-4">
                                         <h5 class="font-weight-bold">Total Amount</h5>
-                                        <span class="text-right">Rs.{{ $amount }}</span>
+                                        <span class="text-right">&#8377;{{ $amount }}</span>
                                     </div>
 
                                     <div class="payment-information mb-4">
