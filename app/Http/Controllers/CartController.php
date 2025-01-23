@@ -79,18 +79,22 @@ class CartController extends Controller
     }
 
     public function remove(Request $request, $itemId)
-    {
-        $cart = session()->get('cart', []);
-        foreach ($cart as $key => $item) {
-            if ($item['id'] === $itemId) {
-                unset($cart[$key]);
-                session()->put('cart', array_values($cart));
-                return response()->json(['success' => true, 'message' => 'Item removed from cart.']);
-            }
-        }
+{
+    $itemId = (int) $itemId; // Ensure integer type
+    $cart = session()->get('cart', []);
 
-        return response()->json(['success' => false, 'message' => 'Item not found in cart.']);
+    foreach ($cart as $key => $item) {
+        if ((int) $item['id'] === $itemId) {
+            unset($cart[$key]);
+            session()->put('cart', array_values($cart));
+
+            return response()->json(['success' => true, 'message' => 'Item removed from cart.']);
+        }
     }
+
+    return response()->json(['success' => false, 'message' => 'Item not found in cart.']);
+}
+
     // Proceed to Checkout
     // public function checkout(Request $request)
     // {

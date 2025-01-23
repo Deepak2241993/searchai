@@ -299,33 +299,37 @@
         }
 
         function deleteItem(itemId) {
-            if (confirm('Are you sure you want to remove this item?')) {
-                fetch(`/cart/remove/${itemId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Failed to remove item.');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        const itemRow = document.querySelector(`#cart-item-${itemId}`);
-                        if (itemRow) {
-                            itemRow.remove();
-                        }
-                        updateSubtotalAndTotal();
-                        updateCartData();
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            }
+        if (confirm('Are you sure you want to remove this item?')) {
+            fetch(`{{ route('cart.remove', '') }}/${itemId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to remove item.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    const itemRow = document.querySelector(`#cart-item-${itemId}`);
+                    if (itemRow) {
+                        itemRow.remove();
+                    }
+                    updateSubtotalAndTotal();
+                    updateCartData();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
+    }
     </script>
 
     </main>
