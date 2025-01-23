@@ -156,25 +156,29 @@
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-10 col-lg-8">
                             <h2 class="display-4 font-weight-bold text-center mb-4">{{ $item->name }}</h2>
-                            <h4 class="text-primary text-center mb-3">₹{{ number_format($item->price, 2) }}</h4>
+                            <h3 class="text-primary text-center mb-3">₹{{ number_format($item->price, 2) }}</h3>
 
                             <!-- Purchase Form -->
                             <form action="{{ route('cart.add') }}" method="POST">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="tokens">Number of Tokens:</label>
-                                    <div class="input-group">
-                                        <button type="button" id="decrease" class="btn btn-outline-secondary">-</button>
-                                        <input type="number" id="tokens" name="tokens" min="1" value="1" required class="form-control">
-                                        <button type="button" id="increase" class="btn btn-outline-secondary">+</button>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="tokens">Number of Tokens:</label>
+                                            <div class="input-group">
+                                                <button type="button" id="decrease" class="btn btn-outline-secondary">-</button>
+                                                <input type="number" id="tokens" name="tokens" min="1" value="1" required class="form-control">
+                                                <button type="button" id="increase" class="btn btn-outline-secondary">+</button>
+                                            </div>
+                                            <input type="hidden" name="pricePerItem" value="{{ $item->price }}">
+                                            <input type="hidden" name="serviceName" value="{{ $item->name }}">
+                                        </div>
                                     </div>
-
-                                    <input type="hidden" name="pricePerItem" value="{{ $item->price }}">
-                                    <input type="hidden" name="serviceName" value="{{ $item->name }}">
-                                </div>
-
-                                <div class="d-flex justify-content-between mt-3">
-                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                    <div class="col-md-4">
+                                        <div class="d-flex justify-content-between mt-4">
+                                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
 
