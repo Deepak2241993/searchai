@@ -78,14 +78,20 @@
                 </button>
             @endforeach
         </div>
-        
+    
         <div class="carousel-inner">
             @foreach ($bannerData as $key => $banner)
                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                    <img src="{{ url('/') . '/' . ('storage/' . $banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
+                    <img src="{{ url('/storage/' . $banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>{{ $banner->title }}</h5>
-                        <p>{{ $banner->description }}</p>
+                        <div class="container h-100">
+                            <div class="row h-100 align-items-center justify-content-start">
+                                <div class="col-md-6 text-start">
+                                    <h4 class="fw-bold">{{ $banner->title }}</h4>
+                                    <p>{{ $banner->description }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endforeach
@@ -100,6 +106,9 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+    
+    
+    
     
 
     {{-- <section id="slider">
