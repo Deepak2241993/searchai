@@ -114,7 +114,7 @@
 	  </div>	
 	</div>
 	<div style="background:#2e2d2d;color:#fff;padding:15px 15px 100px;" class="copyright">
-		<nav class="ampstart-footer-nav">
+		{{-- <nav class="ampstart-footer-nav">
 		  <ul class="social-list">
         <li class="social-list-item">
           <a class="social-link" rel="noopener" href="#" target="_blank" aria-label="Helper Near Me on Facebook" style="background:#3b5998"><amp-img layout="fixed" width="40" height="40" src="{{url('/front-assets')}}/images/icons/facebook.svg" alt="Helper Near Me on Facebook"></amp-img></a>
@@ -129,7 +129,7 @@
           <a class="social-link" rel="noopener" href="#" target="_blank" aria-label="Helper Near Me on WhatsApp" style="background:#55EB4C"><amp-img layout="fixed" width="40" height="40" src="{{url('/front-assets')}}/images/icons/whatsapp.svg" alt="WhatsApp Us"></amp-img></a>
         </li>
 		  </ul>
-		</nav>
-		<h5 class="text-center">Copyright &copy; {{date('Y')}} Navigant Digital Pvt ltd. | All rights reserved | <a href="https://www.thetemz.com/" target="_blank">Develop by TEMZ</a></h5>
+		</nav> --}}
+		<h5 class="text-center">Copyright &copy; {{date('Y')}} Navigant Digital Pvt ltd. |  All rights reserved | <a href="https://www.thetemz.com/" target="_blank">Develop by TEMZ</a></h5>
 	</div>
 </footer>
