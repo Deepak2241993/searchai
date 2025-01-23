@@ -2126,3 +2126,12 @@
 [2025-01-23 08:05:54] local.DEBUG: Validated request data. {"aadhaar_number":"528674287606","token":"4CeivoEtAOTIbgJRKwBdUC4MgFPtZF0V","service_type":"KYC VERIFICATION"} 
 [2025-01-23 08:05:56] local.INFO: OTP generated successfully. {"response_data":{"request_id":"80e91ef2-c3e8-4090-8460-3655377c597e","transaction_id":"184499d5-9eb1-43d9-b5e0-d25ad2f8f30e","status":200,"data":{"code":"1001","message":"OTP sent to your Registered Mobile number. Check your mobile.","transaction_id":"184499d5-9eb1-43d9-b5e0-d25ad2f8f30e"},"timestamp":1737619555687,"path":"/aadhaar-api/boson/generate-otp"}} 
 [2025-01-23 08:05:56] local.INFO: Displaying OTP verification form. {"transaction_id":"184499d5-9eb1-43d9-b5e0-d25ad2f8f30e","token_share_code":"4CeivoEtAOTIbgJRKwBdUC4MgFPtZF0V","aadhaar_number":"528674287606","service_type":"KYC VERIFICATION"} 
+[2025-01-23 08:06:56] local.INFO: Displaying OTP verification form. {"transaction_id":null,"token_share_code":null,"aadhaar_number":null,"service_type":null} 
+[2025-01-23 08:06:56] local.WARNING: Transaction ID is missing in session.  
+[2025-01-23 08:06:56] local.INFO: Displaying Aadhaar OTP generation form.  
+[2025-01-23 08:07:00] local.INFO: Displaying Aadhaar OTP generation form.  
+[2025-01-23 08:07:04] local.INFO: Displaying Aadhaar OTP generation form.  
+[2025-01-23 08:07:07] local.INFO: Displaying Aadhaar OTP generation form.  
+[2025-01-23 08:07:11] local.INFO: Displaying OTP verification form. {"transaction_id":null,"token_share_code":null,"aadhaar_number":null,"service_type":null} 
+[2025-01-23 08:07:11] local.WARNING: Transaction ID is missing in session.  
+[2025-01-23 08:07:11] local.INFO: Displaying Aadhaar OTP generation form.  
