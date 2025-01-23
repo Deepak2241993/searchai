@@ -48,7 +48,7 @@ class AadhaarController extends Controller
                 'Content-Type' => 'application/json',
                 'X-API-Key' => $this->apiKey,
                 'X-Auth-Type' => 'API-Key',
-            ])->post(env('GRIDLINES_API_URL').'/generate-otp', [
+                ])->post('https://api.gridlines.io/aadhaar-api/boson/generate-otp', [
                 'aadhaar_number' => $validated['aadhaar_number'],
                 'consent' => 'Y',
             ]);
