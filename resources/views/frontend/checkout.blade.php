@@ -375,9 +375,9 @@
                                                 <!-- <span class="text-muted">Rs.{{ $item['pricePerItem'] }} x {{ $item['tokens'] }} tokens</span> -->
                                                     <!-- <strong>Amount: Rs.{{ $item['pricePerItem'] * $item['tokens'] }}</strong> -->
                                                 </div>
-                                                <button type="button" class="btn btn-sm btn-danger mt-2" data-item-id="{{ $item['id'] }}">
+                                                {{-- <button type="button" class="btn btn-sm btn-danger mt-2" data-item-id="{{ $item['id'] }}">
                                                     <i class="las la-times"></i> Remove
-                                                </button>
+                                                </button> --}}
                                             </li>
                                             @endforeach
                                         </ul>
@@ -526,50 +526,6 @@
             alert('An error occurred. Please try again.');
         }
     });
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get all remove buttons
-        const removeButtons = document.querySelectorAll('.btn-danger');
-
-        // Loop through each button and add a click event listener
-        removeButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                const itemId = this.getAttribute('data-item-id'); // Get the item ID from the data attribute
-                deleteItem(itemId); // Call the deleteItem function with the ID
-            });
-        });
-
-        // Define the deleteItem function
-        function deleteItem(itemId) {
-            if (confirm('Are you sure you want to remove this item?')) {
-                fetch(`/cart/remove/${itemId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        },
-                        body: JSON.stringify({
-                            id: itemId
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            const itemRow = document.querySelector(`#cart-item-${itemId}`);
-                            if (itemRow) {
-                                itemRow.remove();
-                            }
-                            updateSubtotalAndTotal();
-                            updateCartData();
-                        } else {
-                            alert('Failed to remove item.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred while removing the item. Please try again.');
-                    });
-            }
-        }
-    });
+   
 </script>
 @endsection
