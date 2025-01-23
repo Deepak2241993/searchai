@@ -179,7 +179,7 @@ class AadhaarController extends Controller
                         $authUserEmail = Auth::user()->email;
 
                         // Attempt to send the email
-                        Mail::to($authUserEmail)->send(new \App\Mail\AadhaarSuccessMail($aadhaarData, $aadhaarData['name'], $token->id, $validated['service_type']));
+                        Mail::to($authUserEmail)->send(new \App\Mail\AadhaarSuccessMail($aadhaarData, $aadhaarData['name'], $token->token, $validated['service_type']));
 
                         // Log successful email delivery
                         Log::info('Aadhaar success email sent successfully.', [

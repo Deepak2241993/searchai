@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,26 +15,38 @@
             max-width: 600px;
             margin: 20px auto;
             background-color: #ffffff;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .logo {
+        .header {
             text-align: center;
             margin-bottom: 20px;
         }
-        .logo img {
+        .header img {
             max-width: 200px;
+        }
+        .header h1 {
+            color: #007bff;
+            font-size: 24px;
+            margin-top: 10px;
         }
         .content {
             color: #333333;
             line-height: 1.6;
+        }
+        .details p {
+            margin: 8px 0;
         }
         .footer {
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
             color: #777777;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
         }
         .btn {
             display: inline-block;
@@ -45,11 +56,12 @@
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="email-container">
         <div class="header">
             <img src="https://searchai.space/assets/images/logo.png" alt="SearchAPI Logo">
             <h1>Verification Completed</h1>
