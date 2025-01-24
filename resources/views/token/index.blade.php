@@ -148,7 +148,7 @@ Token List
 
                     <!-- Hidden fields for Token and Service Type -->
                     <input type="hidden" name="token" id="modalToken" value="">
-                    <input type="hidden" name="service_type" id="modalServiceType" value="">
+                    <input type="hidden" name="service_type" id="modalServiceType" value="KYC VERIFICATION">
 
                     <!-- Display Token Info -->
                     <div class="mb-3">
@@ -207,6 +207,10 @@ Token List
                             <td id="aadhaarGender"></td>
                         </tr>
                         <tr>
+                            <th>Care of</th>
+                            <td id="aadhaarCareof"></td>
+                        </tr>
+                        <tr>
                             <th>Address</th>
                             <td id="aadhaarAddress"></td>
                         </tr>
@@ -228,7 +232,7 @@ Token List
                 const serviceType = this.getAttribute('data-service');
                 const token = this.getAttribute('data-token');
                 // Set modal values
-                document.getElementById('modalServiceType').value = serviceType;
+                // document.getElementById('modalServiceType').value = serviceType;
                 document.getElementById('modalToken').value = token;
                 document.getElementById('modalServiceTypeDisplay').textContent = serviceType;
                 document.getElementById('modalTokenDisplay').textContent = token;
@@ -299,17 +303,19 @@ Token List
                 const aadhaarData = JSON.parse(this.getAttribute('data-aadhaar'));
                 document.getElementById('aadhaarNumber').textContent = aadhaarData.aadhaar_number || 'N/A';
                 document.getElementById('aadhaarName').textContent = aadhaarData.name || 'N/A';
-                document.getElementById('aadhaarDob').textContent = aadhaarData.date_of_birth || 'N/A';
+                document.getElementById('aadhaarDob').textContent = aadhaarData.date_of_birth || 'N/A';                    
                 document.getElementById('aadhaarGender').textContent = aadhaarData.gender || 'N/A';
+                document.getElementById('aadhaarCareof').textContent = aadhaarData.care_of || 'N/A';
                 const addressParts = [
-                    aadhaarData.care_of,
+
                     aadhaarData.house,
                     aadhaarData.street,
                     aadhaarData.district,
                     aadhaarData.sub_district,
                     aadhaarData.landmark,
                     aadhaarData.post_office_name,
-                    aadhaarData.state
+                    aadhaarData.state,
+                    aadhaarData.pincode
                 ];
                 const fullAddress = addressParts.filter(part => part).join(', ');
                 document.getElementById('aadhaarAddress').textContent = fullAddress || 'N/A';

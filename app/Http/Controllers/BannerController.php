@@ -34,10 +34,24 @@ class BannerController extends Controller
         $validatedData = $request->validate([
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image'       => [
+                'nullable',
+                'image',
+                'mimes:jpeg,png,jpg,gif,svg',
+                'max:5120', // Max size in KB (5 MB)
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->hasFile('image')) {
+                        $sizeInKB = $request->file('image')->getSize() / 1024;
+                        if ($sizeInKB < 10) {
+                            $fail('The ' . $attribute . ' must be at least 10 KB.');
+                        }
+                    }
+                },
+            ],
             'status'      => 'required|boolean',
             'order'       => 'required|integer',
         ]);
+        
     
         // Handle the image upload
         if ($request->hasFile('image')) {
@@ -78,7 +92,20 @@ class BannerController extends Controller
         $validatedData = $request->validate([
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image'       => [
+                'nullable',
+                'image',
+                'mimes:jpeg,png,jpg,gif,svg',
+                'max:5120', // Max size in KB (5 MB)
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->hasFile('image')) {
+                        $sizeInKB = $request->file('image')->getSize() / 1024;
+                        if ($sizeInKB < 10) {
+                            $fail('The ' . $attribute . ' must be at least 10 KB.');
+                        }
+                    }
+                },
+            ],
             'status'      => 'required|boolean',
             'order'       => 'required|integer',
         ]);

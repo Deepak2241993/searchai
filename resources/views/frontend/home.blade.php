@@ -66,7 +66,52 @@
 </style>
 
 <main id="content">
-    <section id="slider">
+
+    <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+            @foreach ($bannerData as $key => $banner)
+                <button type="button" data-bs-target="#carouselExampleCaptions" 
+                    data-bs-slide-to="{{ $key }}" 
+                    class="{{ $key == 0 ? 'active' : '' }}" 
+                    aria-current="{{ $key == 0 ? 'true' : 'false' }}" 
+                    aria-label="Slide {{ $key + 1 }}">
+                </button>
+            @endforeach
+        </div>
+    
+        <div class="carousel-inner">
+            @foreach ($bannerData as $key => $banner)
+            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                <img src="{{ url('/storage/' . $banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
+                <div class="carousel-caption d-none d-md-block" style="top: 50%; transform: translateY(-50%); left: 0; right: 0;">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-md-6 text-start">
+                                <h4 class="fw-bold">{{ $banner->title }}</h4>
+                                <p>{{ $banner->description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
+    
+    
+    
+
+    {{-- <section id="slider">
         <div class="owl-carousel owl-theme">
             @foreach ($bannerData as $banner)
             <div class="slider-item"
@@ -78,7 +123,7 @@
             </div>
             @endforeach
         </div>
-    </section>
+    </section> --}}
     <div class="button-container">
         <h3>Token Purchase</h3>
         @foreach ($serviceData as $item)

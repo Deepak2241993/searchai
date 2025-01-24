@@ -18,18 +18,21 @@ class TokenPurchaseEmail extends Mailable
 
     public $user;
     public $tokens;
+    public $order;
 
-    public function __construct(User $user, $tokens)
+    public function __construct(User $user, $tokens,$order)
     {
         $this->user = $user;
         $this->tokens = $tokens;
+        $this->order = $order;
+
     }
     public function build()
     {
         // dd($this->user, $this->tokens); 
 
         // Generate the PDF content
-        $pdf = PDF::loadView('emails.tokens', ['tokens' => $this->tokens, 'user' => $this->user]);
+        $pdf = PDF::loadView('emails.tokens', ['tokens' => $this->tokens, 'user' => $this->user, $this->order]);
 
         // Build the email
         return $this->subject('Token Purchase Details')

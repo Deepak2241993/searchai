@@ -29,6 +29,10 @@ All Coupon List
             <div class="row">
                 <div class="col-md-12">
                     <div class="card border-0 shadow-sm">
+                        <h3 id="error" class="text-danger"></h3>
+                          
+                        </div>
+
                         @if (session('message'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <i class="bi bi-check-circle-fill me-2"></i> {{ session('message') }}
@@ -108,7 +112,10 @@ All Coupon List
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                location.reload();
+                document.getElementById('error').innerHTML = data.message;
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             } else {
                 alert(data.message || 'Something went wrong!');
             }

@@ -17,6 +17,6 @@ extends Model
         'status',
         'order',
         'created_at',
-        'updated_at',
+        'updated_at', 
     ];
 }

@@ -159,6 +159,7 @@ class PaymentController extends Controller
                     $expiresAt = Carbon::now()->addDays(600);
 
                     $tokens = [];
+
                     for ($i = 0; $i < $numberOfTokens; $i++) {
                         $newToken = new Token();
                         $newToken->user_id = $user->id;
@@ -166,13 +167,17 @@ class PaymentController extends Controller
                         $newToken->token = Str::random(32);
                         $newToken->expires_at = $expiresAt;
                         $newToken->status = 'active';
-                        $newToken->order_id = $order->id;;
+                        $newToken->order_id = $order->id;
                         $newToken->save();
+                    
+                        // Push the saved token to the array
+                        $tokens[] = $newToken;
                     }
+                    
 
                     // Send the email with the PDF attachment and log success/failure
                     try {
-                        Mail::to($user->email)->send(new TokenPurchaseEmail($user, $tokens));
+                        Mail::to($user->email)->send(new TokenPurchaseEmail($user, $tokens,$order));
                         Log::info('Token purchase email sent successfully', ['user_email' => $user->email]);
                     } catch (\Exception $e) {
                         Log::error('Failed to send token purchase email', [
@@ -231,6 +236,7 @@ class PaymentController extends Controller
     }
     public function success()
     {
+        session()->pull('cart');
         return view('payment.success');
     }
     public function failure()

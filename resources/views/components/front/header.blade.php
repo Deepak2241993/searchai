@@ -67,15 +67,18 @@
                 </li>
                 <li class="nav-item">
                     @auth
+
                     <a class="btn btn-outline-light btn-sm" href="{{ route('home') }}">
+                        <i class="bi bi-house-door"></i>
+                    </a>
+
+                    <a class="btn btn-outline-light btn-sm" href="{{ route('dashboard') }}">
                         <span class="navbar-text me-3 text-white">
                             {{ strtoupper(substr(Auth::user()->name, 0, 1)) . strtoupper(substr(strrchr(Auth::user()->name, ' '), 1, 1)) }}
                         </span>
                     </a>
 
-                    <a class="btn btn-outline-light btn-sm" href="{{ route('dashboard') }}">
-                        <i class="bi bi-house-door"></i>
-                    </a>
+                   
                     <a class="btn btn-outline-light btn-sm ms-2" href="{{ route('settings') }}">
                         <i class="bi bi-gear"></i>
                     </a>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,9 +22,7 @@
     </style>
 </head>
 <body>
-    <h1>Aadhaar Details</h1>
-    <h1>Aadhaar Details</h1>
-    
+    <h1>Aadhaar Details</h1>    
     <div class="content">
         <p><strong>Aadhaar Number:</strong> {{ $aadhaarData['reference_id'] }}</p> 
         <p><strong>Name:</strong> {{ $aadhaarData['name'] }}</p>
@@ -31,17 +30,18 @@
         <p><strong>Gender:</strong> {{ $aadhaarData['gender'] }}</p>
         <p><strong>Mobile:</strong> {{ $aadhaarData['mobile'] }}</p>
         <p><strong>Full Address:</strong> 
-            {{ $aadhaarData['care_of'] }}, 
-            {{ $aadhaarData['house'] }},
-            {{ $aadhaarData['street'] }},
-            {{ $aadhaarData['district'] }},
-            {{ $aadhaarData['sub_district'] }},
-            {{ $aadhaarData['locality'] }},
-            {{ $aadhaarData['post_office_name'] }},
-            {{ $aadhaarData['state'] }},
-            {{ $aadhaarData['pincode'] }},
-            {{ $aadhaarData['country'] }},
-            {{ $aadhaarData['vtc_name'] }}
+            {{ $aadhaarData['care_of'] ?? 'null' }},
+            {{ $aadhaarData['house'] ?? 'null' }},
+            {{ $aadhaarData['street'] ?? 'null' }},
+            {{ $aadhaarData['district'] ?? 'null' }},
+            {{ $aadhaarData['sub_district'] ?? 'null' }},
+            {{ $aadhaarData['locality'] ?? 'null' }},
+            {{ $aadhaarData['post_office_name'] ?? 'null' }},
+            {{ $aadhaarData['state'] ?? 'null' }},
+            {{ $aadhaarData['pincode'] ?? 'null' }},
+            {{ $aadhaarData['country'] ?? 'null' }},
+            {{ $aadhaarData['vtc_name'] ?? 'null' }}
+            
         </p>
     </div>
 </body>

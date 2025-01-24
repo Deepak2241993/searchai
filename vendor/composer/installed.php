@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'f8c19d2c131fc7d15f2e3c7d7618df0175e28481',
+        'reference' => '1368b593d7e4b2bec67c67e0b66006bed760d8da',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'barryvdh/laravel-dompdf' => array(
-            'pretty_version' => 'v3.0.1',
-            'version' => '3.0.1.0',
-            'reference' => 'd2b3a158ba6e6c0fbb97208aa37dc764642ce5d5',
+            'pretty_version' => 'v3.1.0',
+            'version' => '3.1.0.0',
+            'reference' => '8d698b4aec2be91fe1e47ba71ba258acbf23357d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../barryvdh/laravel-dompdf',
             'aliases' => array(),
@@ -418,7 +418,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'f8c19d2c131fc7d15f2e3c7d7618df0175e28481',
+            'reference' => '1368b593d7e4b2bec67c67e0b66006bed760d8da',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

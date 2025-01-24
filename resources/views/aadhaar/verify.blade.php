@@ -23,23 +23,27 @@ Verify OTP
 
 <div class="app-content py-4">
     <div class="container-fluid">
-        <div class="card border-0 shadow-sm mb-4">
-            <div class="card-body d-flex justify-content-between align-items-center rounded">
-                <h4 class="card-title mb-0">Verify Otp</h4>
-            </div>
-        </div>
-        <h1>Verify OTP</h1>
+       
+        
         <form action="{{ route('aadhaar.submit') }}" method="POST">
             @csrf
-            <input type="hidden" name="transaction_id" value="{{ $transactionId }}" required>
-            
-            <input type="hidden" name="token_share_code" value="{{ $tokenShareCode }}" required>
-            <input type="hidden" name="aadhaar_number" value="{{ $aadhaarNumber }}">
-            <input type="hidden" name="service_type" value="{{ $serviceType }}">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="otp">OTP:</label>
+                    <input class= "form-control" type="text" name="otp" id="otp" required>
+                    <input type="hidden" name="transaction_id" value="{{ $transactionId }}" required>
+                    <input type="hidden" name="token_share_code" value="{{ $tokenShareCode }}" required>
+                    <input type="hidden" name="aadhaar_number" value="{{ $aadhaarNumber }}">
+                    <input type="hidden" name="service_type" value="KYC VERIFICATION">
+                </div>
+                <div class="col-md-6 mt-4">
+                    <button type="submit" class="btn btn-success">Verify OTP</button>
+                </div>
+            </div>
+           
 
-            <label for="otp">OTP:</label>
-            <input type="text" name="otp" id="otp" required>
-            <button type="submit">Verify OTP</button>
+           
+           
         </form>
 
     </div>

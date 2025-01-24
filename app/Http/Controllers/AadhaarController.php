@@ -48,7 +48,7 @@ class AadhaarController extends Controller
                 'Content-Type' => 'application/json',
                 'X-API-Key' => $this->apiKey,
                 'X-Auth-Type' => 'API-Key',
-            ])->post('https://api.gridlines.io/aadhaar-api/boson/generate-otp', [
+                ])->post('https://api.gridlines.io/aadhaar-api/boson/generate-otp', [
                 'aadhaar_number' => $validated['aadhaar_number'],
                 'consent' => 'Y',
             ]);
@@ -94,7 +94,6 @@ class AadhaarController extends Controller
             Log::warning('Transaction ID is missing in session.');
             return redirect()->route('aadhaar.form')->withErrors('Transaction ID is missing.');
         }
-
         // Pass the session data to the view
         return view('aadhaar.verify', compact('transactionId', 'tokenShareCode', 'aadhaarNumber', 'serviceType'));
     }
@@ -180,7 +179,7 @@ class AadhaarController extends Controller
                         $authUserEmail = Auth::user()->email;
 
                         // Attempt to send the email
-                        Mail::to($authUserEmail)->send(new \App\Mail\AadhaarSuccessMail($aadhaarData, $aadhaarData['name'], $token->id, $validated['service_type']));
+                        Mail::to($authUserEmail)->send(new \App\Mail\AadhaarSuccessMail($aadhaarData, $aadhaarData['name'], $token->token, $validated['service_type']));
 
                         // Log successful email delivery
                         Log::info('Aadhaar success email sent successfully.', [
