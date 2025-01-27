@@ -148,7 +148,7 @@ class AadhaarController extends Controller
                     return back()->withErrors('Invalid response from Aadhaar API. Please try again.');
                 }
                 // Save Aadhaar data in the database
-                AadhaarData::create([
+                $createdData= AadhaarData::create([
                     'aadhaar_number' => $validated['aadhaar_number'],
                     'reference_id' => $aadhaarData['reference_id'] ?? null,
                     'id_token' => $token->id,
@@ -173,13 +173,19 @@ class AadhaarController extends Controller
                 $token->status = 'expired';
                 $token->save();
 
+               
+
                 try {
                     // Check if the user is authenticated
                     if (Auth::check()) {
                         $authUserEmail = Auth::user()->email;
+                        // SCREENING REPORT
+                        $order_id= "OT".$token->order_id;
+                        $client_data= Auth::user();
+                        // END SCREENING REPORT
 
                         // Attempt to send the email
-                        Mail::to($authUserEmail)->send(new \App\Mail\AadhaarSuccessMail($aadhaarData, $aadhaarData['name'], $token->token, $validated['service_type']));
+                        Mail::to($authUserEmail)->send(new \App\Mail\AadhaarSuccessMail($aadhaarData, $aadhaarData['name'], $token->token, $validated['service_type'],$createdData,$order_id,$client_data));
 
                         // Log successful email delivery
                         Log::info('Aadhaar success email sent successfully.', [
