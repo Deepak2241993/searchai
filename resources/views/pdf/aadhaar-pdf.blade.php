@@ -197,7 +197,7 @@
             <table class="info-table">
                 <tr>
                     <th>Aadhaar Number</th>
-                    <td>{{ $aadhaarData['aadhaar_number'] }}</td>
+                    <td>{{ $createdData['aadhaar_number'] }}</td>
                 </tr>
                 <tr>
                     <th>Name</th>
