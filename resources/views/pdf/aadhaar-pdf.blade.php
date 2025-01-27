@@ -157,7 +157,7 @@
         <div class="header">
 
             <div class="col-md-6 logo">
-                <img src="https://searchai.space/wp-content/uploads/2024/07/cropped-Logo-1-1-220x53.png"
+                <img src="{{url('/logo.png')}}"
                     alt="SearchAI Logo">
             </div>
             <div class="col-md-6 company-details">
