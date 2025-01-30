@@ -189,9 +189,7 @@
                                 {{ $item->long_description }}
                             </p>
 
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-lg btn-dark mt-4 px-5 py-3 shadow-sm" type="button">Buy Now!</button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

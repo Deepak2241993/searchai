@@ -81,12 +81,14 @@ class TokenController extends Controller
     public function downloadPdf($id)
     {
         $token = Token::findOrFail($id);
+       
         $filteredAadhaarData = collect($token->aadhaarData)->except([
             'photo_base64', 'mobile', 'landmark', 'reference_id', 'aadhaar_token', 'updated_at' ]);
         $token->aadhaarData = $filteredAadhaarData;
         $pdf = PDF::loadView('pdf.template', [
             'token' => $token,
         ]);
+        
         return $pdf->download('details_' . $token->id . '.pdf');
         // dd($pdf->output());
     }

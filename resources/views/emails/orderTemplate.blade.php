@@ -177,9 +177,6 @@ $template_data = App\Models\EmailTemplate::where('id', $mail_data->event_id)->ge
             <tr style="vertical-align: top">
                 <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
 
-
-
-
                     <div class="u-row-container" style="padding: 0px;background-color: transparent">
                         <div class="u-row"
                             style="margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;">

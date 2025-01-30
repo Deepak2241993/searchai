@@ -63,7 +63,7 @@
 <body>
     <div class="email-container">
         <div class="header">
-            <img src="https://searchai.space/assets/images/logo.png" alt="SearchAPI Logo">
+            <img src="{{url('/front-assets/images/logo.png')}}" alt="SearchAPI Logo">
             <h1>Verification Completed</h1>
         </div>
         <div class="content">

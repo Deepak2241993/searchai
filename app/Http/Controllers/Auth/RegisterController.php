@@ -51,7 +51,14 @@ class RegisterController extends Controller
 
         auth()->login($user);
 
-        return redirect()->route('home');
+        if (session()->has('cart')) {
+            return redirect()->route('cart.index');
+        } else {
+            return redirect()->route('home');
+        }
+        
+
+        
     }
 
     public function showLoginForm()

@@ -30,7 +30,7 @@
 
                     <div class="row mb-3">
                         <label for="name-input" class="col-sm-2 col-form-label">
-                            <i class="fas fa-user"></i> Name
+                            <i class="fa fa-user" aria-hidden="true"></i> Name
                         </label>
                         <div class="col-sm-10">
                             <input class="form-control form-control-lg rounded-pill" type="text"
@@ -44,7 +44,7 @@
 
                     <div class="row mb-3">
                         <label for="email-input" class="col-sm-2 col-form-label">
-                            <i class="fas fa-envelope"></i> Email
+                            <i class="fa fa-envelope" aria-hidden="true"></i> Email
                         </label>
                         <div class="col-sm-10">
                             <input class="form-control form-control-lg rounded-pill" type="email"
@@ -57,7 +57,7 @@
                     </div>
                     <div class="row mb-3">
                         <label for="address-input" class="col-sm-2 col-form-label">
-                            <i class="fas fa-envelope"></i> Address
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> Address
                         </label>
                         <div class="col-sm-10">
                             <input class="form-control form-control-lg rounded-pill" type="address"
@@ -70,7 +70,7 @@
                     </div>
                     <div class="row mb-3">
                         <label for="alternate_address-input" class="col-sm-2 col-form-label">
-                            <i class="fas fa-envelope"></i> Alternate Address
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> Alternate Address
                         </label>
                         <div class="col-sm-10">
                             <input class="form-control form-control-lg rounded-pill" type="alternate_address"
@@ -86,7 +86,7 @@
                     @endphp --}}
                     <div class="row mb-3">
                         <label for="phone-input" class="col-sm-2 col-form-label">
-                            <i class="fas fa-phone"></i> Phone
+                            <i class="fa fa-phone-square" aria-hidden="true"></i> Phone
                         </label>
                         <div class="col-sm-10">
                             <input type="hidden" id="countryCode" name="country_code">
@@ -99,7 +99,7 @@
                     </div>
 
 
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <label for="profile-pic" class="col-sm-2 col-form-label">
                             <i class="fas fa-image"></i> Profile Picture
                         </label>
@@ -126,11 +126,11 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row mt-4">
                         <div class="col-sm-12 text-center">
                             <button type="submit" class="btn btn-lg btn-primary rounded-pill px-5">
-                                <i class="fas fa-save"></i> Save Changes
+                                <i class="fa fa-save" aria-hidden="true"></i> Save Changes
                             </button>
                         </div>
                     </div>
