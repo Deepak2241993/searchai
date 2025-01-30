@@ -58,7 +58,7 @@
         <div class="card">
             <h1>Payment Successful!</h1>
             <p>Thank you for your payment.</p>
-            <p>Your Order ID: <span class="order-id">sdfvs</span></p>
+            {{-- <p>Your Order ID: <span class="order-id">sdfvs</span></p> --}}
             <a href="{{ url('/') }}">Go to Homepage</a>
             <br>
             <a href="{{ url('/my-orders') }}">My Order</a>

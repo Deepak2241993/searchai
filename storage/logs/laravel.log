@@ -127,3 +127,5 @@
 #60 C:\\xampp\\htdocs\\searchai\\public\\index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 {main}
 "} 
+[2025-01-29 22:52:11] local.INFO: Razorpay order created successfully {"order_id":"order_PpWNNtEFH9dUAQ","amount":160000,"tokens_purchased":"10","serviceName":"Aadhar KYC","currency":"INR"} 
+[2025-01-29 22:52:46] local.INFO: Token purchase email sent successfully {"user_email":"deepakprasad224@gmail.com"} 
