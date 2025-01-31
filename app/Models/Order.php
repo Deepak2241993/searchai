@@ -15,7 +15,8 @@ class Order extends Model
         'currency',
         'status',
         'tokens_purchased',
-        'serviceName',
+        'serviceNames',
+        'tokens',
     ];
     public function user()
     {
