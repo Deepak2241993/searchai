@@ -77,7 +77,7 @@
                 <li class="nav-item">
                     <a href="{{ route('new-token.index') }}" class="nav-link {{ Request::segment(1) === 'ccrv' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
-                        <p>New Background Verification</p>
+                        <p>CCRV</p>
                     </a>
                 </li>
                 <li class="nav-item">
