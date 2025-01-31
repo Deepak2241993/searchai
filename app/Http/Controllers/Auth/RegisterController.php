@@ -56,9 +56,6 @@ class RegisterController extends Controller
         } else {
             return redirect()->route('home');
         }
-        
-
-        
     }
 
     public function showLoginForm()
@@ -236,20 +233,24 @@ class RegisterController extends Controller
 
     public function orders()
     {
-
+        // Fetch the orders with related tokens
         $data = Order::with('tokens')
             ->where('user_id', auth()->id())
             ->paginate(5);
-
-        // dd($data);
-
+        foreach ($data as $order) {
+            $tokens = explode(',', $order->tokens);
+            $order->tokens_sum = array_sum(array_map('intval', $tokens)); // Sum the tokens
+        }
         return view('auth.orders', compact('data'));
     }
 
+
+
     public function show($orderId)
     {
+        // dd($orderId);
         $tokens = Token::where('order_id', $orderId)->get();
-
+        // dd($tokens);
         if ($tokens->isNotEmpty()) {
             $tokens = $tokens->map(function ($token) {
                 return [
