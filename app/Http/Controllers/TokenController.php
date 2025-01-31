@@ -92,6 +92,42 @@ class TokenController extends Controller
 
         return view('token.index', compact('data'));
     }
+
+    public function CCRVReport(Request $request){
+        $data = [
+            "name" => $reques->name,
+            "father_name" => $reques->father_name,
+            "address" => $reques->address,
+            "date_of_birth" => $reques->date_of_birth,
+            "consent" => $reques->consent
+        ];
+        
+        $headers = [
+            'Accept: application/json',
+            'Content-Type: application/json',
+            'X-API-Key: ' . env('GridLineAPIKey'),
+            'X-Auth-Type: API-Key'
+        ];
+        
+        $ch = curl_init();
+        
+        curl_setopt($ch, CURLOPT_URL, env('CCRV_API_URL'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        
+        $response = curl_exec($ch);
+        
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        } else {
+            echo $response;
+        }
+        
+        curl_close($ch);
+    }
     public function downloadPdf($id)
     {
         $token = Token::findOrFail($id);

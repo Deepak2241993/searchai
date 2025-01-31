@@ -19,7 +19,7 @@ class AadhaarController extends Controller
 
     public function __construct()
     {
-        $this->apiKey = env('AADHAAR_API_KEY');
+        $this->apiKey = env('GridLineAPIKey');
     }
 
 

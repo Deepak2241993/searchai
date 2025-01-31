@@ -1,7 +1,7 @@
 @extends('layouts.admin-master')
 
 @section('title')
-Token List
+CCRV
 @endsection
 
 @section('content')
@@ -9,12 +9,12 @@ Token List
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-sm-6">
-                <h3 class="mb-0">Token List</h3>
+                <h3 class="mb-0">CCRV</h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end mb-0">
                     <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Token List</li>
+                    <li class="breadcrumb-item active" aria-current="page">CCRV</li>
                 </ol>
             </div>
         </div>
@@ -25,7 +25,7 @@ Token List
     <div class="container-fluid">
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-body d-flex justify-content-between align-items-center rounded">
-                <h4 class="card-title mb-0">Token Management</h4>
+                <h4 class="card-title mb-0">CCRV Token</h4>
             </div>
         </div>
         <!-- Show success message -->
@@ -128,35 +128,46 @@ Token List
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="aadhaarOtpModalLabel">Generate OTP</h5>
+                <h5 class="modal-title" id="aadhaarOtpModalLabel">Generate CCRV Report</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- Aadhaar OTP Generation Form -->
-                <form id="aadhaarOtpForm" action="{{ route('aadhaar.generate') }}" method="POST">
+               
+
+                <form  id="aadhaarOtpForm" action="{{ route('aadhaar.generate') }}" method="POST">
                     @csrf
-                    <div class="mb-3">
-                        <label for="aadhaar_number" class="form-label">Aadhaar Number:</label>
-                        <input type="text" name="aadhaar_number" id="aadhaar_number" class="form-control" required>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" value="Aditya Kapoor" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="father_name" class="form-label">Father's Name</label>
+                                <input type="text" class="form-control" id="father_name" value="Raj Kapoor" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="date_of_birth" class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" id="date_of_birth" value="1999-03-12" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="address" value="A-123, Block-A, Sector-45, Gurgaon" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="additional_address" class="form-label">Additional Address</label>
+                                <input type="text" class="form-control" id="additional_address" value="F-123, Block-F, Vasant kunj, New Delhi">
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="consent" checked>
+                                <label class="form-check-label" for="consent">Consent Given</label>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Share Code (4 characters) -->
-                    <!-- <div class="mb-3">
-                        <label for="share_code" class="form-label">Share Code (4 characters):</label>
-                        <input type="text" name="share_code" id="share_code" maxlength="4" class="form-control" required>
-                    </div> -->
-
-                    <!-- Hidden fields for Token and Service Type -->
-                    <input type="hidden" name="token" id="modalToken" value="">
-                    <input type="hidden" name="service_type" id="modalServiceType" value="KYC VERIFICATION">
-
-                    <!-- Display Token Info -->
-                    <div class="mb-3">
-                        <p><strong>Service Type:</strong> <span id="modalServiceTypeDisplay"></span></p>
-                        <p><strong>Token:</strong> <span id="modalTokenDisplay"></span></p>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Generate OTP</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
                 <!-- Verify OTP Form (hidden initially) -->
