@@ -87,7 +87,7 @@ class TokenController extends Controller
         }
         $data = Token::with('aadhaarData')
             ->where('user_id', $userId)
-            ->where('service_type', 'New UPI')
+            ->where('service_type', 'CCRV')
             ->paginate(10);
 
         return view('token.index', compact('data'));
