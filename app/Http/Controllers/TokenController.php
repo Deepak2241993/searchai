@@ -74,7 +74,7 @@ class TokenController extends Controller
         }
         $data = Token::with('aadhaarData')
             ->where('user_id', $userId)
-            ->where('service_type', 'Aadhar KYC')
+           // ->where('service_type', 'Aadhar KYC')
             ->paginate(10);
 
         return view('token.index', compact('data'));
