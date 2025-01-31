@@ -140,21 +140,21 @@ CCRV
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
+                                <label for="name" class="form-label">Name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="name" value="Aditya Kapoor" required>
                             </div>
                             <div class="mb-3">
-                                <label for="father_name" class="form-label">Father's Name</label>
+                                <label for="father_name" class="form-label">Father's Name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="father_name" value="Raj Kapoor" required>
                             </div>
                             <div class="mb-3">
-                                <label for="date_of_birth" class="form-label">Date of Birth</label>
+                                <label for="date_of_birth" class="form-label">Date of Birth<span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" id="date_of_birth" value="1999-03-12" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
+                                <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="address" value="A-123, Block-A, Sector-45, Gurgaon" required>
                             </div>
                             <div class="mb-3">
