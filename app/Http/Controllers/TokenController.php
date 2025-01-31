@@ -74,6 +74,20 @@ class TokenController extends Controller
         }
         $data = Token::with('aadhaarData')
             ->where('user_id', $userId)
+            ->where('service_type', 'Aadhar KYC')
+            ->paginate(10);
+
+        return view('token.index', compact('data'));
+    }
+    public function newTokenList()
+    {
+        $userId = auth()->id();
+        if (!$userId) {
+            return redirect()->route('login')->with('error', 'Please log in to access tokens.');
+        }
+        $data = Token::with('aadhaarData')
+            ->where('user_id', $userId)
+            ->where('service_type', 'New UPI')
             ->paginate(10);
 
         return view('token.index', compact('data'));

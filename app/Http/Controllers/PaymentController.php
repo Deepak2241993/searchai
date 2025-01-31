@@ -18,7 +18,6 @@ class PaymentController extends Controller
 {
     public function createOrder(Request $request)
     {
-        // dd($request->all());
         $validated = $request->validate([
             'amount' => 'required|numeric|min:1',
             'name' => 'required|string|max:255',
@@ -27,9 +26,13 @@ class PaymentController extends Controller
             'address' => 'required|string|max:255',
             'alternateaddress' => 'nullable|string|max:255',
             'buyTokens' => 'required|string|max:255',
-            'serviceName' => 'required|string|max:255',
+            'serviceNames' => 'required|array', 
+            'serviceNames.*' => 'required|string|max:255',
+            'tokens' => 'required|array',
+            'tokens.*' => 'required|numeric|min:1',
         ]);
 
+        // dd($request->all());
 
         $user = User::find(auth()->id());
 
@@ -65,9 +68,11 @@ class PaymentController extends Controller
 
             $razorpayOrder = $api->order->create($orderData);
             $tokensToBuy = $validated['buyTokens'];
-            $serviceName = $validated['serviceName'];
 
-            // dd($serviceName);
+            // Convert arrays to comma-separated strings
+            $serviceNamesString = implode(',', $validated['serviceNames']);
+            $tokensString = implode(',', $validated['tokens']);
+
             $order = Order::create([
                 'user_id' => $user->id,
                 'razorpay_order_id' => $razorpayOrder['id'],
@@ -75,23 +80,21 @@ class PaymentController extends Controller
                 'currency' => 'INR',
                 'status' => 'pending',
                 'tokens_purchased' => $tokensToBuy,
-                'serviceName' => $serviceName,
+                'serviceNames' => $serviceNamesString, // Save as comma-separated string
+                'tokens' => $tokensString, // Save as comma-separated string
             ]);
 
-            // dd($order);
             Log::info("Razorpay order created successfully", [
                 'order_id' => $razorpayOrder['id'],
                 'amount' => $amountInPaise,
                 'tokens_purchased' => $tokensToBuy,
-                'serviceName' => $serviceName,
+                'serviceNames' => $serviceNamesString, // Log the string version
                 'currency' => 'INR',
             ]);
-
 
             return response()->json([
                 'orderId' => $razorpayOrder['id'],
                 'amount' => $validated['amount'],
-
             ], 201);
         } catch (\Exception $e) {
             Log::error("Error creating Razorpay order", [
@@ -102,6 +105,7 @@ class PaymentController extends Controller
             return response()->json(['error' => 'Failed to create order'], 500);
         }
     }
+
 
     public function initiatePayment($orderId)
     {
@@ -159,20 +163,39 @@ class PaymentController extends Controller
                     $expiresAt = Carbon::now()->addDays(600);
 
                     $tokens = [];
+                    $services = explode(',', $order->serviceNames);
+                    $tokensCount = explode(',', $order->tokens);
 
-                    for ($i = 0; $i < $numberOfTokens; $i++) {
-                        $newToken = new Token();
-                        $newToken->user_id = $user->id;
-                        $newToken->service_type = $order->serviceName;
-                        $newToken->token = Str::random(32);
-                        $newToken->expires_at = $expiresAt;
-                        $newToken->status = 'active';
-                        $newToken->order_id = $order->id;
-                        $newToken->save();
+                    foreach ($services as $index => $service) {
+                        $numberOfTokensForService = (int) $tokensCount[$index];  
                     
-                        // Push the saved token to the array
-                        $tokens[] = $newToken;
+                        for ($i = 0; $i < $numberOfTokensForService; $i++) {
+                            $newToken = new Token();
+                            $newToken->user_id = $user->id;
+                            $newToken->service_type = $service; 
+                            $newToken->token = Str::random(32); 
+                            $newToken->expires_at = $expiresAt;
+                            $newToken->status = 'active';
+                            $newToken->order_id = $order->id;
+                            $newToken->save();
+                    
+                            $tokens[] = $newToken;
+                        }
                     }
+
+                    // for ($i = 0; $i < $numberOfTokens; $i++) {
+                    //     $newToken = new Token();
+                    //     $newToken->user_id = $user->id;
+                    //     $newToken->service_type = $services[$i] ?? null;
+                    //     $newToken->token = Str::random(32);
+                    //     $newToken->expires_at = $expiresAt;
+                    //     $newToken->status = 'active';
+                    //     $newToken->order_id = $order->id;
+                    //     $newToken->save();
+                    
+                    //     // Push the saved token to the array
+                    //     $tokens[] = $newToken;
+                    // }
                     
 
                     // Send the email with the PDF attachment and log success/failure

@@ -368,16 +368,10 @@
                                             <li class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-3">
                                                 <div>
                                                     <h5 class="font-weight-bold">{{ $item['serviceName'] }}</h5>
-                                                    <input type="hidden" id="serviceName" name="serviceName" value="{{ $item['serviceName'] }}">
+                                                    <input type="hidden"  name="serviceName[]" value="{{ $item['serviceName'] }}">
+                                                    <input type="hidden" name="tokens[]" value="{{ $item['tokens'] }}">
                                                     <span class="text-muted">&#8377;{{ $item['pricePerItem'] }} x {{ $item['tokens'] }} tokens</span>
                                                 </div>
-                                                <div class="text-right">
-                                                <!-- <span class="text-muted">Rs.{{ $item['pricePerItem'] }} x {{ $item['tokens'] }} tokens</span> -->
-                                                    <!-- <strong>Amount: Rs.{{ $item['pricePerItem'] * $item['tokens'] }}</strong> -->
-                                                </div>
-                                                {{-- <button type="button" class="btn btn-sm btn-danger mt-2" data-item-id="{{ $item['id'] }}">
-                                                    <i class="las la-times"></i> Remove
-                                                </button> --}}
                                             </li>
                                             @endforeach
                                         </ul>
@@ -428,13 +422,18 @@
         const phone = document.getElementById('phone').value;
         const address = document.getElementById('address').value;
         const alternateAddress = document.getElementById('alternateaddress').value;
-        const buyTokens = document.getElementById('buy-tokens').value;
-        const serviceName = document.getElementById('serviceName').value;
+        // Get all service names
+        const serviceNames = Array.from(document.querySelectorAll('input[name="serviceName[]"]')).map(input => input.value);
 
-        if (!amount || !name || !email || !phone || !address) {
+        // Get all token counts
+        const tokens = Array.from(document.querySelectorAll('input[name="tokens[]"]')).map(input => input.value);
+        const buyTokens = tokens.reduce((acc, curr) => acc + curr, 0); 
+        
+        if (!amount || !name || !email || !phone || !address || serviceNames.length === 0 || tokens.length === 0) {
             alert('Please fill all the required fields.');
             return;
         }
+
 
         console.log('User Details:', {
             amount,
@@ -460,7 +459,8 @@
                     address,
                     alternateaddress: alternateAddress,
                     buyTokens,
-                    serviceName
+                    serviceNames,
+                    tokens
                 })
             });
 
