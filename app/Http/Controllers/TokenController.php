@@ -72,14 +72,14 @@ class TokenController extends Controller
         if (!$userId) {
             return redirect()->route('login')->with('error', 'Please log in to access tokens.');
         }
+
         $data = Token::with('aadhaarData')
             ->where('user_id', $userId)
-           // ->where('service_type', 'Aadhar KYC')
+           ->where('service_type', 'Aadhar KYC')
             ->paginate(10);
-
         return view('token.index', compact('data'));
     }
-    public function newTokenList()
+    public function CCRV()
     {
         $userId = auth()->id();
         if (!$userId) {
