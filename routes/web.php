@@ -129,6 +129,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/download-pdf/{id}', [TokenController::class, 'downloadPdf'])->name('download.pdf');
 
     Route::get('/ccrv', [TokenController::class, 'CCRV'])->name('new-token.index');
+    Route::get('/all-ccrv-report', [TokenController::class, 'AllCCRVReport'])->name('all-ccrv-report');
     Route::post('/ccrv-report', [TokenController::class, 'CCRVReport'])->name('ccrv-report');
     Route::get('/download-pdf/{id}', [TokenController::class, 'downloadPdf'])->name('download.pdf');
 

@@ -1,7 +1,7 @@
 @extends('layouts.admin-master')
 
 @section('title')
-    Aadhar Verification
+    CCRV
 @endsection
 
 @section('content')
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Aadhar Verification</h3>
+                    <h3 class="mb-0">CCRV</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end mb-0">
                         <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Aadhar Verification</li>
+                        <li class="breadcrumb-item active" aria-current="page">CCRV</li>
                     </ol>
                 </div>
             </div>
@@ -25,7 +25,7 @@
         <div class="container-fluid">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body d-flex justify-content-between align-items-center rounded">
-                    <h4 class="card-title mb-0">Aadhar Verification Token</h4>
+                    <h4 class="card-title mb-0">CCRV Token</h4>
                 </div>
             </div>
             <!-- Show success message -->
@@ -136,65 +136,41 @@
                     <!-- Aadhaar OTP Generation Form -->
 
 
-                    <form id="aadhaarOtpForm" action="{{ route('aadhaar.generate') }}" method="POST">
+                    <form id="aadhaarOtpForm" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="name" value="Aditya Kapoor"
-                                        required>
+                                    <input type="text" class="form-control" id="name" name="name" value="vijay mallya" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="father_name" class="form-label">Father's Name<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="father_name" value="Raj Kapoor" required>
+                                    <label for="father_name" class="form-label">Father's Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="father_name" name="father_name" value="vittal mallya" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="date_of_birth" class="form-label">Date of Birth<span
-                                            class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="date_of_birth" value="1999-03-12"
-                                        required>
+                                    <label for="date_of_birth" class="form-label">Date of Birth<span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="1990-01-26" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="address" class="form-label">Address<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="address"
-                                        value="A-123, Block-A, Sector-45, Gurgaon" required>
+                                    <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="address" name="address" value="mumbai" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="additional_address" class="form-label">Additional Address</label>
-                                    <input type="text" class="form-control" id="additional_address"
-                                        value="F-123, Block-F, Vasant kunj, New Delhi">
+                                    <input type="text" class="form-control" id="additional_address" name="additional_address" value="F-123, Block-F, Vasant kunj, New Delhi">
                                 </div>
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="consent" checked>
+                                    <input type="checkbox" class="form-check-input" value="Y" id="consent" name="consent" checked>
                                     <label class="form-check-label" for="consent">Consent Given</label>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
                     </form>
-
-                    <!-- Verify OTP Form (hidden initially) -->
-                    <div id="verifyOtpForm" class="d-none">
-                        <h3>Verify OTP</h3>
-                        <form id="verifyOtpSubmitForm" action="{{ route('aadhaar.submit') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="transaction_id" id="transaction_id" value="">
-
-                            <label for="otp">OTP:</label>
-                            <input type="text" name="otp" id="otp" required>
-
-                            <label for="share_code">Share Code:</label>
-                            <input type="text" name="share_code" id="verify_share_code" value=""
-                                maxlength="4" required>
-
-                            <button type="submit">Verify OTP</button>
-                        </form>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -262,90 +238,46 @@
         });
     </script>
     <script>
-        $(document).ready(function() {
-            // Submit Aadhaar OTP Generation form via AJAX
-            $('#aadhaarOtpForm').on('submit', function(e) {
-                e.preventDefault();
+        
+        $('#aadhaarOtpForm').on('submit', function(e) {
+    e.preventDefault();  // Prevent form from submitting the usual way
 
-                var form = $(this);
-                var formData = form.serialize();
+    // Validate form fields
+    if (!$('#name').val() || !$('#father_name').val() || !$('#date_of_birth').val() || !$('#address').val()) {
+        alert('Please fill in all required fields.');
+        return;  // Stop the form submission if validation fails
+    }
 
-                $.ajax({
-                    url: form.attr('action'),
-                    type: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        if (response.success) {
-                            $('#transaction_id').val(response.transaction_id);
-                            $('#verify_share_code').val(response.share_code);
-                            $('#aadhaarOtpForm').addClass('d-none');
-                            $('#verifyOtpForm').removeClass('d-none');
-                        } else {
-                            alert('OTP generation failed: ' + response.message);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        alert('An error occurred while generating OTP: ' + error);
-                    }
-                });
-            });
+    // Show the spinner on button click
+    var submitButton = $('#submitButton');
+    submitButton.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'); // Show spinner and disable button
 
-            // Submit Verify OTP form via AJAX
-            $('#verifyOtpSubmitForm').on('submit', function(e) {
-                e.preventDefault();
+    var form = $(this);
+    var formData = form.serialize();  // Serialize the form data
 
-                var form = $(this);
-                var formData = form.serialize();
-                $.ajax({
-                    url: form.attr('action'),
-                    type: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        if (response.success) {
-                            alert('OTP verification successful!');
-                            // Redirect or show success message
-                            window.location.href = response.redirect_url;
-                        } else {
-                            alert('OTP verification failed: ' + response.message);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        alert('An error occurred while verifying OTP: ' + error);
-                    }
-                });
-            });
-        });
+    $.ajax({
+        url: '{{ route('ccrv-report') }}',
+        type: 'POST',
+        data: formData,  // Send serialized data
+        success: function(response) {
+            if (response.success) {
+                alert('OTP verification successful!');
+                window.location.href = response.redirect_url;  // Redirect upon success
+            } else {
+                alert('OTP verification failed: ' + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            alert('An error occurred while verifying OTP: ' + error);
+        },
+        complete: function() {
+            // Hide spinner and enable button after AJAX call
+            submitButton.prop('disabled', false).html('Submit');
+        }
+    });
+});
+
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.view-data-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const aadhaarData = JSON.parse(this.getAttribute('data-aadhaar'));
-                    document.getElementById('aadhaarNumber').textContent = aadhaarData
-                        .aadhaar_number || 'N/A';
-                    document.getElementById('aadhaarName').textContent = aadhaarData.name || 'N/A';
-                    document.getElementById('aadhaarDob').textContent = aadhaarData.date_of_birth ||
-                        'N/A';
-                    document.getElementById('aadhaarGender').textContent = aadhaarData.gender ||
-                        'N/A';
-                    document.getElementById('aadhaarCareof').textContent = aadhaarData.care_of ||
-                        'N/A';
-                    const addressParts = [
-
-                        aadhaarData.house,
-                        aadhaarData.street,
-                        aadhaarData.district,
-                        aadhaarData.sub_district,
-                        aadhaarData.landmark,
-                        aadhaarData.post_office_name,
-                        aadhaarData.state,
-                        aadhaarData.pincode
-                    ];
-                    const fullAddress = addressParts.filter(part => part).join(', ');
-                    document.getElementById('aadhaarAddress').textContent = fullAddress || 'N/A';
-                });
-            });
-        });
-    </script>
+    
 @endsection
