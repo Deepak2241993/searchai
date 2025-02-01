@@ -64,7 +64,7 @@ User Orders
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>OT{{ $token->id }}</td>
-                                        <td>{{ $token->serviceNames }}</td>
+                                        <td>{{ $token->service_names }}</td>
                                         <td>{{ $token->tokens_sum }}</td>
                                         <td>{{ \Carbon\Carbon::parse($token->created_at)->format('d-m-Y H:i A') }}</td>
                                         <td> {{ $token->status == 'paid' ? 'Paid' : 'pending' }}</td>

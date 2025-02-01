@@ -62,7 +62,7 @@ Total Orders List
                                         <td>Rs.{{ number_format($order->amount, 2) }}</td>
                                         <!-- <td>{{ strtoupper($order->currency) }}</td> -->
                                         <td>{{ ucfirst($order->status) }}</td>
-                                        <td>{{ $order->serviceName ?? 'N/A' }}</td>
+                                        <td>{{ $order->service_names ?? 'N/A' }}</td>
                                         <td>{{ $order->created_at ? $order->created_at->format('d-m-Y H:i') : 'N/A' }}</td>
                                         <td>
                                             <button class="btn btn-primary btn-sm view-order-btn" data-id="{{ $order->id }}" data-bs-toggle="modal" data-bs-target="#orderDetailsModal">
@@ -114,50 +114,63 @@ Total Orders List
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const modalContent = document.getElementById('orderDetailsContent');
-    const buttons = document.querySelectorAll('.view-order-btn');
+        const modalContent = document.getElementById('orderDetailsContent');
+        const buttons = document.querySelectorAll('.view-order-btn');
 
-    buttons.forEach(button => {
-        button.addEventListener('click', function () {
-            const orderId = this.dataset.id;
+        buttons.forEach(button => {
+            button.addEventListener('click', function () {
+                const orderId = this.dataset.id;
 
-            // Clear previous content and show a loading indicator
-            modalContent.innerHTML = '<p class="text-center">Loading...</p>';
+                // Clear previous content and show a loading indicator
+                modalContent.innerHTML = '<p class="text-center">Loading...</p>';
 
-            // Fetch order details via AJAX
-            fetch(`/orders/${orderId}`)
-                .then(response => response.json())
-                .then(data => {
-                    // Populate modal with order details
-                    modalContent.innerHTML = `
-                        <h5>Order ID: ${data.id}</h5>
-                        <p><strong>User:</strong> ${data.user.name ?? 'N/A'}</p>
-                        <p><strong>Total Tokens:</strong> ${data.tokens_total ?? 'N/A'}</p>
-                        <h6>Tokens:</h6>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Token ID</th>
-                                    <th>Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${data.tokens.map(token => `
+                // Fetch order details via AJAX
+              
+                fetch(`{{ url('admin/orders') }}/${orderId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch order details');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data) {
+                            // Populate modal with order details
+                            modalContent.innerHTML = `
+                                <h5>Order ID: ${data.id ?? 'N/A'}</h5>
+                                <p><strong>User:</strong> ${data.user}</p>
+                                <p><strong>Total Tokens:</strong> ${data.total_token}</p>
+                                <h6>Tokens:</h6>
+                                <table class="table">
+                                <thead>
                                     <tr>
-                                        <td>${token.id}</td>
-                                        <td>${token.quantity}</td>
+                                        <th>Token ID</th>
+                                        <th>Service Type</th>
+                                        <th>Status</th>
                                     </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    `;
-                })
-                .catch(error => {
-                    modalContent.innerHTML = `<p class="text-danger">Failed to load order details. Please try again.</p>`;
-                });
+                                </thead>
+                                <tbody>
+                                    ${data.service_tokens?.flat().map(token => `
+                                        <tr>
+                                            <td>${token.token ?? 'N/A'}</td>
+                                            <td>${token.service_type ?? 'N/A'}</td>
+                                            <td>${token.status ?? 'N/A'}</td>
+                                        </tr>
+                                    `).join('') ?? '<tr><td colspan="3" class="text-center">No tokens available</td></tr>'}
+                                </tbody>
+                            </table>
+
+                            `;
+                        } else {
+                            modalContent.innerHTML = `<p class="text-danger">No order details found.</p>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        modalContent.innerHTML = `<p class="text-danger">Failed to load order details. Please try again later.</p>`;
+                    });
+            });
         });
     });
-});
-
 </script>
 @endsection

@@ -26,8 +26,8 @@ class PaymentController extends Controller
             'address' => 'required|string|max:255',
             'alternateaddress' => 'nullable|string|max:255',
             'buyTokens' => 'required|string|max:255',
-            'serviceNames' => 'required|array', 
-            'serviceNames.*' => 'required|string|max:255',
+            'service_names' => 'required|array', 
+            'service_names.*' => 'required|string|max:255',
             'tokens' => 'required|array',
             'tokens.*' => 'required|numeric|min:1',
         ]);
@@ -70,7 +70,7 @@ class PaymentController extends Controller
             $tokensToBuy = $validated['buyTokens'];
 
             // Convert arrays to comma-separated strings
-            $serviceNamesString = implode(',', $validated['serviceNames']);
+            $service_namesString = implode(',', $validated['service_names']);
             $tokensString = implode(',', $validated['tokens']);
 
             $order = Order::create([
@@ -80,7 +80,7 @@ class PaymentController extends Controller
                 'currency' => 'INR',
                 'status' => 'pending',
                 'tokens_purchased' => $tokensToBuy,
-                'serviceNames' => $serviceNamesString, // Save as comma-separated string
+                'service_names' => $service_namesString, // Save as comma-separated string
                 'tokens' => $tokensString, // Save as comma-separated string
             ]);
 
@@ -88,7 +88,7 @@ class PaymentController extends Controller
                 'order_id' => $razorpayOrder['id'],
                 'amount' => $amountInPaise,
                 'tokens_purchased' => $tokensToBuy,
-                'serviceNames' => $serviceNamesString, // Log the string version
+                'service_names' => $service_namesString, // Log the string version
                 'currency' => 'INR',
             ]);
 
@@ -163,7 +163,7 @@ class PaymentController extends Controller
                     $expiresAt = Carbon::now()->addDays(600);
 
                     $tokens = [];
-                    $services = explode(',', $order->serviceNames);
+                    $services = explode(',', $order->service_names);
                     $tokensCount = explode(',', $order->tokens);
 
                     foreach ($services as $index => $service) {

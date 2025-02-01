@@ -423,13 +423,13 @@
         const address = document.getElementById('address').value;
         const alternateAddress = document.getElementById('alternateaddress').value;
         // Get all service names
-        const serviceNames = Array.from(document.querySelectorAll('input[name="serviceName[]"]')).map(input => input.value);
+        const service_names = Array.from(document.querySelectorAll('input[name="serviceName[]"]')).map(input => input.value);
 
         // Get all token counts
         const tokens = Array.from(document.querySelectorAll('input[name="tokens[]"]')).map(input => input.value);
         const buyTokens = tokens.reduce((acc, curr) => acc + curr, 0); 
         
-        if (!amount || !name || !email || !phone || !address || serviceNames.length === 0 || tokens.length === 0) {
+        if (!amount || !name || !email || !phone || !address || service_names.length === 0 || tokens.length === 0) {
             alert('Please fill all the required fields.');
             return;
         }
@@ -459,7 +459,7 @@
                     address,
                     alternateaddress: alternateAddress,
                     buyTokens,
-                    serviceNames,
+                    service_names,
                     tokens
                 })
             });
