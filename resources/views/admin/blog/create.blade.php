@@ -58,7 +58,7 @@
                                 
                                 <div class="row">
                                     <!-- Blog Title -->
-                                    <div class="mb-3 col-lg-6">
+                                    <div class="mb-3 col-lg-12">
                                         <label for="title" class="form-label">Blog Title</label>
                                         <input class="form-control" 
                                                type="text" 
@@ -70,7 +70,7 @@
                                     </div>
             
                                     <!-- Blog Content -->
-                                    <div class="mb-3 col-lg-6">
+                                    <div class="mb-3 col-lg-12">
                                         <label for="content" class="form-label">Content</label>
                                         <textarea class="form-control" 
                                                   name="content" 
@@ -80,12 +80,12 @@
                                     </div>
             
                                     <!-- Long Content -->
-                                    <div class="mb-3 col-lg-6">
+                                    <div class="mb-3 col-lg-12">
                                         <label for="long_content" class="form-label">Long Content</label>
                                         <input class="form-control" 
                                                type="text" 
                                                name="long_content" 
-                                               id="long_content" 
+                                               id="summernote" 
                                                value="{{ old('long_content', $blogData->long_content ?? '') }}" 
                                                placeholder="Long Content" 
                                                required>

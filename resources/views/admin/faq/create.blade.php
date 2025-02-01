@@ -49,17 +49,17 @@
                                     <form method="post" action="{{ route('admin.faq.store') }}" enctype="multipart/form-data">
                             @endif
                             @csrf
-                            <div class="row col-md-6">
-                                <div class="mb-3 col-lg-12 self">
+                            <div class="row">
+                                <div class="mb-3 col-lg-6 self">
                                     <label for="question" class="form-label">Question<span class="text-danger">*</span></label>
                                     <input class="form-control" type="text required" name="question"
                                         value="{{ isset($faqData) ? $faqData->question : '' }}" placeholder="Question"
                                         id="question" required>
                                 </div>
-                                <div class="mb-3 col-lg-12 self">
-                                    <label for="answer" class="form-label">Answer<span class="text-danger">*</span></label>
-                                    <textarea onKeyDown="textCounter(this,60);" onKeyUp="textCounter(this,'q17length' ,60)" class="form-control"
-                                        name="answer" id="answer" required rows="5" cols="">{{ isset($faqData) ? $faqData->answer : '' }}</textarea><br>
+                                <div class="com-md-12 self">
+                                    <label for="summernote" class="form-label">Answer<span class="text-danger">*</span></label>
+                                    <textarea class="form-control"
+                                        name="answer" id="summernote" required >{{ isset($faqData) ? $faqData->answer : '' }}</textarea><br>
                                    
         
                                 </div>

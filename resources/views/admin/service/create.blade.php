@@ -72,9 +72,9 @@
                                     <textarea class="form-control" name="short_description" id="short_description" rows="5"
                                         placeholder="Shortly describe the service">{{ isset($serviceData) ? $serviceData->short_description : '' }}</textarea>
                                 </div>
-                                <div class="mb-3 col-lg-6">
+                                <div class="mb-3 col-lg-12">
                                     <label for="long_description" class="form-label">Long Description</label>
-                                    <textarea class="form-control" name="long_description" id="long_description" rows="5"
+                                    <textarea class="form-control" name="long_description" id="summernote" rows="5"
                                         placeholder="Describe the service">{{ isset($serviceData) ? $serviceData->long_description : '' }}</textarea>
                                 </div>
                                 <div class="mb-3 col-lg-6">
@@ -124,7 +124,7 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
     <script>
         $("#name").on("change", function() {
             var element = $(this);

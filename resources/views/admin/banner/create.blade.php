@@ -74,11 +74,11 @@
                                 </div>
 
                                 <!-- Description Field -->
-                                <div class="mb-3 col-lg-6">
-                                    <label for="description" class="form-label">Description</label>
+                                <div class="mb-3 col-lg-12">
+                                    <label for="summernote" class="form-label">Description</label>
                                     <textarea 
                                         class="form-control" 
-                                        id="description" 
+                                        id="summernote" 
                                         name="description" 
                                         rows="5" 
                                         placeholder="Enter description" 
