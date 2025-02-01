@@ -19,37 +19,37 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.coupon.list') }}" class="nav-link">
-                        <i class="nav-icon fa fa-barcode"></i>
+                        <i class="nav-icon fa fa-gift" aria-hidden="true"></i>
                         <p>Coupon Management</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.faq.index') }}" class="nav-link">
-                        <i class="bi bi-blockquote-left"></i>
+                        <i class="nav-icon fa fa-question" aria-hidden="true"></i>
                         <p>FAQs Management</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.banner.index') }}" class="nav-link">
-                        <i class="bi bi-layout-sidebar"></i>
+                        <i class="nav-icon fa fa-picture-o" aria-hidden="true"></i>
                         <p>Banner Management</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.service.index') }}" class="nav-link">
-                        <i class="bi bi-gear-wide-connected"></i>
+                        <i class="fa fa-list-alt" aria-hidden="true"></i>
                         <p>Service Management</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.blog.index') }}" class="nav-link">
-                        <i class="bi bi-gear-wide-connected"></i>
+                        <i class="nav-icon fa fa-rss" aria-hidden="true"></i>
                         <p>Blogs</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.ordersDetails') }}" class="nav-link">
-                        <i class="bi bi-calendar2-minus"></i>
+                        <i class="nav-icon fa fa-money" aria-hidden="true"></i>
                         <p>Orders Details</p>
                     </a>
                 </li>
