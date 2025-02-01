@@ -6,49 +6,49 @@
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 @if(auth()->user() && auth()->user()->isAdmin())
                 <li class="nav-item">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link active">
-                        <i class="nav-icon fa fa-circle"></i>
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Request::segment(2) === 'dashboard' ? 'active' : '' }}">
+                        <i class="fa fa-tachometer" aria-hidden="true"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.user-list') }}" class="nav-link">
+                    <a href="{{ route('admin.user-list') }}" class="nav-link {{ Request::segment(2) === 'user-list' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-user"></i>
                         <p>User Management</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.coupon.list') }}" class="nav-link">
+                    <a href="{{ route('admin.coupon.list') }}" class="nav-link {{ Request::segment(2) === 'coupon-list' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-gift" aria-hidden="true"></i>
                         <p>Coupon Management</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.faq.index') }}" class="nav-link">
+                    <a href="{{ route('admin.faq.index') }}" class="nav-link {{ Request::segment(2) === 'faq' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-question" aria-hidden="true"></i>
                         <p>FAQs Management</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.banner.index') }}" class="nav-link">
+                    <a href="{{ route('admin.banner.index') }}" class="nav-link {{ Request::segment(2) === 'banner' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-picture-o" aria-hidden="true"></i>
                         <p>Banner Management</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.service.index') }}" class="nav-link">
+                    <a href="{{ route('admin.service.index') }}" class="nav-link {{ Request::segment(2) === 'service' ? 'active' : '' }}">
                         <i class="fa fa-list-alt" aria-hidden="true"></i>
                         <p>Service Management</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.blog.index') }}" class="nav-link">
+                    <a href="{{ route('admin.blog.index') }}" class="nav-link {{ Request::segment(2) === 'blog' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-rss" aria-hidden="true"></i>
                         <p>Blogs</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.ordersDetails') }}" class="nav-link">
+                    <a href="{{ route('admin.ordersDetails') }}" class="nav-link {{ Request::segment(2) === 'tokens' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-money" aria-hidden="true"></i>
                         <p>Orders Details</p>
                     </a>
