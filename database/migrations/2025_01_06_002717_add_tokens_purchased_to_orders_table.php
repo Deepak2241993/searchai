@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->string('tokens_purchased')->nullable();
-            $table->string('serviceName')->nullable();
+            $table->string('service_names')->nullable();
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('tokens_purchased','serviceName');
+            $table->dropColumn('tokens_purchased','service_names');
         });
     }
 };
