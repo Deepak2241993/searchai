@@ -143,7 +143,7 @@ class TokenController extends Controller
                     'message' => 'Transaction ID not found in the API response.',
                 ]);
             }
-    
+            sleep(60);
             $this->addCCRVData($apiResponse['transaction_id']);
     
             return redirect()->route('all-ccrv-report')
@@ -168,7 +168,8 @@ class TokenController extends Controller
                 "Accept: application/json",
                 "X-API-Key: " . env('GridLineAPIKey'),
                 "X-Auth-Type: API-Key",
-                "X-Transaction-ID:05d0e7b3-e99b-4f7b-8746-cd36cd3cc513"  // Use passed $transaction_id here
+                // "X-Transaction-ID:05d0e7b3-e99b-4f7b-8746-cd36cd3cc513"  // Use passed $transaction_id here
+                "X-Transaction-ID:".$transaction_id
             ],
         ]);
     
