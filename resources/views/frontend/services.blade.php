@@ -2,26 +2,25 @@
 @section('body')
 <style>
     #content {
-        background: #ED760D;
+        background: #ffff;
         padding: 40px;
         border-radius: 12px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         text-align: center;
-
-        color: #fff;
+        color: #000;
     }
 
     #content h1 {
         font-size: 2.5em;
         margin-bottom: 20px;
-        color: #ffffff;
+        color: #000;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     #content p {
         font-size: 1.2em;
         line-height: 1.6;
-        color: #ffffff;
+        color: #000;
     }
 
     .container-fluid {
@@ -134,7 +133,8 @@
 </style>
 
 <main id="content">
-    <div class="container-fluid vh-100">
+    {{-- <div class="container-fluid vh-100"> --}}
+        <div class="container">
         <div class="row h-100">
 
 
