@@ -268,7 +268,7 @@
             }
         },
         error: function(xhr, status, error) {
-            alert('An error occurred while verifying OTP: ' + error);
+            alert(error);
         },
         complete: function() {
             // Hide spinner and enable button after AJAX call
