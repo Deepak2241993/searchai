@@ -315,7 +315,7 @@
                                 </span>
                             </div>
                         </header>
-                        <div class="card-body">a. It is an Easier, Simpler & Better way of verifying Workers. 5 minutes and just a click of a few buttons, that’s all it takes to verify Workers at SearchAPI.</div>
+                        <div class="card-body">It is an Easier, Simpler & Better way of verifying Workers. 5 minutes and just a click of a few buttons, that’s all it takes to verify Workers at SearchAPI.</div>
                     </section>
                     <section class="card p0 mb1">
                         <header class="card-header md-list">

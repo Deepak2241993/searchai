@@ -93,7 +93,7 @@
 					<li><a href="customer-reviews.html" class="inline-block footer-link text-decoration-none">Reviews</a></li>
 					<li><a href="refer-a-worker.html" class="inline-block footer-link text-decoration-none">Refer a Worker</a></li> --}}
 					<li><a target="_blank" href="blog/index.html" class="inline-block footer-link text-decoration-none">Blog</a></li>
-					<li><a target="_blank" href="blog/our-response-to-covid-19/index.html" class="inline-block footer-link text-decoration-none">Our response to Covid-19</a></li>
+					
 				</ul>
 			</div>
 			<div class="sm-col-12 md-col-3 md-col lg-col lg-col-3">
