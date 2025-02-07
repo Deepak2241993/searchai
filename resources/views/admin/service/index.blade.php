@@ -56,7 +56,7 @@ Service List
                                                 <td>{{ $service->name }}</td>
                                                 <td>{{ $service->short_description}}</td>
                                                 <td>{{ $service->price }}</td>
-                                                <td><img src="{{url('/'.$service->images)}}" height="100" width="100"></td>
+                                                <td><img src="{{$service->images}}" height="100" width="100"></td>
                                                 <td> {{ $service->status == 1 ? 'Active' : 'Inactive' }}</td>
                                                 <td class="text-center">
                                                     <a href="{{ route('admin.service.edit', $service->id) }}" class="btn btn-sm btn-info me-2">Edit</a>

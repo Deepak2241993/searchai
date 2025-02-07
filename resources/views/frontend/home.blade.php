@@ -82,13 +82,13 @@
         <div class="carousel-inner">
             @foreach ($bannerData as $key => $banner)
             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                <img src="{{ url('/storage/' . $banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
+                <img src="{{ url('/').$banner->image }}" class="d-block w-100" alt="{{ $banner->title }}">
                 <div class="carousel-caption d-none d-md-block" style="top: 50%; transform: translateY(-50%); left: 0; right: 0;">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-md-6 text-start">
-                                <h4 class="fw-bold">{{ $banner->title }}</h4>
-                                <p>{{ $banner->description }}</p>
+                                <h4 class="fw-bold">{!! $banner->title !!}</h4>
+                                <p>{!!  $banner->description !!}</p>
                             </div>
                         </div>
                     </div>
