@@ -63,6 +63,9 @@
         margin-right: 8px;
         font-size: 1.2rem;
     }
+    .service_box{
+        width:150px;margin:5px
+    }
 </style>
 
 <main id="content">
@@ -149,146 +152,148 @@
             <h2 class="text-center pb1">Get Verification Done Today</h2>
             <div class="layout-wrap layout-row layout-align-center-center text-center">
                 <a class="text-decoration-none" href="find-helpersd22b.html?group=1">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/house.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Domestic<br />Workers</h4>
+                            <h4>Domestic Workers</h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helperse026.html?group=2">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/chair.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Office<br />Workers</h4>
+                            <h4>Office Workers</h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helpers5848.html?group=15">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/luggage.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Expats<br />Workers</h4>
+                            <h4>Expats Workers</h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helpers106a.html?group=8">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/car.svg" width="60" height="60"
                                 alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Permanent<br />Drivers</h4>
+                            <h4>Permanent Drivers</h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helpers2f2b.html?group=4">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/hospital.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Healthcare<br />Workers</h4>
+                            <h4>Healthcare Workers</h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helpers4b69.html?group=3">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/shop.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Store<br />Workers</h4>
+                            <h4 style="font-size:16px; font-weight:500; line-height:20px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                Store Workers
+                            </h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helpers1c34.html?group=7">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/food.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Restaurant<br />Workers</h4>
+                            <h4>Restaurant Workers</h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helpers9244.html?group=6">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/barbershop1.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Salon<br />Workers</h4>
+                            <h4>Salon Workers</h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helpers7383.html?group=16">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/school.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">School<br />Workers</h4>
+                            <h4>School Workers</h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helpers61b9.html?group=5">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/factory2.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Factory<br />Workers</h4>
+                            <h4>Factory Workers</h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helperscdac.html?group=18">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/workers.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Construction<br />Workers</h4>
+                            <h4>Construction Workers</h4>
                         </div>
                     </div>
                 </a>
                 <a class="text-decoration-none" href="find-helpers921f.html?group=19">
-                    <div style="width:100px;margin:5px" class="card box-hover-effect">
+                    <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/car2.svg" width="60"
                                 height="60" alt="Steps"></amp-img>
                         </div>
                         <div class="card-body" style="padding:10px">
                             <!--<div style="margin:10px 0" class="divider"></div>-->
-                            <h4 style="font-size:15px;font-weight:400;line-height:24px">Automotive<br />Workers</h4>
+                            <h4>Automotive Workers</h4>
                         </div>
                     </div>
                 </a>
