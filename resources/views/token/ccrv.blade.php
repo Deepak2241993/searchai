@@ -260,20 +260,26 @@
         type: 'POST',
         data: formData,  // Send serialized data
         success: function(response) {
-            if (response.success) {
-                alert('OTP verification successful!');
-                window.location.href = response.redirect_url;  // Redirect upon success
-            } else {
-                alert('OTP verification failed: ' + response.message);
-            }
-        },
-        error: function(xhr, status, error) {
-            alert(error);
-        },
-        complete: function() {
-            // Hide spinner and enable button after AJAX call
-            submitButton.prop('disabled', false).html('Submit');
+    console.log(response);
+    
+    if (response.success) {
+        alert(response.message);
+        
+        if (response.redirect_url) {
+            window.location.href = response.redirect_url;  // Redirect upon success
         }
+    } else {
+        alert('Operation failed: ' + response.message);
+    }
+},
+error: function(xhr, status, error) {
+    console.error('AJAX Error:', error);
+    alert('Something went wrong. Please try again later.');
+},
+complete: function() {
+    // Hide spinner and enable button after AJAX call
+    submitButton.prop('disabled', false).html('Submit');
+}
     });
 });
 
