@@ -87,24 +87,24 @@
 			<div class="sm-col-12 md-col-3 md-col lg-col lg-col-3">
 				<h3 style="border-left:3px solid #fff;padding-left:10px">Important Links</h3>
 				<ul class="list-reset footer-links mb2">
-					<li><a href="about-us.html" class="inline-block footer-link text-decoration-none">About Us</a></li>
-					<li><a href="verifications.html" class="inline-block footer-link text-decoration-none">Verify your Helper, Professionally</a></li>
-					{{-- <li><a href="affiliations.html" class="inline-block footer-link text-decoration-none">Affiliations</a></li>
-					<li><a href="customer-reviews.html" class="inline-block footer-link text-decoration-none">Reviews</a></li>
-					<li><a href="refer-a-worker.html" class="inline-block footer-link text-decoration-none">Refer a Worker</a></li> --}}
-					<li><a target="_blank" href="blog/index.html" class="inline-block footer-link text-decoration-none">Blog</a></li>
+					<li><a href="{{route('aboutus')}}" class="inline-block footer-link text-decoration-none">About Us</a></li>
+					<li><a href="#" class="inline-block footer-link text-decoration-none">Verify your Helper, Professionally</a></li>
+					{{-- <li><a href="#" class="inline-block footer-link text-decoration-none">Affiliations</a></li>
+					<li><a href="#" class="inline-block footer-link text-decoration-none">Reviews</a></li>
+					<li><a href="#" class="inline-block footer-link text-decoration-none">Refer a Worker</a></li> --}}
+					<li><a target="_blank" href="#" class="inline-block footer-link text-decoration-none">Blog</a></li>
 					
 				</ul>
 			</div>
 			<div class="sm-col-12 md-col-3 md-col lg-col lg-col-3">
 				<h3 style="border-left:3px solid #fff;padding-left:10px">Our Policies</h3>
 				<ul class="list-reset footer-links mb2">
-					<li><a href="terms-of-use.html" class="inline-block footer-link text-decoration-none">Terms of Use</a></li>
-					<li><a href="privacy-policy-agreement.html" class="inline-block footer-link text-decoration-none">Privacy Policy</a></li>
-					<li><a href="verification-policy.html" class="inline-block footer-link text-decoration-none">Verification Policy</a></li>
-					<li><a href="refund-policy.html" class="inline-block footer-link text-decoration-none">Refund Policy</a></li>
-					<li><a href="disclaimer-policy.html" class="inline-block footer-link text-decoration-none">Disclaimer</a></li>
-					<li><a href="safety-security-guidelines.html" class="inline-block footer-link text-decoration-none">Safety & Security Guidelines</a></li>
+					<li><a href="#" class="inline-block footer-link text-decoration-none">Terms of Use</a></li>
+					<li><a href="#" class="inline-block footer-link text-decoration-none">Privacy Policy</a></li>
+					<li><a href="#" class="inline-block footer-link text-decoration-none">Verification Policy</a></li>
+					<li><a href="#" class="inline-block footer-link text-decoration-none">Refund Policy</a></li>
+					<li><a href="#" class="inline-block footer-link text-decoration-none">Disclaimer</a></li>
+					<li><a href="#" class="inline-block footer-link text-decoration-none">Safety & Security Guidelines</a></li>
 				</ul>
 			</div>
 			<div class="sm-col-12 md-col-2 md-col lg-col lg-col-2 text-center">

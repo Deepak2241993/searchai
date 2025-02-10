@@ -16,6 +16,10 @@ class HomeController extends Controller
         $serviceData = Service::where('status', 1)->get(); 
         return view('frontend.home', compact('faqData', 'bannerData', 'serviceData'));
     }
+
+    public function AboutUs(){
+        return view('frontend.aboutus');
+    }
     
     
 }

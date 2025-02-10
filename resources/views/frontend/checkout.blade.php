@@ -291,7 +291,7 @@
 
                             <!-- Name Field -->
                             <div class="form-group">
-                                <label for="name">Name*</label>
+                                <label for="name">Name<span class="text-danger">*</span></label>
                                 <input type="text" id="name" name="name" class="form-control"
                                     value="{{ auth()->check() ? auth()->user()->name : (isset($customerAddress) ? $customerAddress->name : '') }}"
                                     placeholder="Full Name" required>
@@ -299,7 +299,7 @@
 
                             <!-- Phone Field -->
                             <div class="form-group">
-                                <label for="phone">Phone Number*</label>
+                                <label for="phone">Phone Number<span class="text-danger">*</span></label>
                                 <input
                                     type="tel"
                                     id="phone"
@@ -313,7 +313,7 @@
 
                             <!-- Email Field -->
                             <div class="form-group">
-                                <label for="email">Email Address*</label>
+                                <label for="email">Email Address<span class="text-danger">*</span></label>
                                 <input
                                     type="email"
                                     id="email"
@@ -327,26 +327,27 @@
 
                             <!-- Address Field -->
                             <div class="form-group">
-                                <label for="address">Address*</label>
-                                <input type="text" id="address" name="address" class="form-control"
+                                <label for="address">Address<span class="text-danger">*</span></label>
+                                <textarea id="address" name="address" class="form-control"
                                     value="{{ isset($customerAddress) ? $customerAddress->address : '' }}"
-                                    placeholder="e.g. House, Road, Street Name" required>
-                            </div>
-
-                            <!-- Alternate Address Field -->
-                            <div class="form-group">
-                                <label for="alternateaddress">Alternate Address*</label>
-                                <input type="text" id="alternateaddress" name="alternateaddress" class="form-control"
-                                    value="{{ isset($customerAddress) ? $customerAddress->alternate_address : '' }}"
-                                    placeholder="e.g. Alternate Address">
-                            </div>
-
-                            <!-- Notes Field -->
-                            <div class="form-group mb-0">
-                                <label for="note">Order Notes (Optional)</label>
-                                <textarea id="note" name="note" class="form-control"
-                                    placeholder="Note about your order e.g. special note for your delivery"></textarea>
-                            </div>
+                                    placeholder="e.g. House, Road, Street Name" required></textarea>
+                            </div>                           
+<hr>
+<h4>Company Details</h4>
+<hr>
+<div class="form-group">
+    <label for="company_name">Company Name (Optional)</label>
+    <input type="text" id="company_name" name="company_name" class="form-control"
+        value="{{ isset($customercompany_name) ? $customercompany_name->company_name : '' }}"
+        placeholder="e.g. xyz.pvt.ltd">
+</div>  
+<div class="form-group">
+    <label for="gst_number">GST (Optional)</label>
+    <input type="text" id="gst_number" name="gst_number" class="form-control"
+        value="{{ isset($customergst_number) ? $customergst_number->gst_number : '' }}"
+        placeholder="e.g. 29GGGGG1314R9Z6">
+</div>  
+                           
                         </div>
 
 
@@ -421,7 +422,8 @@
         const email = document.getElementById('email').value;
         const phone = document.getElementById('phone').value;
         const address = document.getElementById('address').value;
-        const alternateAddress = document.getElementById('alternateaddress').value;
+        const company_name = document.getElementById('company_name').value;
+        const gst_number = document.getElementById('gst_number').value;
         // Get all service names
         const service_names = Array.from(document.querySelectorAll('input[name="serviceName[]"]')).map(input => input.value);
 
@@ -441,7 +443,8 @@
             email,
             phone,
             address,
-            alternateAddress
+            company_name,
+            gst_number
         });
 
         try {
@@ -457,10 +460,11 @@
                     email,
                     phone,
                     address,
-                    alternateaddress: alternateAddress,
                     buyTokens,
                     service_names,
-                    tokens
+                    tokens,
+                    company_name,
+                    gst_number
                 })
             });
 

@@ -1,169 +1,171 @@
 @extends('layouts.master')
 @section('body')
     <style>
-        /* General Styling */
         #content {
-            background: linear-gradient(135deg, #FF7E5F, #ED760D);
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            margin-top: 50px;
-            margin-bottom: 50px;
-            width: 90%;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    /* background: linear-gradient(135deg, #FF7E5F, #ED760D); */
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-        #content h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: #ffffff;
-            font-weight: bold;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
+#content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
 
-        #content p {
-            font-size: 1.3em;
-            line-height: 1.8;
-            color: #ffffff;
-            margin-bottom: 40px;
-        }
+#content p {
+    font-size: 1.3em;
+    line-height: 1.8;
+    color: #ffffff;
+    margin-bottom: 40px;
+}
 
-        .table-wrap {
-            margin: 30px auto;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            background: #fff;
-        }
+.table-wrap {
+    margin: 30px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background: #fff;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-        th,
-        td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            vertical-align: middle;
-        }
+th,
+td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
 
-        th {
-            background: #ED760D;
-            color: #fff;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+th {
+    background: #ED760D;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 
-        td button {
-            background-color: #FF4C4C;
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            font-size: 0.9em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+td button {
+    background-color: #FF4C4C;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-        td button:hover {
-            background-color: #FF0000;
-        }
+td button:hover {
+    background-color: #FF0000;
+}
 
-        .product-info {
-            display: flex;
-            align-items: center;
-        }
+.product-info {
+    display: flex;
+    align-items: center;
+}
 
-        .product-info img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-right: 20px;
-        }
+.product-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+}
 
-        .product-info h2 {
-            font-size: 1.2em;
-            color: #333;
-        }
+.product-info h2 {
+    font-size: 1.2em;
+    color: #333;
+}
 
-        .total-cost-bar {
-            background: #f9f9f9;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 30px auto;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+.total-cost-bar {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 30px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-        .total-cost-bar h3 {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #ED760D;
-        }
+.total-cost-bar h3 {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ED760D;
+}
 
-        .total-cost-bar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+.total-cost-bar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
-        .total-cost-bar ul li {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            font-size: 1.2em;
-            color: #333;
-        }
+.total-cost-bar ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 1.2em;
+    color: #333;
+}
 
-        .total-cost-bar ul li span {
-            font-weight: bold;
-            color: #ED760D;
-        }
+.total-cost-bar ul li span {
+    font-weight: bold;
+    color: #ED760D;
+}
 
-        .btn-wrap {
-            margin-top: 30px;
-            text-align: right;
-        }
+.btn-wrap {
+    margin-top: 30px;
+    text-align: right;
+}
 
-        .btn-wrap button {
-            background: #0B7CA1;
-            color: #fff;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.btn-wrap button {
+    background: #0B7CA1;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-        .btn-wrap button:hover {
-            background: #ED760D;
-            color: #fff;
-        }
+.btn-wrap button:hover {
+    background: #ED760D;
+    color: #fff;
+}
 
-        .btn-primary {
-            display: inline-block;
-            background-color: #0B7CA1;
-            color: #fff;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+.btn-primary {
+    display: inline-block;
+    background-color: #0B7CA1;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
 
-        .btn-primary:hover {
-            background-color: #ED760D;
-            color: #fff;
-        }
-    </style>
+.btn-primary:hover {
+    background-color: #ED760D;
+    color: #fff;
+}
+.checkout-button{
+    padding: 10px 20px; background: #004555; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;
+}
+        </style>
     <main id="content" style="padding: 20px; font-family: Arial, sans-serif;">
         <h1 style="text-align: center; margin-bottom: 20px;">Your Cart</h1>
         <p style="text-align: center; color: #555;">Review your selected items below and proceed to checkout.</p>
@@ -212,14 +214,10 @@
                                                 min="1" style="width: 80px;"
                                                 onchange="updateTotalPrice(this, {{ $item['pricePerItem'] }}, '{{ $item['id'] }}')">
 
-                                            {{-- <p style="margin-top: 5px; font-size: 14px;">
-                                                <strong>Price:</strong> Rs.<span
-                                                    class="item-total">{{ number_format($item['tokens'] * $item['pricePerItem'], 2) }}</span>
-                                            </p> --}}
                                         </td>
                                         <td>
                                             <button onclick="deleteItem('{{ $item['id'] }}')"
-                                                style="padding: 5px 10px; background: #dc3545; color: white; border: none; border-radius: 3px; cursor: pointer;">Remove</button>
+                                                class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
                                 @endif
@@ -240,8 +238,7 @@
                     <form action="{{ route('checkout') }}" method="get" style="display: inline-block;">
                         @csrf
                         <input type="hidden" id="cart-data" name="cart" value="{{ json_encode($cart) }}">
-                        <button type="submit"
-                            style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Proceed
+                        <button type="submit" class="checkout-button">Proceed
                             to Checkout</button>
                     </form>
                 </div>

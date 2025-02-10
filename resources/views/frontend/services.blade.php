@@ -134,69 +134,54 @@
 
 <main id="content">
     {{-- <div class="container-fluid vh-100"> --}}
-        <div class="container">
-        <div class="row h-100">
-
-
+        <div class="row g-4 h-100">
             @foreach ($services as $item)
-            <!-- Left side with the image -->
-            <div class="col-md-6 p-0">
-                @php
-                $image = explode('|', $item->images);
-            @endphp
-            @foreach ($image as $value)
-                <img src="{{$value ? $value : url('/front-assets/default-image.jpg') }}"
-                    alt="{{ $item->name ?? 'Image' }}"
-                    class="img-fluid h-100 w-100">
-                    @endforeach
-            </div>
-            <!-- Right side with the content -->
-            <div class="col-md-6 d-flex align-items-center">
-                <div class="container py-5">
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-md-10 col-lg-8">
-                            <h2 class="display-4 font-weight-bold text-center mb-4">{{ $item->name }}</h2>
-                            <h3 class="text-primary text-center mb-3">₹{{ number_format($item->price, 2) }}</h3>
-
-                            <!-- Purchase Form -->
-                            <form action="{{ route('cart.add') }}" method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label for="tokens">Number of Tokens:</label>
-                                            <div class="input-group">
-                                                <button type="button" id="decrease" class="btn btn-outline-secondary">-</button>
-                                                <input type="number" id="tokens" name="tokens" min="1" value="1" required class="form-control">
-                                                <button type="button" id="increase" class="btn btn-outline-secondary">+</button>
-                                            </div>
-                                            <input type="hidden" name="pricePerItem" value="{{ $item->price }}">
-                                            <input type="hidden" name="serviceName" value="{{ $item->name }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="d-flex justify-content-between mt-4">
-                                            <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <p class="lead text-center mt-4">
-                                {{ $item->short_description }}
-                            </p>
-                            <p class="lead text-center mt-4">
-                                {{ $item->long_description }}
-                            </p>
-
-                            
-                        </div>
+                <div class="col-md-6">
+                    @php
+                        $image = explode('|', $item->images);
+                    @endphp
+                    <div class="position-relative overflow-hidden rounded shadow-sm">
+                        @foreach ($image as $value)
+                            <img src="{{ $value ? $value : url('/front-assets/default-image.jpg') }}" 
+                                 alt="{{ $item->name ?? 'Image' }}" class="img-fluid h-100 w-100 rounded">
+                        @endforeach
                     </div>
                 </div>
-            </div>
+        
+                <div class="col-md-6 d-flex bg-light rounded shadow-sm">
+                    <div class="container py-4">
+                        <h2 class="text-start text-dark mb-3">{{ $item->name }}</h2>
+                        <h3 class="text-success text-start mb-3">₹{{ number_format($item->price, 2) }}</h3>
+                        
+                        <form action="{{ route('cart.add') }}" method="POST" class="text-start">
+                            @csrf
+                            <div class="row align-items-center mb-3">
+                                <div class="col-md-4">
+                                    <label for="tokens" class="form-label fw-semibold">Number of Tokens:</label>
+                                    <div class="input-group">
+                                        <button type="button" id="decrease" class="btn btn-outline-secondary">-</button>
+                                        <input type="number" id="tokens" name="tokens" min="1" value="1" required class="form-control">
+                                        <button type="button" id="increase" class="btn btn-outline-secondary">+</button>
+                                    </div>
+                                    <input type="hidden" name="pricePerItem" value="{{ $item->price }}">
+                                    <input type="hidden" name="serviceName" value="{{ $item->name }}">
+                                </div>
+                                <div class="col-md-4" style="margin-top: 30px;">
+                                    <button type="submit" class="btn btn-primary w-100">Add to Cart</button>
+                                </div>
+                            </div>
+                        </form>
+        
+                        <div class="text-muted mt-3 text-start">
+                            <p class="lead">{!!  $item->short_description !!}</p>
+                            <p>{!!  $item->long_description !!}</p>
+                        </div>
+                        
+                    </div>
+                </div>
             @endforeach
         </div>
-    </div>
+        
 
 
     <!-- Bootstrap JS -->

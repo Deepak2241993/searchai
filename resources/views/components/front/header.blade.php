@@ -63,7 +63,7 @@
                     <a class="nav-link text-white" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">About Us</a>
+                    <a class="nav-link text-white" href="{{route('aboutus')}}">About Us</a>
                 </li>
                 
                 @auth

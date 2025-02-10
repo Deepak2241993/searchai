@@ -37,6 +37,7 @@ use App\Http\Controllers\AadhaarController;
 //     return view('welcom');
 // });
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about-us', [HomeController::class, 'AboutUs'])->name('aboutus');
 
 // register
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');

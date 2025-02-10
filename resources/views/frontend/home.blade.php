@@ -140,7 +140,7 @@
 
 
     <!-- <div class="action-bar text-center">
-        <a href="find-helpers.html">Find & Hire now <span class="font-icon"><svg xmlns="http://www.w3.org/2000/svg"
+        <a href="#">Find & Hire now <span class="font-icon"><svg xmlns="http://www.w3.org/2000/svg"
                     height="24" viewBox="0 0 24 24" width="24">
                     <path d="M0 0h24v24H0z" fill="none" />
                     <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
@@ -151,7 +151,7 @@
         <div class="container">
             <h2 class="text-center pb1">Get Verification Done Today</h2>
             <div class="layout-wrap layout-row layout-align-center-center text-center">
-                <a class="text-decoration-none" href="find-helpersd22b.html?group=1">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/house.svg" width="60"
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helperse026.html?group=2">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/chair.svg" width="60"
@@ -175,7 +175,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helpers5848.html?group=15">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/luggage.svg" width="60"
@@ -187,7 +187,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helpers106a.html?group=8">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/car.svg" width="60" height="60"
@@ -199,7 +199,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helpers2f2b.html?group=4">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/hospital.svg" width="60"
@@ -211,7 +211,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helpers4b69.html?group=3">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/shop.svg" width="60"
@@ -225,7 +225,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helpers1c34.html?group=7">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/food.svg" width="60"
@@ -237,7 +237,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helpers9244.html?group=6">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/barbershop1.svg" width="60"
@@ -249,7 +249,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helpers7383.html?group=16">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/school.svg" width="60"
@@ -261,7 +261,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helpers61b9.html?group=5">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/factory2.svg" width="60"
@@ -273,7 +273,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helperscdac.html?group=18">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/workers.svg" width="60"
@@ -285,7 +285,7 @@
                         </div>
                     </div>
                 </a>
-                <a class="text-decoration-none" href="find-helpers921f.html?group=19">
+                <a class="text-decoration-none" href="#">
                     <div class="service_box card box-hover-effect">
                         <div style="background:#ccc;padding:10px;border-radius:10px 10px 0 0;">
                             <amp-img src="{{ url('/front-assets') }}/images/icons/car2.svg" width="60"
@@ -421,7 +421,7 @@
                 With SearchAPI, building trustworthy and successful relationships has never been easier.
             </p>
             <div class="text-center block m3">
-                <a style="border-radius:4px" class="ampstart-btn btn btn-sm btn-outline-primary" href="about-us.html">
+                <a style="border-radius:4px" class="ampstart-btn btn btn-sm btn-outline-primary" href="{{route('aboutus')}}">
                     Read more&nbsp;<i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -463,7 +463,7 @@
             <h2 class="text-center my2">Quick Links</h2>
             <div class="text-center my2">
                 <amp-carousel height="190" layout="fixed-height" type="carousel">
-                    <a style="text-decoration:none;padding:2px" href="find-helpers.html">
+                    <a style="text-decoration:none;padding:2px" href="#">
                         <div style="min-width:125px" class="card box-hover-effect">
                             <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
                                 <amp-img src="{{ url('/front-assets') }}/images/icons/destination.svg" width="75"
@@ -476,7 +476,7 @@
                             </div>
                         </div>
                     </a>
-                    <a style="text-decoration:none;padding:2px" href="verifications.html">
+                    <a style="text-decoration:none;padding:2px" href="#">
                         <div style="min-width:125px" class="card box-hover-effect">
                             <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
                                 <amp-img src="{{ url('/front-assets') }}/images/icons/shield2.svg" width="75"
@@ -489,7 +489,7 @@
                             </div>
                         </div>
                     </a>
-                    <a style="text-decoration:none;padding:2px" href="salary-tracker.html">
+                    <a style="text-decoration:none;padding:2px" href="#">
                         <div style="min-width:125px" class="card box-hover-effect">
                             <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
                                 <amp-img src="{{ url('/front-assets') }}/images/icons/trending.svg" width="75"
@@ -502,7 +502,7 @@
                             </div>
                         </div>
                     </a>
-                    <a style="text-decoration:none;padding:2px" href="https://worker.helpersnearme.com/">
+                    <a style="text-decoration:none;padding:2px" href="#">
                         <div style="min-width:125px" class="card box-hover-effect">
                             <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
                                 <amp-img src="{{ url('/front-assets') }}/images/icons/join_us.svg" width="75"
@@ -515,7 +515,7 @@
                             </div>
                         </div>
                     </a>
-                    <a style="text-decoration:none;padding:2px" href="my-orders.html">
+                    <a style="text-decoration:none;padding:2px" href="#">
                         <div style="min-width:125px" class="card box-hover-effect">
                             <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
                                 <amp-img src="{{ url('/front-assets') }}/images/icons/your_orders.svg" width="75"
@@ -527,7 +527,7 @@
                             </div>
                         </div>
                     </a>
-                    <a style="text-decoration:none;padding:2px" href="customer-reviews.html">
+                    <a style="text-decoration:none;padding:2px" href="#">
                         <div style="min-width:125px" class="card box-hover-effect">
                             <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
                                 <amp-img src="{{ url('/front-assets') }}/images/icons/customer-review.svg"
@@ -539,7 +539,7 @@
                             </div>
                         </div>
                     </a>
-                    <a style="text-decoration:none;padding:2px" href="refer-your-friends.html">
+                    <a style="text-decoration:none;padding:2px" href="#">
                         <div style="min-width:125px" class="card box-hover-effect">
                             <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
                                 <amp-img src="{{ url('/front-assets') }}/images/icons/chat.svg" width="75"
@@ -552,7 +552,7 @@
                             </div>
                         </div>
                     </a>
-                    <a style="text-decoration:none;padding:2px" href="refer-a-worker.html">
+                    <a style="text-decoration:none;padding:2px" href="#">
                         <div style="min-width:125px" class="card box-hover-effect">
                             <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
                                 <amp-img src="{{ url('/front-assets') }}/images/icons/referral.svg" width="75"
