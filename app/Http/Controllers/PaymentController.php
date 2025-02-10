@@ -24,7 +24,6 @@ class PaymentController extends Controller
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'address' => 'required|string|max:255',
-            'alternateaddress' => 'nullable|string|max:255',
             'buyTokens' => 'required|string|max:255',
             'service_names' => 'required|array', 
             'service_names.*' => 'required|string|max:255',
@@ -40,17 +39,18 @@ class PaymentController extends Controller
             return response()->json(['error' => 'User not found'], 404);
         }
 
-        $user->update([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-        ]);
+        // $user->update([
+        //     'name' => $validated['name'],
+        //     'email' => $validated['email'],
+        // ]);
 
         $user->customerAddress()->updateOrCreate(
             ['user_id' => $user->id],
             [
                 'phone' => $validated['phone'],
                 'address' => $validated['address'],
-                'alternate_address' => $validated['alternateaddress'],
+                'company_name' => $request->company_name,
+                'gst_number' => $request->gst_number
             ]
         );
 

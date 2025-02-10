@@ -321,7 +321,7 @@
                                     class="form-control"
                                     value="{{ auth()->check() ? auth()->user()->email : (isset($customerAddress) ? $customerAddress->email : old('email')) }}"
                                     placeholder="Email Address"
-                                    required>
+                                    readonly>
                             </div>
 
 
