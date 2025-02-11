@@ -7,6 +7,10 @@ use App\Models\Token;
 use App\Models\Ccrv_case;
 use PDF;
 use DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CCRVReportMail;
+use Auth;
+
 
 class TokenController extends Controller
 {
@@ -97,14 +101,25 @@ class TokenController extends Controller
 
     public function CCRVReport(Request $request)
 {
+    $validated = $request->validate([
+        'name' => 'required|string|max:50',
+        'father_name' => 'required|string|max:50',
+        'address' => 'required|string|max:255',
+        'token' => 'required|string',
+        'date_of_birth' => 'required|string',
+        'service_type' => 'required|string',
+    ]);
+    
     $data = [
-        "name" => $request->input('name'),
-        "father_name" => $request->input('father_name'),
-        "address" => $request->input('address'),
-        "date_of_birth" => $request->input('date_of_birth'),
-        "consent" => $request->input('consent') ?: 'Y',
+        "name" => $validated['name'],
+        "father_name" => $validated['father_name'],
+        "address" => $validated['address'],
+        "date_of_birth" => $validated['date_of_birth'],  // Since this is validated, use it from $validated
+        "consent" => $request->input('consent', 'Y'), // Use default fallback with input()
     ];
+    
 
+    $token = Token::where('token', $validated['token'])->first();
     // Initialize cURL for the search request
     $curl = curl_init();
     curl_setopt_array($curl, [
@@ -152,6 +167,13 @@ class TokenController extends Controller
 
         // Return response based on data processing
         if ($ccrvDataResult['success']) {
+            // Send Mail
+            // Update token status
+            $token->status = 'expired';
+            $token->save();
+             // Attempt to send the email
+             $authUserEmail = Auth::user()->email;
+             Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['case'], $ccrvDataResult['total_case'], $token->token));
             return response()->json([
                 'success' => true,
                 'message' => $ccrvDataResult['message'],
@@ -241,7 +263,9 @@ public function addCCRVData($transaction_id)
 
             return [
                 'success' => true,
-                'message' => 'CCRV data processed and saved successfully.'
+                'message' => 'CCRV data processed and saved successfully.',
+                'case' => $reportData['data']['ccrv_data']['cases'],
+                'total_case' => $reportData['data']['ccrv_data'],
             ];
         } else {
             return [

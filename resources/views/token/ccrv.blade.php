@@ -168,6 +168,8 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="token" id="modalToken" value="">
+                        <input type="hidden" name="service_type" id="modalServiceType" value="CCRV">
                         <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
                     </form>
                     
