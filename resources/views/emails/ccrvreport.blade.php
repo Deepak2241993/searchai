@@ -69,69 +69,52 @@
         <div class="content">
             <p>Dear <strong>{{ ucFirst(Auth::user()->name) }}</strong>,</p>
             <p>Thank you for choosing <strong>SearchAPI</strong>! We are pleased to inform you that your Criminal Background Screening Report is complete, and the detailed report is now available.</p>
-            
+            {{-- {{dd($cases[0]['name'],$caseCount['case_count'])}} --}}
             <div class="details">
-                <p><strong>Victim Name:</strong> {{ $caseData[0]['name'] }}</p>
+                <p><strong>Victim Name:</strong> {{ $cases[0]['name'] }}</p>
                 <p><strong>Token ID:</strong> {{ $token }}</p>
                 <p><strong>Verification Type:</strong>Criminal Background</p>
-                <p><strong>Total Case:</strong> {{ $totalCase }}</p>
+                <p><strong>Total Case:</strong> {{ $caseCount['case_count'] }}</p>
                 <table border="1" cellpadding="10" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Case Number</th>
-                            <th>Case Category</th>
-                            <th>Case Type</th>
-                            <th>Case Status</th>
-                            <th>Case Year</th>
-                            <th>CNR</th>
-                            <th>District Name</th>
-                            <th>Filing Date</th>
-                            <th>Filing Number</th>
-                            <th>Filing Year</th>
-                            <th>First Hearing Date</th>
-                            <th>Decision Date</th>
-                            <th>Court Name</th>
-                            <th>Opposing Party</th>
-                            <th>Police Station</th>
-                            <th>Under Acts</th>
-                            <th>Under Sections</th>
-                            <th>Nature of Disposal</th>
-                            <th>Name</th>
-                            <th>Father Match Type</th>
-                            <th>Name Match Type</th>
-                            <th>Algorithm Risk</th>
-                            <th>State Name</th>
+                            @php
+                                $headers = [
+                                    'Case Number', 'Case Category', 'Case Type', 'Case Status', 
+                                    'Case Year', 'CNR', 'District Name', 'Filing Date', 
+                                    'Filing Number', 'Filing Year', 'First Hearing Date', 
+                                    'Decision Date', 'Opposing Party','Name', 
+                                     'Under Acts', 'Under Sections', 
+                                    'Nature of Disposal', 'Algorithm Risk', 'State Name'
+                                ];
+                            @endphp
+                    
+                            @foreach ($headers as $header)
+                                <th>{{ $header }}</th>
+                            @endforeach
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($caseData as $value)
-                        <tr>
-                            <td>12345</td>
-                            <td>Criminal</td>
-                            <td>Theft</td>
-                            <td>Closed</td>
-                            <td>2023</td>
-                            <td>CNR00123</td>
-                            <td>New York</td>
-                            <td>2023-05-15</td>
-                            <td>FN001</td>
-                            <td>2023</td>
-                            <td>2023-06-01</td>
-                            <td>2023-07-10</td>
-                            <td>High Court</td>
-                            <td>John Doe</td>
-                            <td>Central Station</td>
-                            <td>Act XYZ</td>
-                            <td>Section 123</td>
-                            <td>Disposed</td>
-                            <td>Jane Doe</td>
-                            <td>Partial Match</td>
-                            <td>Exact Match</td>
-                            <td>Medium</td>
-                            <td>California</td>
-                        </tr>
+                        @foreach ($cases as $case)
+                            <tr>
+                                @php
+                                    $fields = [
+                                        'case_number', 'case_category', 'case_type', 'case_status',
+                                        'case_year', 'cnr', 'district_name', 'filing_date',
+                                        'filing_number', 'filing_year', 'first_hearing_date',
+                                        'decision_date', 'oparty', 'name',
+                                        'under_acts', 'under_sections',
+                                        'nature_of_disposal', 'algorithm_risk','state_name'
+                                    ];
+                                @endphp
+                    
+                                @foreach ($fields as $field)
+                                    <td>{{ $case[$field] ?? '' }}</td>
+                                @endforeach
+                            </tr>
                         @endforeach
                     </tbody>
+                    
                 </table>
                 
                 

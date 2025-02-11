@@ -13,17 +13,17 @@ class CCRVReportMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $caseData;
-    public $totalCase;
+    public $cases;
+    public $caseCount;
     public $token;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($caseData, $totalCase, $token)
+    public function __construct($cases, $caseCount, $token)
     {
-        $this->caseData = $caseData;
-        $this->totalCase = $totalCase;
+        $this->cases = $cases;
+        $this->caseCount = $caseCount;
         $this->token = $token;
     }
 
@@ -45,8 +45,8 @@ class CCRVReportMail extends Mailable
         return new Content(
             view: 'emails.ccrvreport',
             with: [
-                'caseData' => $this->caseData,
-                'totalCase' => $this->totalCase,
+                'cases' => $this->cases,
+                'caseCount' => $this->caseCount,
                 'token' => $this->token,
             ]
         );
