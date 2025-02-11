@@ -71,7 +71,7 @@
             <p>Thank you for choosing <strong>SearchAPI</strong>! We are pleased to inform you that your Criminal Background Screening Report is complete, and the detailed report is now available.</p>
             {{-- {{dd($cases[0]['name'],$caseCount['case_count'])}} --}}
             <div class="details">
-                <p><strong>Victim Name:</strong> {{ $cases[0]['name'] }}</p>
+                <p><strong>Victim Name:</strong> {{ ucFirst($cases[0]['name'])}}</p>
                 <p><strong>Token ID:</strong> {{ $token }}</p>
                 <p><strong>Verification Type:</strong>Criminal Background</p>
                 <p><strong>Total Case:</strong> {{ $caseCount['case_count'] }}</p>
