@@ -142,25 +142,25 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="name" name="name" value="vijay mallya" required>
+                                    <input type="text" class="form-control" id="name" name="name" value="Sushobhan Banerjee" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="father_name" class="form-label">Father's Name<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="father_name" name="father_name" value="vittal mallya" required>
+                                    <input type="text" class="form-control" id="father_name" name="father_name" value="Shubhasish Banerjee" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="date_of_birth" class="form-label">Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="1990-01-26" required>
+                                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="1993-12-07" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="address" name="address" value="mumbai" required>
+                                    <input type="text" class="form-control" id="address" name="address" value="L Block 59C Saket New Delhi 110017" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="additional_address" class="form-label">Additional Address</label>
-                                    <input type="text" class="form-control" id="additional_address" name="additional_address" value="F-123, Block-F, Vasant kunj, New Delhi">
+                                    <input type="text" class="form-control" id="additional_address" name="additional_address" value="L Block 59C Saket New Delhi 110017">
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" value="Y" id="consent" name="consent" checked>
@@ -276,7 +276,7 @@
 },
 error: function(xhr, status, error) {
     console.error('AJAX Error:', error);
-    alert('Something went wrong. Please try again later.');
+    alert('Technical Error Try After Some Time');
 },
 complete: function() {
     // Hide spinner and enable button after AJAX call

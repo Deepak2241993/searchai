@@ -71,21 +71,19 @@
             <p>Thank you for choosing <strong>SearchAPI</strong>! We are pleased to inform you that your Criminal Background Screening Report is complete, and the detailed report is now available.</p>
             {{-- {{dd($cases[0]['name'],$caseCount['case_count'])}} --}}
             <div class="details">
+                @if(count($cases)>0)
                 <p><strong>Victim Name:</strong> {{ ucFirst($cases[0]['name'])}}</p>
+                @endif
                 <p><strong>Token ID:</strong> {{ $token }}</p>
                 <p><strong>Verification Type:</strong>Criminal Background</p>
-                <p><strong>Total Case:</strong> {{ $caseCount['case_count'] }}</p>
+                <p><strong>Total Case:</strong>  @if(count($cases)>0){{ $caseCount['case_count'] }} @else 0 @endif</p>
                 <table border="1" cellpadding="10" cellspacing="0">
                     <thead>
                         <tr>
                             @php
                                 $headers = [
-                                    'Case Number', 'Case Category', 'Case Type', 'Case Status', 
-                                    'Case Year', 'CNR', 'District Name', 'Filing Date', 
-                                    'Filing Number', 'Filing Year', 'First Hearing Date', 
-                                    'Decision Date', 'Opposing Party','Name', 
-                                     'Under Acts', 'Under Sections', 
-                                    'Nature of Disposal', 'Algorithm Risk', 'State Name'
+                                    'Source', 'State Name','District Name','Court Name', 'Case Category', 
+                                    'Under Acts', 'Under Sections','Case Status','Filing Date','Decision Date'
                                 ];
                             @endphp
                     
@@ -95,16 +93,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if(count($cases)>0)
                         @foreach ($cases as $case)
                             <tr>
                                 @php
                                     $fields = [
-                                        'case_number', 'case_category', 'case_type', 'case_status',
-                                        'case_year', 'cnr', 'district_name', 'filing_date',
-                                        'filing_number', 'filing_year', 'first_hearing_date',
-                                        'decision_date', 'oparty', 'name',
-                                        'under_acts', 'under_sections',
-                                        'nature_of_disposal', 'algorithm_risk','state_name'
+                                        'source', 'state_name','district_name','court_name', 'case_category','under_acts', 'under_sections','case_status','filing_date'
+                                        ,'decision_date'
                                     ];
                                 @endphp
                     
@@ -113,6 +108,11 @@
                                 @endforeach
                             </tr>
                         @endforeach
+                        @else
+                        <tr>
+                            <td colspan="10"> No cases available (case_count is zero) </td>
+                        </tr>
+                        @endif
                     </tbody>
                     
                 </table>

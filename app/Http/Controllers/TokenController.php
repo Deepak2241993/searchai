@@ -173,7 +173,10 @@ class TokenController extends Controller
             $token->save();
              // Attempt to send the email
              $authUserEmail = Auth::user()->email;
-             Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['cases'], $ccrvDataResult['case_count'], $token->token));
+            
+                Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['debug']['cases'], $ccrvDataResult['debug']['case_count'], $token->token));
+             
+             
             return response()->json([
                 'success' => true,
                 'message' => $ccrvDataResult['message'],
@@ -196,10 +199,9 @@ class TokenController extends Controller
     
 public function addCCRVData($transaction_id)
 {
-    
     $curl_report = curl_init();
     curl_setopt_array($curl_report, [
-        CURLOPT_URL => env('CCRV_API_URL') . "result",
+        CURLOPT_URL => rtrim(env('CCRV_API_URL'), '/') . "/result",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
@@ -227,60 +229,95 @@ public function addCCRVData($transaction_id)
     if ($reportHttpCode === 200 && $reportResponse) {
         $reportData = json_decode($reportResponse, true);
 
-        if (isset($reportData['data']['ccrv_data']['cases']) && is_array($reportData['data']['ccrv_data']['cases'])) {
-            foreach ($reportData['data']['ccrv_data']['cases'] as $caseData) {
-                $caseRecord = [
-                    'algorithm_risk' => $caseData['algorithm_risk'] ?? null,
-                    'father_match_type' => $caseData['father_match_type'] ?? null,
-                    'name_match_type' => $caseData['name_match_type'] ?? null,
-                    'case_category' => $caseData['case_category'] ?? null,
-                    'case_decision_date' => $caseData['case_decision_date'] ?? null,
-                    'case_number' => $caseData['case_number'] ?? null,
-                    'case_status' => $caseData['case_status'] ?? null,
-                    'case_type' => $caseData['case_type'] ?? null,
-                    'case_year' => $caseData['case_year'] ?? null,
-                    'cnr' => $caseData['cnr'] ?? null,
-                    'decision_date' => $caseData['decision_date'] ?? null,
-                    'district_name' => $caseData['district_name'] ?? null,
-                    'filing_date' => $caseData['filing_date'] ?? null,
-                    'filing_number' => $caseData['filing_number'] ?? null,
-                    'filing_year' => $caseData['filing_year'] ?? null,
-                    'first_hearing_date' => $caseData['first_hearing_date'] ?? null,
-                    'name' => $caseData['name'] ?? null,
-                    'nature_of_disposal' => $caseData['nature_of_disposal'] ?? null,
-                    'oparty' => $caseData['oparty'] ?? null,
-                    'registration_date' => $caseData['registration_date'] ?? null,
-                    'registration_number' => $caseData['registration_number'] ?? null,
-                    'registration_year' => $caseData['registration_year'] ?? null,
-                    'source' => $caseData['source'] ?? null,
-                    'state_name' => $caseData['state_name'] ?? null,
-                    'type' => $caseData['type'] ?? null,
-                    'under_acts' => $caseData['under_acts'] ?? null,
-                    'under_sections' => $caseData['under_sections'] ?? null,
-                ];
-
-                DB::table('ccrv_cases')->insert($caseRecord);
-            }
-
-            return [
-                'success' => true,
-                'message' => 'CCRV data processed and saved successfully.',
-                'cases' => $reportData['data']['ccrv_data']['cases'],
-                'case_count' => $reportData['data']['ccrv_data'],
-            ];
-        } else {
+        // 🚩 Check for JSON decode errors
+        if (json_last_error() !== JSON_ERROR_NONE) {
             return [
                 'success' => false,
-                'message' => 'No cases found in the report data.'
+                'message' => 'JSON Decode Error: ' . json_last_error_msg(),
+                'response' => $reportResponse
+            ];
+        }
+
+        // ✅ Corrected condition with additional safety check
+        if (
+            isset($reportData['data']['ccrv_data']['case_count']) &&
+            $reportData['data']['ccrv_data']['case_count'] != 0
+        ) {
+            if (isset($reportData['data']['ccrv_data']['cases']) && is_array($reportData['data']['ccrv_data']['cases'])) {
+                foreach ($reportData['data']['ccrv_data']['cases'] as $caseData) {
+                    try {
+                        $caseRecord = [
+                            'algorithm_risk' => $caseData['algorithm_risk'] ?? null,
+                            'father_match_type' => $caseData['father_match_type'] ?? null,
+                            'name_match_type' => $caseData['name_match_type'] ?? null,
+                            'case_category' => $caseData['case_category'] ?? null,
+                            'case_decision_date' => $caseData['case_decision_date'] ?? null,
+                            'case_number' => $caseData['case_number'] ?? null,
+                            'case_status' => $caseData['case_status'] ?? null,
+                            'case_type' => $caseData['case_type'] ?? null,
+                            'case_year' => $caseData['case_year'] ?? null,
+                            'cnr' => $caseData['cnr'] ?? null,
+                            'decision_date' => $caseData['decision_date'] ?? null,
+                            'district_name' => $caseData['district_name'] ?? null,
+                            'filing_date' => $caseData['filing_date'] ?? null,
+                            'filing_number' => $caseData['filing_number'] ?? null,
+                            'filing_year' => $caseData['filing_year'] ?? null,
+                            'first_hearing_date' => $caseData['first_hearing_date'] ?? null,
+                            'name' => $caseData['name'] ?? null,
+                            'nature_of_disposal' => $caseData['nature_of_disposal'] ?? null,
+                            'oparty' => $caseData['oparty'] ?? null,
+                            'registration_date' => $caseData['registration_date'] ?? null,
+                            'registration_number' => $caseData['registration_number'] ?? null,
+                            'registration_year' => $caseData['registration_year'] ?? null,
+                            'source' => $caseData['source'] ?? null,
+                            'state_name' => $caseData['state_name'] ?? null,
+                            'type' => $caseData['type'] ?? null,
+                            'under_acts' => $caseData['under_acts'] ?? null,
+                            'under_sections' => $caseData['under_sections'] ?? null,
+                        ];
+
+                        DB::table('ccrv_cases')->insert($caseRecord);
+                    } catch (\Exception $e) {
+                        // 🚩 Handle database insertion errors
+                        return [
+                            'success' => false,
+                            'message' => 'Database Error: ' . $e->getMessage(),
+                            'caseData' => $caseData
+                        ];
+                    }
+                }
+
+                return [
+                    'success' => true,
+                    'message' => 'CCRV data processed and saved successfully.',
+                    'cases' => $reportData['data']['ccrv_data']['cases'],
+                    'case_count' => $reportData['data']['ccrv_data']['case_count'],
+                ];
+            } else {
+                return [
+                    'success' => false,
+                    'message' => 'No cases available for entry.',
+                    'debug' => $reportData['data']['ccrv_data']
+                ];
+            }
+        } else {
+            return [
+                'success' => true,
+                'message' => 'No cases available (case_count is zero).',
+                'debug' => $reportData['data']['ccrv_data'] ?? []
             ];
         }
     }
 
     return [
         'success' => false,
-        'message' => 'Error fetching report data.'
+        'message' => 'Error fetching report data or invalid response from API.',
+        'http_code' => $reportHttpCode,
+        'raw_response' => $reportResponse
     ];
 }
+
+
 
 
     
