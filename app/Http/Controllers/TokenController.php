@@ -123,7 +123,7 @@ class TokenController extends Controller
     $curl = curl_init();
 
     curl_setopt_array($curl, [
-        CURLOPT_URL => rtrim(env('CCRV_API_URL'), '/') . "/search", // Ensure proper URL formatting
+        CURLOPT_URL => rtrim(env('CCRV_API_URL'). "search"), // Ensure proper URL formatting
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => json_encode($data),
