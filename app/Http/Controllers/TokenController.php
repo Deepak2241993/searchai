@@ -118,7 +118,6 @@ class TokenController extends Controller
         "consent" => $request->input('consent', 'Y'), // Use default fallback with input()
     ];
     
-
     $token = Token::where('token', $validated['token'])->first();
     // Initialize cURL for the search request
     $curl = curl_init();
@@ -148,10 +147,11 @@ class TokenController extends Controller
     }
 
     curl_close($curl);
-
     if ($httpCode === 200 && $response) {
         $apiResponse = json_decode($response, true);
 
+        // Add delay if necessary
+        sleep(60);
         if (!isset($apiResponse['transaction_id'])) {
             return response()->json([
                 'success' => false,
@@ -159,8 +159,6 @@ class TokenController extends Controller
             ]);
         }
 
-        // Add delay if necessary
-        sleep(60);
 
         // Process CCRV Data
         $ccrvDataResult = $this->addCCRVData($apiResponse['transaction_id']);
@@ -196,6 +194,7 @@ class TokenController extends Controller
     
 public function addCCRVData($transaction_id)
 {
+    
     $curl_report = curl_init();
     curl_setopt_array($curl_report, [
         CURLOPT_URL => env('CCRV_API_URL') . "result",

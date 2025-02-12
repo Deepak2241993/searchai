@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('registration_year')->nullable();
             $table->string('source')->nullable();
             $table->string('type')->nullable();
+            $table->string('case_decision_date')->nullable();
+            $table->string('registration_date')->nullable();
             
         });
     }
