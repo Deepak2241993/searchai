@@ -225,10 +225,10 @@
                     <th>DOB</th>
                     <td>{{ $victimdata['date_of_birth'] }}</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <th>Check Status</th>
-                    <td>@if(count($cases)>0)Case:{{ $caseCount['case_count'] }} @else Cleared @endif</td>
-                </tr>
+                    <td>@if($caseCount != 0)Case:{{ $caseCount['case_count'] }} @else Cleared @endif</td>
+                </tr> --}}
                 
             </table>
         </section>

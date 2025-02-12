@@ -173,9 +173,14 @@ class TokenController extends Controller
             $token->save();
              // Attempt to send the email
              $authUserEmail = Auth::user()->email;
-            
+            if($ccrvDataResult['case_count'] > 0)
+            {
+                Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['cases'], $ccrvDataResult['case_count'], $token->token,$data));
+            }
+                
+             else{
                 Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['debug']['cases'], $ccrvDataResult['debug']['case_count'], $token->token,$data));
-             
+             }
              
             return response()->json([
                 'success' => true,
@@ -292,6 +297,7 @@ public function addCCRVData($transaction_id)
                     'message' => 'CCRV data processed and saved successfully.',
                     'cases' => $reportData['data']['ccrv_data']['cases'],
                     'case_count' => $reportData['data']['ccrv_data']['case_count'],
+                    
                 ];
             } else {
                 return [

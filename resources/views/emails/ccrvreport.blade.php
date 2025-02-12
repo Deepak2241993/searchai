@@ -76,7 +76,7 @@
                 @endif
                 <p><strong>Token ID:</strong> {{ $token }}</p>
                 <p><strong>Verification Type:</strong>Criminal Background</p>
-                <p><strong>Total Case:</strong>  @if(count($cases)>0){{ $caseCount['case_count'] }} @else 0 @endif</p>
+                {{-- <p><strong>Total Case:</strong>  @if(count($cases)>0){{ $caseCount['case_count'] }} @else 0 @endif</p> --}}
                 <table border="1" cellpadding="10" cellspacing="0">
                     <thead>
                         <tr>
