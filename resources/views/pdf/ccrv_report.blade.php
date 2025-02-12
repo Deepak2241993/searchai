@@ -44,7 +44,7 @@
             margin: 0 10px;
         }
 
-        /* @page {
+        @page {
             size: A4;
             margin: 20mm;
            
@@ -58,7 +58,7 @@
             padding: 20mm;
             overflow: hidden;
             box-sizing: border-box;
-        } */
+        }
 
         .info-table th {
             background-color: #f2f2f2;
