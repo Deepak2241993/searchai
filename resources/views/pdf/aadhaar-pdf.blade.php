@@ -157,7 +157,7 @@
         <div class="header">
 
             <div class="col-md-6 logo">
-                <img src="{{url('/front-assets/images/logo.png')}}" alt="SearchAPI Logo">
+                <img src="{{ public_path('front-assets/images/logo.png') }}" alt="SearchAI Logo">
             </div>
             <div class="col-md-6 company-details">
                 <p>Navigant Digital Pvt. Ltd.</p>

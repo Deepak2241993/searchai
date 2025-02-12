@@ -142,29 +142,29 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="name" name="name" value="Sushobhan Banerjee" required>
+                                    <input type="text" class="form-control" id="name" name="name" value="" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="father_name" class="form-label">Father's Name<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="father_name" name="father_name" value="Shubhasish Banerjee" required>
+                                    <input type="text" class="form-control" id="father_name" name="father_name" value="" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="date_of_birth" class="form-label">Date of Birth<span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="1993-12-07" required>
+                                    <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="" placeholder="YYYY-MM-DD" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="address" name="address" value="L Block 59C Saket New Delhi 110017" required>
+                                    <input type="text" class="form-control" id="address" name="address" value="" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="additional_address" class="form-label">Additional Address</label>
-                                    <input type="text" class="form-control" id="additional_address" name="additional_address" value="L Block 59C Saket New Delhi 110017">
+                                    <input type="text" class="form-control" id="additional_address" name="additional_address" value="">
                                 </div>
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" value="Y" id="consent" name="consent" checked>
-                                    <label class="form-check-label" for="consent">Consent Given</label>
+                                    <input type="hidden" class="form-check-input" value="Y" id="consent" name="consent" checked>
+                                    {{-- <label class="form-check-label" for="consent">Consent Given</label> --}}
                                 </div>
                             </div>
                         </div>
