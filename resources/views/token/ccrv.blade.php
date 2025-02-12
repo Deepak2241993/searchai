@@ -83,7 +83,7 @@
                                                             data-bs-toggle="modal" data-bs-target="#aadhaarOtpModal"
                                                             data-id="{{ $Token->id }}" data-token="{{ $Token->token }}"
                                                             data-service="{{ $Token->service_type }}">
-                                                            Generate OTP
+                                                            Generate Report
                                                         </button>
                                                     </td>
                                                 @else
