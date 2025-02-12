@@ -1,10 +1,24 @@
+@php
+// $token ="mtVNZSBUKNqoXyJa6mWbIo1RCiscc39O";
+   $token_data = \App\Models\Token::where('token',$token)->first();
+   $customer_details = \App\Models\CustomerAddress::where('user_id',Auth::user()->id)->first();
+   $name = Auth::user()->name;
+
+//    $victimdata = [
+//         "name" => 'Monu',
+//         "father_name" => 'Sonu',
+//         "address" => 'Ras',
+//         "date_of_birth" => '23/04/1992',  
+//     ];
+//     $caseCount = ['case_count' => 19];
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aadhaar Details {{ $aadhaarData['reference_id'] }}</title>
+    <title>Criminal Background Screening Report </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -157,7 +171,7 @@
         <div class="header">
 
             <div class="col-md-6 logo">
-                <img src="{{url('/front-assets/images/logo.png')}}" alt="SearchAPI Logo">
+                <img src="{{ public_path('front-assets/images/logo.png') }}" alt="SearchAI Logo">
             </div>
             <div class="col-md-6 company-details">
                 <p>Navigant Digital Pvt. Ltd.</p>
@@ -169,74 +183,112 @@
 
 
         <section class="client-info">
-            <div class="identity-check">BACKGROUND SCREENING REPORT</div>
+            <div class="identity-check">CRIMINAL BACKGROUND SCREENING REPORT</div>
 
             <table class="info-table">
                 <tr>
                     <th>Client Name</th>
-                    <td>{{ $client_data->name }}</td>
+                    <td>{{ $name }}</td>
                 </tr>
                 <tr>
                     <th>Order ID</th>
-                    <td>{{ $order_id }}</td>
+                    <td>OT-{{ $token_data->order_id  }}</td>
                 </tr>
                 <tr>
                     <th>Mobile Number</th>
-                    <td>--</td>
+                    <td>{{$customer_details->phone}}</td>
                 </tr>
                 <tr>
                     <th>Report Date</th>
-                    <td>{{ date('d-m-Y', strtotime($createdData->updated_at)) }}</td>
+                    <td>{{ date('d-m-Y', strtotime($token_data->updated_at)) }}</td>
                 </tr>
             </table>
         </section>
 
         <section class="report-info">
-            <div class="identity-check">IDENTITY CHECK : AADHAAR CARD</div>
+            <div class="identity-check">CRIMINAL CHECK DETAILS</div>
             <table class="info-table">
                 <tr>
-                    <th>Aadhaar Number</th>
-                    <td>{{ $createdData['aadhaar_number'] }}</td>
+                    <th>Name of the applicant
+                    </th>
+                    <td>{{ $victimdata['name'] }}</td>
                 </tr>
                 <tr>
-                    <th>Name</th>
-                    <td>{{ $aadhaarData['name'] }}</td>
-                </tr>
-                <tr>
-                    <th>Date of Birth</th>
-                    <td>{{ $aadhaarData['date_of_birth'] }}</td>
-                </tr>
-                <tr>
-                    <th>Gender</th>
-                    <td>{{ $aadhaarData['gender'] }}</td>
-                </tr>
-                <tr>
-                    <th>Father's Name</th>
-                    <td>{{ $aadhaarData['care_of'] ?? 'null' }}</td>
-                </tr>
-                <tr>
-                    <th>State</th>
-                    <td>{{ $aadhaarData['state'] ?? 'null' }}</td>
+                    <th>Father's Name/Care of</th>
+                    <td>{{ $victimdata['father_name'] }}</td>
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td>
-                        {{ $aadhaarData['house'] ?? 'null' }},
-                        {{ $aadhaarData['street'] ?? 'null' }},
-                        {{ $aadhaarData['district'] ?? 'null' }},
-                        {{ $aadhaarData['sub_district'] ?? 'null' }},
-                        {{ $aadhaarData['locality'] ?? 'null' }},
-                        {{ $aadhaarData['post_office_name'] ?? 'null' }},
-                        {{ $aadhaarData['state'] ?? 'null' }}
-                        {{ $aadhaarData['country'] ?? 'null' }},
-                        {{ $aadhaarData['vtc_name'] ?? 'null' }}</td>
+                    <td>{{ $victimdata['address'] }}</td>
                 </tr>
                 <tr>
-                    <th>Pin Code</th>
-                    <td>{{ $aadhaarData['pincode'] ?? 'null' }}</td>
+                    <th>DOB</th>
+                    <td>{{ $victimdata['date_of_birth'] }}</td>
                 </tr>
+                <tr>
+                    <th>Check Status</th>
+                    <td>@if(count($cases)>0)Case:{{ $caseCount['case_count'] }} @else Cleared @endif</td>
+                </tr>
+                
             </table>
         </section>
+
+        @if(count($cases)>0)
+        @foreach ($cases as $case)
+        <section class="report-info">
+            <div class="identity-check">CASE DETAILS</div>
+            <table class="info-table">
+                <tr>
+                    <th>Source</th>
+                    <td>{{ $case['source']  ?? 'null'}}</td>
+                </tr>
+                <tr>
+                    <th>State Name</th>
+                    <td>{{ $aadhaarData['state_name'] ?? 'null' }}</td>
+                </tr>
+                <tr>
+                    <th>District Name</th>
+                    <td>{{ $aadhaarData['district_name'] ?? 'null' }}</td>
+                </tr>
+                <tr>
+                    <th>Court Name</th>
+                    <td>{{ $aadhaarData['court_name'] ?? 'null' }}</td>
+                </tr>
+                <tr>
+                    <th>Case Category</th>
+                    <td>{{ $aadhaarData['case_category'] ?? 'null' }}</td>
+                </tr>
+                <tr>
+                    <th>Under Acts</th>
+                    <td>{{ $aadhaarData['under_acts'] ?? 'null' }}</td>
+                </tr>
+                <tr>
+                    <th>Under Sections</th>
+                    <td>{{ $aadhaarData['under_sections'] ?? 'null' }}</td>
+                </tr>
+                <tr>
+                    <th>Case Status</th>
+                    <td>{{ $aadhaarData['case_status'] ?? 'null' }}</td>
+                </tr>
+                <tr>
+                    <th>Filing Date</th>
+                    <td>{{ $aadhaarData['filing_date'] ?? 'null' }}</td>
+                </tr>
+                <tr>
+                    <th>Decision Date</th>
+                    <td>{{ $aadhaarData['decision_date'] ?? 'null' }}</td>
+                </tr>
+                
+            </table>
+        </section>
+        @endforeach
+        @else
+        <table class="info-table">
+            <tr>
+                <td colspan="10">No cases available (case_count is zero)</td>
+            </tr>
+        </table>
+        @endif
 
         <footer>
             <div class="footer-disclaimer">

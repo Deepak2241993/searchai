@@ -184,4 +184,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/tokens', [OrderRecordsController::class, 'ordersDetails'])->name('ordersDetails');
     });
 });
-Route:: view('deepak','pdf.aadhaar-pdf');
+Route:: view('deepak','pdf.ccrv_report');

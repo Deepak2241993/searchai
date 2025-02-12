@@ -174,7 +174,7 @@ class TokenController extends Controller
              // Attempt to send the email
              $authUserEmail = Auth::user()->email;
             
-                Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['debug']['cases'], $ccrvDataResult['debug']['case_count'], $token->token));
+                Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['debug']['cases'], $ccrvDataResult['debug']['case_count'], $token->token,$data));
              
              
             return response()->json([
