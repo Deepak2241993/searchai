@@ -121,8 +121,9 @@ class TokenController extends Controller
     $token = Token::where('token', $validated['token'])->first();
     // Initialize cURL for the search request
     $curl = curl_init();
+
     curl_setopt_array($curl, [
-        CURLOPT_URL => env('CCRV_API_URL') . "search",
+        CURLOPT_URL => rtrim(env('CCRV_API_URL'), '/') . "/search", // Ensure proper URL formatting
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "POST",
         CURLOPT_POSTFIELDS => json_encode($data),
@@ -132,8 +133,9 @@ class TokenController extends Controller
             "X-API-Key: " . env('GridLineAPIKey'),
             "X-Auth-Type: API-Key"
         ],
+        CURLOPT_TIMEOUT => 60 // Correct way to set timeout
     ]);
-
+    
     $response = curl_exec($curl);
     $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
@@ -145,10 +147,10 @@ class TokenController extends Controller
             'message' => "cURL Error: $error",
         ]);
     }
-
     curl_close($curl);
     if ($httpCode === 200 && $response) {
         $apiResponse = json_decode($response, true);
+        // dd($apiResponse['transaction_id']);
 
         // Add delay if necessary
         sleep(60);
