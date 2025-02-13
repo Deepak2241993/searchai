@@ -169,16 +169,24 @@
     <div class="a4">
 
         <div class="header">
-
-            <div class="col-md-6 logo">
-                <img src="{{ public_path('front-assets/images/logo.png') }}" alt="SearchAI Logo">
-            </div>
-            <div class="col-md-6 company-details">
-                <p>Navigant Digital Pvt. Ltd.</p>
-                <p>E44/3 Okhla Industrial Area,</p>
-                <p>Phase 2 Near C Lal Chowk,</p>
-                <p class="bold">New Delhi 110020,</p>
-            </div>
+            <table>
+                <tr>
+                    <td style="margin-right: 10px; width: 300px; text-align: left;"> 
+                        <div class="col-md-6 logo">
+                            <img src="{{ public_path('front-assets/images/logo.png') }}" alt="SearchAI Logo">
+                        </div>
+                    </td>
+                    <td style="margin-right: 10px; width: 300px; text-align: left;">
+                        <div class="col-md-4 company-details">
+                            <p>Navigant Digital Pvt. Ltd.</p>
+                            <p>E44/3 Okhla Industrial Area,</p>
+                            <p>Phase 2 Near C Lal Chowk,</p>
+                            <p class="bold">New Delhi 110020,</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+           
         </div>
 
 
@@ -225,10 +233,17 @@
                     <th>DOB</th>
                     <td>{{ $victimdata['date_of_birth'] }}</td>
                 </tr>
-                {{-- <tr>
+                <tr>
                     <th>Check Status</th>
-                    <td>@if($caseCount != 0)Case:{{ $caseCount['case_count'] }} @else Cleared @endif</td>
-                </tr> --}}
+                    <td>
+                        @if(is_array($caseCount) && isset($caseCount['case_count']))
+                            Case: {{ $caseCount['case_count'] }}
+                        @else
+                            Cleared
+                        @endif
+                    </td>
+                    
+                </tr>
                 
             </table>
         </section>
@@ -240,43 +255,43 @@
             <table class="info-table">
                 <tr>
                     <th>Source</th>
-                    <td>{{ $case['source']  ?? 'null'}}</td>
+                    <td>{{ $case['source']  ?? '--'}}</td>
                 </tr>
                 <tr>
                     <th>State Name</th>
-                    <td>{{ $aadhaarData['state_name'] ?? 'null' }}</td>
+                    <td>{{ $case['state_name'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>District Name</th>
-                    <td>{{ $aadhaarData['district_name'] ?? 'null' }}</td>
+                    <td>{{ $case['district_name'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>Court Name</th>
-                    <td>{{ $aadhaarData['court_name'] ?? 'null' }}</td>
+                    <td>{{ $case['court_name'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>Case Category</th>
-                    <td>{{ $aadhaarData['case_category'] ?? 'null' }}</td>
+                    <td>{{ $case['case_category'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>Under Acts</th>
-                    <td>{{ $aadhaarData['under_acts'] ?? 'null' }}</td>
+                    <td>{{ $case['under_acts'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>Under Sections</th>
-                    <td>{{ $aadhaarData['under_sections'] ?? 'null' }}</td>
+                    <td>{{ $case['under_sections'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>Case Status</th>
-                    <td>{{ $aadhaarData['case_status'] ?? 'null' }}</td>
+                    <td>{{ $case['case_status'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>Filing Date</th>
-                    <td>{{ $aadhaarData['filing_date'] ?? 'null' }}</td>
+                    <td>{{ $case['filing_date'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>Decision Date</th>
-                    <td>{{ $aadhaarData['decision_date'] ?? 'null' }}</td>
+                    <td>{{ $case['decision_date'] ?? '--' }}</td>
                 </tr>
                 
             </table>

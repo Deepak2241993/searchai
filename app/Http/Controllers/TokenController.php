@@ -164,7 +164,7 @@ class TokenController extends Controller
 
         // Process CCRV Data
         $ccrvDataResult = $this->addCCRVData($apiResponse['transaction_id']);
-
+        
         // Return response based on data processing
         if ($ccrvDataResult['success']) {
             // Send Mail
@@ -173,12 +173,13 @@ class TokenController extends Controller
             $token->save();
              // Attempt to send the email
              $authUserEmail = Auth::user()->email;
-            if($ccrvDataResult['case_count'] > 0)
+            if($ccrvDataResult['case_entry'])
             {
                 Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['cases'], $ccrvDataResult['case_count'], $token->token,$data));
             }
                 
              else{
+                // dd($ccrvDataResult['debug']['case_count']);
                 Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['debug']['cases'], $ccrvDataResult['debug']['case_count'], $token->token,$data));
              }
              
@@ -294,6 +295,7 @@ public function addCCRVData($transaction_id)
 
                 return [
                     'success' => true,
+                    'case_entry' => true,
                     'message' => 'CCRV data processed and saved successfully.',
                     'cases' => $reportData['data']['ccrv_data']['cases'],
                     'case_count' => $reportData['data']['ccrv_data']['case_count'],
@@ -302,6 +304,7 @@ public function addCCRVData($transaction_id)
             } else {
                 return [
                     'success' => false,
+                    'case_entry' => false,
                     'message' => 'No cases available for entry.',
                     'debug' => $reportData['data']['ccrv_data']
                 ];
@@ -309,6 +312,7 @@ public function addCCRVData($transaction_id)
         } else {
             return [
                 'success' => true,
+                'case_entry' => false,
                 'message' => 'No cases available (case_count is zero).',
                 'debug' => $reportData['data']['ccrv_data'] ?? []
             ];

@@ -156,15 +156,23 @@
 
         <div class="header">
 
-            <div class="col-md-6 logo">
-                <img src="{{ public_path('front-assets/images/logo.png') }}" alt="SearchAI Logo">
-            </div>
-            <div class="col-md-6 company-details">
-                <p>Navigant Digital Pvt. Ltd.</p>
-                <p>E44/3 Okhla Industrial Area,</p>
-                <p>Phase 2 Near C Lal Chowk,</p>
-                <p class="bold">New Delhi 110020,</p>
-            </div>
+            <table>
+                <tr>
+                    <td style="margin-right: 10px; width: 300px; text-align: left;"> 
+                        <div class="col-md-6 logo">
+                            <img src="{{ public_path('front-assets/images/logo.png') }}" alt="SearchAI Logo">
+                        </div>
+                    </td>
+                    <td style="margin-right: 10px; width: 300px; text-align: left;">
+                        <div class="col-md-4 company-details">
+                            <p>Navigant Digital Pvt. Ltd.</p>
+                            <p>E44/3 Okhla Industrial Area,</p>
+                            <p>Phase 2 Near C Lal Chowk,</p>
+                            <p class="bold">New Delhi 110020,</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
 

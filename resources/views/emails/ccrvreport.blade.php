@@ -76,7 +76,17 @@
                 @endif
                 <p><strong>Token ID:</strong> {{ $token }}</p>
                 <p><strong>Verification Type:</strong>Criminal Background</p>
-                {{-- <p><strong>Total Case:</strong>  @if(count($cases)>0){{ $caseCount['case_count'] }} @else 0 @endif</p> --}}
+                
+                    <p>
+                        @if(is_array($caseCount) && isset($caseCount['case_count']))
+                        <strong>Total Case:</strong> {{ $caseCount['case_count'] }}
+                        @elseif(is_int($caseCount) && $caseCount != 0)
+                        <strong>Total Case:</strong> {{ $caseCount }}
+                        @else
+                            Cleared
+                        @endif
+                    </p>
+                    {{-- @if(count($cases)>0){{ $caseCount['case_count'] }} @else 0 @endif</p> --}}
                 <table border="1" cellpadding="10" cellspacing="0">
                     <thead>
                         <tr>
