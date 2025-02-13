@@ -83,7 +83,7 @@
                         @elseif(is_int($caseCount) && $caseCount != 0)
                         <strong>Total Case:</strong> {{ $caseCount }}
                         @else
-                            Cleared
+                        Case Status: Cleared
                         @endif
                     </p>
                     {{-- @if(count($cases)>0){{ $caseCount['case_count'] }} @else 0 @endif</p> --}}
