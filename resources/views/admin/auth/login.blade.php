@@ -22,7 +22,7 @@
         <div class="card">
             <div class="login-logo">
                 <a href="#">
-                    <img src="{{url('/')}}/admin-assets/assets/img/searchai.png" alt="Search AI Admin Logo" />
+                    <img src="{{url('/')}}/front-assets/images/footer_logo.png" alt="Search AI Admin Logo" />
                 </a>
             </div>
             <div class="card-body login-card-body">

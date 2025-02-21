@@ -26,7 +26,7 @@
             <div class="card-body login-card-body">
                 <div class="login-logo">
                     <a href="#">
-                        <img src="{{url('/')}}/admin-assets/assets/img/searchai.png" alt="Search AI Logo" />
+                        <img src="{{url('/')}}/front-assets/images/footer_logo.png" alt="Search AI Logo" />
                     </a>
                 </div>
                 <p class="login-box-msg">Sign In</p>
