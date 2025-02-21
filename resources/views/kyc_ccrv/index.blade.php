@@ -139,13 +139,6 @@ Token List
                         <label for="aadhaar_number" class="form-label">Aadhaar Number:</label>
                         <input type="text" name="aadhaar_number" id="aadhaar_number" class="form-control" required>
                     </div>
-
-                    <!-- Share Code (4 characters) -->
-                    <!-- <div class="mb-3">
-                        <label for="share_code" class="form-label">Share Code (4 characters):</label>
-                        <input type="text" name="share_code" id="share_code" maxlength="4" class="form-control" required>
-                    </div> -->
-
                     <!-- Hidden fields for Token and Service Type -->
                     <input type="hidden" name="token" id="modalToken" value="">
                     <input type="hidden" name="service_type" id="modalServiceType" value="KYC VERIFICATION">
@@ -164,47 +157,6 @@ Token List
     </div>
 </div>
 
-<div class="modal fade" id="aadhaarDataModal" tabindex="-1" aria-labelledby="aadhaarDataModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="aadhaarDataModalLabel">Aadhaar Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <th>Aadhaar Number</th>
-                            <td id="aadhaarNumber"></td>
-                        </tr>
-                        <tr>
-                            <th>Name</th>
-                            <td id="aadhaarName"></td>
-                        </tr>
-                        <tr>
-                            <th>Date of Birth</th>
-                            <td id="aadhaarDob"></td>
-                        </tr>
-                        <tr>
-                            <th>Gender</th>
-                            <td id="aadhaarGender"></td>
-                        </tr>
-                        <tr>
-                            <th>Care of</th>
-                            <td id="aadhaarCareof"></td>
-                        </tr>
-                        <tr>
-                            <th>Address</th>
-                            <td id="aadhaarAddress"></td>
-                        </tr>
-                        <!-- Add more fields as needed -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('scripts')
