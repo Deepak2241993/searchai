@@ -7034,3 +7034,5 @@
 [2025-02-21 07:29:07] local.INFO: Razorpay order created successfully {"order_id":"order_PyHJV38nvU8yeE","amount":2000000,"tokens_purchased":"010","service_names":"KYC+CCRV","currency":"INR"} 
 [2025-02-21 07:37:36] local.INFO: Razorpay order created successfully {"order_id":"order_PyHSTc6uu504SU","amount":2000000,"tokens_purchased":"010","service_names":"KYC+CCRV","currency":"INR"} 
 [2025-02-21 07:49:43] local.INFO: Razorpay order created successfully {"order_id":"order_PyHfHaXQ4b2BBF","amount":2000000,"tokens_purchased":"010","service_names":"KYC+CCRV","currency":"INR"} 
+[2025-02-21 07:50:25] local.INFO: Razorpay order created successfully {"order_id":"order_PyHg0Sd4VHfUkS","amount":2000000,"tokens_purchased":"010","service_names":"KYC+CCRV","currency":"INR"} 
+[2025-02-21 07:51:35] local.INFO: Token purchase email sent successfully {"user_email":"deepakprasad224@gmail.com"} 

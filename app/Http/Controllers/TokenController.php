@@ -351,4 +351,20 @@ public function AllCCRVReport(){
         return $pdf->download('details_' . $token->id . '.pdf');
         // dd($pdf->output());
     }
+
+
+    public function CcrvAndBackgroundVerification()
+    {
+        $userId = auth()->id();
+        if (!$userId) {
+            return redirect()->route('login')->with('error', 'Please log in to access tokens.');
+        }
+        $data = Token::where('user_id', $userId)
+            ->where('service_type', 'KYC+CCRV')
+            ->paginate(10);
+
+        return view('kyc_ccrv.index', compact('data'));
+    }
+
+
 }

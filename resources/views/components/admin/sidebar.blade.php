@@ -80,6 +80,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('ccrv-and-background-verification') }}" class="nav-link {{ Request::segment(1) === 'ccrv-and-background-verification' ? 'active' : '' }}">
+                        <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
+                        <p>CCRV + Background Verification</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('orders') }}" class="nav-link {{ Request::segment(1) === 'my-orders' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i>
                         <p>Orders</p>

@@ -58,13 +58,13 @@
                                     <label for="name" class="form-label">Service Name</label>
                                     <input class="form-control" type="text" name="name"
                                         value="{{ isset($serviceData) ? $serviceData->name : '' }}"
-                                        placeholder="Service Name" id="name" required>
+                                        placeholder="Service Name" {{ isset($serviceData)?'readonly':''}} id="name" required>
                                 </div>
                                 <div class="mb-3 col-lg-6">
                                     <label for="service_slug" class="form-label">Service Slug</label>
                                     <input class="form-control" readonly type="text" name="service_slug"
                                         value="{{ isset($serviceData) ? $serviceData->service_slug : '' }}"
-                                        placeholder="Service Slug" id="service_slug" required>
+                                        placeholder="Service Slug" {{ isset($serviceData)?'readonly':''}} id="service_slug" required>
                                 </div>
 
                                 <div class="mb-3 col-lg-6">

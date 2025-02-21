@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Criminal and Court Record Verification</h3>
+                    <h3 class="mb-0">CCRV</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end mb-0">
