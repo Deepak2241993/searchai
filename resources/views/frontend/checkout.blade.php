@@ -393,8 +393,9 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-lg btn-primary w-100 btn-rounded shadow-lg transition-all">
-                                            <i class="las la-check-circle"></i> Place Order
+                                        <button type="submit" id="submitButton" class="btn btn-lg btn-primary w-100 btn-rounded shadow-lg transition-all">
+                                            <i class="las la-check-circle"></i> <span id="buttonText">Place Order</span>
+                                            <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -417,6 +418,15 @@
     document.getElementById('orderForm').addEventListener('submit', async function(event) {
         event.preventDefault();
 
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        const spinner = document.getElementById('spinner');
+
+        // Disable button and show spinner
+        submitButton.disabled = true;
+        spinner.classList.remove('d-none');
+        buttonText.textContent = 'Processing...';
+
         const amount = document.getElementById('order-amount').value;
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
@@ -433,6 +443,9 @@
         
         if (!amount || !name || !email || !phone || !address || service_names.length === 0 || tokens.length === 0) {
             alert('Please fill all the required fields.');
+            submitButton.disabled = false;
+            spinner.classList.add('d-none');
+            buttonText.textContent = 'Place Order';
             return;
         }
 
