@@ -133,11 +133,13 @@ Token List
             </div>
             <div class="modal-body">
                 <!-- Aadhaar OTP Generation Form -->
-                <form id="aadhaarOtpForm" action="{{ route('aadhaar.generate') }}" method="POST">
+                <form id="aadhaarOtpForm" action="{{ route('background-otpgeneration') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="aadhaar_number" class="form-label">Aadhaar Number:</label>
-                        <input type="text" name="aadhaar_number" id="aadhaar_number" class="form-control" required>
+                        
+                        <input type="text" name="aadhaar_number" id="aadhaar_number" class="form-control" required pattern="\d{12}" maxlength="12">
+
                     </div>
                     <!-- Hidden fields for Token and Service Type -->
                     <input type="hidden" name="token" id="modalToken" value="">
@@ -157,51 +159,150 @@ Token List
     </div>
 </div>
 
+
+
+{{--  For OPT Verification Code --}}
+<div class="modal fade" id="optverification" tabindex="-1" aria-labelledby="optverificationLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="optverificationLabel">Generate OTP</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Aadhaar OTP Generation Form -->
+                <form action="{{ route('kyc-otp') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="otp">OTP:</label>
+                            <input class= "form-control" type="text" name="otp" id="otp" required>
+                            <input type="hidden" name="transaction_id" value="" required>
+                            <input type="hidden" name="token_share_code" value="" required>
+                            <input type="hidden" name="aadhaar_number" id="aadhaar_number_otp">
+                            <input type="hidden" name="service_type" value="KYC VERIFICATION">
+                        </div>
+                        <div class="col-md-6 mt-4">
+                            <button type="submit" class="btn btn-success">Verify OTP</button>
+                        </div>
+                    </div> 
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Handle modal opening
-        document.querySelectorAll('.open-modal-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const serviceType = this.getAttribute('data-service');
-                const token = this.getAttribute('data-token');
-                // Set modal values
-                // document.getElementById('modalServiceType').value = serviceType;
-                document.getElementById('modalToken').value = token;
-                document.getElementById('modalServiceTypeDisplay').textContent = serviceType;
-                document.getElementById('modalTokenDisplay').textContent = token;
-            });
+ document.addEventListener("DOMContentLoaded", function () {
+    // Handle modal opening and set data attributes
+    document.querySelectorAll(".open-modal-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+            const serviceType = this.getAttribute("data-service");
+            const token = this.getAttribute("data-token");
+
+            // Set modal values
+            document.getElementById("modalToken").value = token;
+            document.getElementById("modalServiceTypeDisplay").textContent = serviceType;
+            document.getElementById("modalTokenDisplay").textContent = token;
         });
     });
-</script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.view-data-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const aadhaarData = JSON.parse(this.getAttribute('data-aadhaar'));
-                document.getElementById('aadhaarNumber').textContent = aadhaarData.aadhaar_number || 'N/A';
-                document.getElementById('aadhaarName').textContent = aadhaarData.name || 'N/A';
-                document.getElementById('aadhaarDob').textContent = aadhaarData.date_of_birth || 'N/A';                    
-                document.getElementById('aadhaarGender').textContent = aadhaarData.gender || 'N/A';
-                document.getElementById('aadhaarCareof').textContent = aadhaarData.care_of || 'N/A';
-                const addressParts = [
+    // Handle Aadhaar OTP Form Submission via AJAX
+    document.getElementById("aadhaarOtpForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent normal form submission
 
-                    aadhaarData.house,
-                    aadhaarData.street,
-                    aadhaarData.district,
-                    aadhaarData.sub_district,
-                    aadhaarData.landmark,
-                    aadhaarData.post_office_name,
-                    aadhaarData.state,
-                    aadhaarData.pincode
-                ];
-                const fullAddress = addressParts.filter(part => part).join(', ');
-                document.getElementById('aadhaarAddress').textContent = fullAddress || 'N/A';
+        let aadhaarNumber = document.getElementById("aadhaar_number").value.trim();
+    if (!/^\d{12}$/.test(aadhaarNumber)) {
+        alert("Please enter a valid 12-digit Aadhaar number.");
+        event.preventDefault();
+        return;
+    }
+        let formData = new FormData(this);
+        let submitButton = this.querySelector("button[type='submit']");
+
+        // Show spinner and disable button
+        submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...`;
+        submitButton.disabled = true;
+
+        fetch(this.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Hide Aadhaar OTP modal before opening the next modal
+                    let aadhaarOtpModal = bootstrap.Modal.getInstance(document.getElementById("aadhaarOtpModal"));
+                    aadhaarOtpModal.hide();
+
+                    setTimeout(() => {
+                        // Populate second modal hidden fields with response data
+                        document.querySelector('input[name="transaction_id"]').value = data.transaction_id;
+                        document.querySelector('input[name="token_share_code"]').value = data.token_share_code;
+                        document.getElementById('aadhaar_number_otp').value = data.aadhaar_number;
+                        document.querySelector('input[name="service_type"]').value = data.service_type;
+
+                        // Show OTP verification modal
+                        let otpVerificationModal = new bootstrap.Modal(document.getElementById("optverification"));
+                        otpVerificationModal.show();
+                    }, 500); // Small delay to ensure first modal is completely hidden
+                } else {
+                    alert("Error: " + data.message);
+                }
+            })
+            .catch(error => console.error("Error:", error))
+            .finally(() => {
+                // Reset button state
+                submitButton.innerHTML = "Generate OTP";
+                submitButton.disabled = false;
             });
-        });
     });
+
+    // Handle OTP Verification Form Submission via AJAX
+    document.querySelector('#optverification form').addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent normal form submission
+
+        let formData = new FormData(this);
+        let submitButton = this.querySelector("button[type='submit']");
+
+        // Show spinner and disable button
+        submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Verifying...`;
+        submitButton.disabled = true;
+
+        fetch(this.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("OTP Verified Successfully!");
+                    let otpVerificationModal = bootstrap.Modal.getInstance(document.getElementById("optverification"));
+                    otpVerificationModal.hide();
+                } else {
+                    alert("OTP Verification Failed: " + data.message);
+                }
+            })
+            .catch(error => console.error("Error:", error))
+            .finally(() => {
+                // Reset button state
+                submitButton.innerHTML = "Verify OTP";
+                submitButton.disabled = false;
+            });
+    });
+});
+
+
 </script>
+
+
 @endsection

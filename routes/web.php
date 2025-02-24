@@ -60,9 +60,6 @@ Route::post('reset-password', [RegisterController::class, 'reset'])->name('passw
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 
 
-
-
-
 // Checkout Routes
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 Route::post('/payment/create-order', [PaymentController::class, 'createOrder'])->name('payment.createOrder');
@@ -137,6 +134,8 @@ Route::middleware(['auth'])->group(function () {
 
     // For Background And CCRV 
     Route::get('/ccrv-and-background-verification', [TokenController::class, 'CcrvAndBackgroundVerification'])->name('ccrv-and-background-verification');
+    Route::post('/background-otpgeneration', [TokenController::class, 'BackgroundVerificationOtp'])->name('background-otpgeneration');
+    Route::post('/background-kyc-otp', [TokenController::class, 'KycOtpSubmit'])->name('kyc-otp');
 
     // Checkout Routes
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
