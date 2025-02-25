@@ -329,8 +329,6 @@ $(document).ready(function () {
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Generating...
         `);
 
-        $("#reportgenerate .modal-body").html('<p>Loading...</p>');
-
         $.ajax({
             url: "{{ route('ccrv-report-generation') }}", // Ensure this route is correctly defined
             type: "POST",
@@ -343,26 +341,14 @@ $(document).ready(function () {
             dataType: "json", // Ensures JSON response is parsed correctly
             success: function (response) {
                 if (response.success) {
-                    let message = response.message || "Report generated successfully.";
-                    let reportData = response.data || null;
-
-                    if (reportData) {
-                        $("#reportgenerate .modal-body").html(`
-                            <p><strong>${message}</strong></p>
-                            <p><strong>Reference ID:</strong> ${reportData.reference_id || "N/A"}</p>
-                            <p><strong>Name:</strong> ${reportData.name || "N/A"}</p>
-                            <p><strong>Status:</strong> ${reportData.status || "N/A"}</p>
-                        `);
-                    } else {
-                        $("#reportgenerate .modal-body").html(`<p class="text-warning">${message}</p>`);
-                    }
-                } else {
-                    $("#reportgenerate .modal-body").html(`<p class="text-danger">${response.message || "Failed to generate report."}</p>`);
+                    // Reload the page after a short delay (1.5 seconds)
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1500);
                 }
             },
             error: function (xhr) {
-                let errorMessage = xhr.responseJSON?.message || 'Something went wrong!';
-                $("#reportgenerate .modal-body").html(`<p class="text-danger">Error: ${errorMessage}</p>`);
+                alert(xhr.responseJSON?.message || "Something went wrong!");
             },
             complete: function () {
                 // Restore button state after request completes
@@ -371,6 +357,7 @@ $(document).ready(function () {
         });
     });
 });
+
 
 
 
