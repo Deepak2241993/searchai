@@ -14,6 +14,8 @@ class Token extends Model
         'token',
         'expires_at',
         'status',
+        'api_status',
+        'order_id '
     ];
     public function aadhaarData()
     {

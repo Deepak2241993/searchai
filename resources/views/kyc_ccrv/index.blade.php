@@ -74,7 +74,7 @@ Token List
                                         <td>{{ $Token->service_type }}</td>
                                         <td>{{ $Token->token }}</td>
                                         <td>{{ $Token->status == 'active' ? 'Active' : 'Expired' }}</td>
-                                        @if ($Token->status == 'active')
+                                        @if ($Token->status == 'active' && $Token->api_status == 'active')
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-info me-2 open-modal-btn"
                                                 data-bs-toggle="modal"
@@ -85,7 +85,8 @@ Token List
                                                 Generate OTP
                                             </button>
                                         </td>
-                                        @else
+                                        @endif
+                                        @if ($Token->status == 'active' && $Token->api_status == 'partially_run')
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-primary view-data-btn"
                                                 data-bs-toggle="modal"
@@ -96,9 +97,24 @@ Token List
                                                 data-aadhaar="{{ json_encode($Token->aadhaarData) }}">
                                                 View
                                             </button>
-                                            <a href="{{ route('download.pdf', $Token->id) }}" class="btn btn-sm btn-secondary">
-                                                Download PDF
-                                            </a>
+                                            <button class="btn btn-sm btn-warning view-data-btn"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#aadhaarDataModal"
+                                                data-id="{{ $Token->id }}"
+                                                data-token="{{ $Token->token }}"
+                                                data-service="{{ $Token->service_type }}"
+                                                data-aadhaar="{{ json_encode($Token->aadhaarData) }}">
+                                                Generate Report
+                                            </button>
+                                           
+                                        </td>
+                                        @endif	
+                                        
+                                        @if ($Token->status == 'expired' && $Token->api_status == 'completed')
+                                        <td class="text-center">
+                                        <a href="{{ route('download.pdf', $Token->id) }}" class="btn btn-sm btn-secondary">
+                                            Download Report
+                                        </a>
                                         </td>
                                         @endif
                                     </tr>

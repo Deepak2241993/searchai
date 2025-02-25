@@ -266,10 +266,10 @@
     
     if (response.success) {
         alert(response.message);
-        
-        if (response.redirect_url) {
-            window.location.href = response.redirect_url;  // Redirect upon success
-        }
+        window.location.href = '{{route('all-ccrv-report')}}';
+        // if (response.redirect_url) {
+        //     window.location.href = response.redirect_url;  // Redirect upon success
+        // }
     } else {
         alert('Operation failed: ' + response.message);
     }

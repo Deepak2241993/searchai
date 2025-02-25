@@ -144,7 +144,7 @@ class TokenController extends Controller
             "X-API-Key: " . env('GridLineAPIKey'),
             "X-Auth-Type: API-Key"
         ],
-        CURLOPT_TIMEOUT => 60 // Correct way to set timeout
+        CURLOPT_TIMEOUT => 55 // Correct way to set timeout
     ]);
 
     $response = curl_exec($curl);
@@ -180,8 +180,7 @@ class TokenController extends Controller
         if ($ccrvDataResult['success']) {
             // Send Mail
             // Update token status
-            $token->status = 'expired';
-            $token->save();
+            
                 // Attempt to send the email
                 $authUserEmail = Auth::user()->email;
             if($ccrvDataResult['case_entry'])
@@ -189,15 +188,15 @@ class TokenController extends Controller
                 Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['cases'], $ccrvDataResult['case_count'], $token->token,$data));
             }
                 
-                else{
-                // dd($ccrvDataResult['debug']['case_count']);
-                Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['debug']['cases'], $ccrvDataResult['debug']['case_count'], $token->token,$data));
-                }
-                
+            else{
+            // dd($ccrvDataResult['debug']['case_count']);
+            Mail::to($authUserEmail)->send(new CCRVReportMail($ccrvDataResult['debug']['cases'], $ccrvDataResult['debug']['case_count'], $token->token,$data));
+            }
+            $token->status = 'expired';
+            $token->save(); 
             return response()->json([
                 'success' => true,
-                'message' => $ccrvDataResult['message'],
-                'redirect_url' => route('all-ccrv-report')
+                'message' => $ccrvDataResult['message']
             ]);
         } else {
             return response()->json([
@@ -472,140 +471,130 @@ public function AllCCRVReport(){
     
     //  For KYC OTP Verification
     public function KycOtpSubmit(Request $request)
-    {
-        Log::info('Attempting to submit OTP.', ['request_data' => $request->except(['otp', 'token_share_code'])]);
+{
+    Log::info('Attempting to submit OTP.', ['request_data' => $request->except(['otp', 'token_share_code'])]);
 
-        $validated = $request->validate([
-            'otp' => 'required|digits:6',
-            'transaction_id' => 'required|string',
-            'aadhaar_number' => 'required|digits:12',
-            'token_share_code' => 'required|string',
-            'service_type' => 'required|string',
+    $validated = $request->validate([
+        'otp' => 'required|digits:6',
+        'transaction_id' => 'required|string',
+        'aadhaar_number' => 'required|digits:12',
+        'token_share_code' => 'required|string',
+        'service_type' => 'required|string',
+    ]);
+
+    // Fetch token
+    $token = Token::where('token', $validated['token_share_code'])->first();
+    if (!$token) {
+        Log::error('Token not found for the given token_share_code.', ['token_share_code' => $validated['token_share_code']]);
+        return back()->withErrors('Invalid token share code. Please try again.');
+    }
+
+    // Store transaction ID in session
+    session(['transaction_id' => $validated['transaction_id']]);
+
+    Log::debug('Validated OTP submission data.', $validated);
+
+    try {
+        // API Call
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'X-API-Key' => $this->apiKey,
+            'X-Auth-Type' => 'API-Key',
+            'X-Transaction-ID' => $validated['transaction_id'],
+        ])->post('https://api.gridlines.io/aadhaar-api/boson/submit-otp', [
+            'otp' => $validated['otp'],
+            'include_xml' => true,
+            'token_share_code' => $validated['token_share_code'],
         ]);
 
-        $token = Token::where('token', $validated['token_share_code'])->first();
+        if ($response->successful()) {
+            $data = $response->json();
+            Log::info('OTP submitted successfully.', ['response_data' => $data]);
 
-        if (!$token) {
-            Log::error('Token not found for the given token_share_code.', ['token_share_code' => $validated['token_share_code']]);
-            return back()->withErrors('Invalid token share code. Please try again.');
-        }
+            $aadhaarData = $data['data']['aadhaar_data'] ?? null;
+            if (!$aadhaarData) {
+                Log::error('Missing aadhaar_data in response.', ['response' => $data]);
+                return back()->withErrors('Invalid response from Aadhaar API. Please try again.');
+            }
 
-        session(['transaction_id' => $validated['transaction_id']]);
-
-        Log::debug('Validated OTP submission data.', $validated);
-
-        try {
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                'X-API-Key' => $this->apiKey,
-                'X-Auth-Type' => 'API-Key',
-                'X-Transaction-ID' => $validated['transaction_id'],
-            ])->post('https://api.gridlines.io/aadhaar-api/boson/submit-otp', [
-                'otp' => $validated['otp'],
-                'include_xml' => true,
-                'token_share_code' => $validated['token_share_code'],
+            // Save Aadhaar Data
+            $createdData = AadhaarData::create([
+                'aadhaar_number' => $validated['aadhaar_number'],
+                'reference_id' => $aadhaarData['reference_id'] ?? null,
+                'id_token' => $token->id,
+                'aadhaar_token' => $validated['transaction_id'],
+                'name' => $aadhaarData['name'] ?? null,
+                'date_of_birth' => $aadhaarData['date_of_birth'] ?? null,
+                'gender' => $aadhaarData['gender'] ?? null,
+                'mobile' => $aadhaarData['mobile'] ?? null,
+                'care_of' => $aadhaarData['care_of'] ?? null,
+                'house' => $aadhaarData['house'] ?? null,
+                'street' => $aadhaarData['street'] ?? null,
+                'district' => $aadhaarData['district'] ?? null,
+                'sub_district' => $aadhaarData['sub_district'] ?? null,
+                'landmark' => $aadhaarData['landmark'] ?? null,
+                'post_office_name' => $aadhaarData['post_office_name'] ?? null,
+                'state' => $aadhaarData['state'] ?? null,
+                'pincode' => $aadhaarData['pincode'] ?? null,
+                'country' => $aadhaarData['country'] ?? 'India',
+                'vtc_name' => $aadhaarData['vtc_name'] ?? null,
             ]);
 
-            if ($response->successful()) {
-                $data = $response->json();
+            // **Email Sending Logic**
+            try {
+                if (Auth::check()) {
+                    $authUser = Auth::user();
+                    $authUserEmail = $authUser->email ?? null;
+                    $order_id = "OT" . ($token->order_id ?? '');
+                    $client_data = $authUser;
 
-                Log::info('OTP submitted successfully.', ['response_data' => $data]);
-
-                $aadhaarData = $data['data']['aadhaar_data'] ?? null;
-
-                if (!$aadhaarData) {
-                    Log::error('Missing aadhaar_data in response.', ['response' => $data]);
-                    return back()->withErrors('Invalid response from Aadhaar API. Please try again.');
-                }
-
-                // Save Aadhaar data
-                $createdData = AadhaarData::create([
-                    'aadhaar_number' => $validated['aadhaar_number'],
-                    'reference_id' => $aadhaarData['reference_id'] ?? null,
-                    'id_token' => $token->id,
-                    'aadhaar_token' => $validated['transaction_id'],
-                    'name' => $aadhaarData['name'] ?? null,
-                    'date_of_birth' => $aadhaarData['date_of_birth'] ?? null,
-                    'gender' => $aadhaarData['gender'] ?? null,
-                    'mobile' => $aadhaarData['mobile'] ?? null,
-                    'care_of' => $aadhaarData['care_of'] ?? null,
-                    'house' => $aadhaarData['house'] ?? null,
-                    'street' => $aadhaarData['street'] ?? null,
-                    'district' => $aadhaarData['district'] ?? null,
-                    'sub_district' => $aadhaarData['sub_district'] ?? null,
-                    'landmark' => $aadhaarData['landmark'] ?? null,
-                    'post_office_name' => $aadhaarData['post_office_name'] ?? null,
-                    'state' => $aadhaarData['state'] ?? null,
-                    'pincode' => $aadhaarData['pincode'] ?? null,
-                    'country' => $aadhaarData['country'] ?? 'India',
-                    'vtc_name' => $aadhaarData['vtc_name'] ?? null,
-                ]);
-
-                
-
-                try {
-                    if (Auth::check()) {
-                        $authUserEmail = Auth::user()->email;
-                        $order_id = "OT" . $token->order_id;
-                        $client_data = Auth::user();
-
-                        Mail::to($authUserEmail)->send(new \App\Mail\AadhaarSuccessMail($aadhaarData, $aadhaarData['name'], $token->token, $validated['service_type'], $createdData, $order_id, $client_data));
+                    if ($authUserEmail) {
+                        Mail::to($authUserEmail)->send(
+                            new \App\Mail\AadhaarSuccessMail(
+                                $aadhaarData,
+                                $aadhaarData['name'] ?? '',
+                                $token->token,
+                                $validated['service_type'],
+                                $createdData,
+                                $order_id,
+                                $client_data
+                            )
+                        );
 
                         Log::info('Aadhaar success email sent successfully.', [
                             'recipient' => $authUserEmail,
                             'aadhaar_data' => $aadhaarData,
                         ]);
                     } else {
-                        Log::warning('No authenticated user found. Cannot send email.');
+                        Log::warning('Authenticated user email not found. Cannot send email.');
                     }
-                } catch (\Exception $e) {
-                    Log::error('Failed to send Aadhaar success email.', [
-                        'recipient' => $authUserEmail ?? 'unknown',
-                        'error' => $e->getMessage(),
-                    ]);
-                }
-
-                // ✅ Call CCRVReport after successful Aadhaar verification
-                $ccrvRequest = new Request([
-                    'name' => $aadhaarData['name'] ?? null,
-                    'father_name' => $aadhaarData['care_of'] ?? null,
-                    'address' => implode(', ', array_filter([
-                        $aadhaarData['house'] ?? '',
-                        $aadhaarData['street'] ?? '',
-                        $aadhaarData['district'] ?? '',
-                        $aadhaarData['state'] ?? '',
-                        $aadhaarData['pincode'] ?? '',
-                        'India'
-                    ])),
-                    'date_of_birth' => $aadhaarData['date_of_birth'] ?? null,
-                    'service_type' => $validated['service_type'],
-                    'token' => $token->token
-                ]);
-
-                Log::info('Initiating CCRVReport after Aadhaar verification.');
-                $ccrvResponse = $this->CCRVReport($ccrvRequest);
-
-                // Handle the response
-                if ($ccrvResponse->getData()->success) {
-                    // Update token status
-                    $token->status = 'expired';
-                    $token->save();
-                    Log::info('CCRV Report processed successfully.', ['response' => $ccrvResponse->getData()]);
                 } else {
-                    Log::warning('CCRV Report processing failed.', ['response' => $ccrvResponse->getData()]);
+                    Log::warning('No authenticated user found. Cannot send email.');
                 }
-
-                return redirect()->route('aadhaar.success')->with('data', $data);
+            } catch (\Exception $e) {
+                Log::error('Failed to send Aadhaar success email.', [
+                    'recipient' => $authUserEmail ?? 'unknown',
+                    'error' => $e->getMessage(),
+                ]);
             }
 
-            Log::error('Failed to submit OTP.', ['response' => $response->body()]);
-            return back()->withErrors('Failed to verify OTP. Please try again.');
-        } catch (\Exception $e) {
-            Log::critical('Exception occurred while submitting OTP.', ['error' => $e->getMessage()]);
-            return back()->withErrors('An error occurred. Please try again later.');
+            // **Update API Status**
+            $token->api_status = 'partially_run';
+            $token->save();
+
+            return redirect()->route('aadhaar.success')->with('data', $data);
         }
+
+        // **Handle Failed Response**
+        Log::error('Failed to submit OTP.', ['response' => $response->body()]);
+        return back()->withErrors('Failed to verify OTP. Please try again.');
+    } catch (\Exception $e) {
+        Log::critical('Exception occurred while submitting OTP.', ['error' => $e->getMessage()]);
+        return back()->withErrors('An error occurred. Please try again later.');
     }
+}
+
 
 
 
