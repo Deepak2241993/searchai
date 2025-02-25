@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tokens', function (Blueprint $table) {
-            $table->enum('api_status', ['active','partially_run', 'completed'])->default('partially_run')->after('order_id');
+            $table->enum('api_status', ['active','partially_run', 'completed'])->default('active')->after('order_id');
 
         });
     }
