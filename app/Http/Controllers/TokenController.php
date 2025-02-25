@@ -595,6 +595,41 @@ public function AllCCRVReport(){
     }
 }
 
+public function CcrvReportGeneration(Request $request){
+    $data = $request->all();
+   $adhardata =  AadhaarData::where('id_token',$request->token_id)->first();
+    // ✅ Call CCRVReport after successful Aadhaar verification
+    $ccrvRequest = new Request([
+        'name' => $adhardata['name'] ?? null,
+        'father_name' => $adhardata['care_of'] ?? null,
+        'address' => implode(', ', array_filter([
+            $adhardata['house'] ?? '',
+            $adhardata['street'] ?? '',
+            $adhardata['district'] ?? '',
+            $adhardata['state'] ?? '',
+            $adhardata['pincode'] ?? ''
+        ])),
+        'date_of_birth' => $adhardata['date_of_birth'] ?? null,
+        'service_type' => $data['service_type'],
+        'token' => $data['token']
+    ]);
+
+    Log::info('Initiating CCRVReport after Aadhaar verification.');
+    $ccrvResponse = $this->CCRVReport($ccrvRequest);
+    $responseData = $ccrvResponse->getData(true); // Convert JSON response to an associative array
+    
+    if (isset($responseData['success']) && $responseData['success'] === true) {
+        $token = Token::find($data['token_id']); // Ensure token_id is correctly passed
+    
+        if ($token) { // Check if token exists before updating
+            $token->update(['api_status' => 'completed']);
+        }
+    }
+    return $responseData;
+    
+    
+}
+
 
 
 

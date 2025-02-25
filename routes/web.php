@@ -136,6 +136,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ccrv-and-background-verification', [TokenController::class, 'CcrvAndBackgroundVerification'])->name('ccrv-and-background-verification');
     Route::post('/background-otpgeneration', [TokenController::class, 'BackgroundVerificationOtp'])->name('background-otpgeneration');
     Route::post('/background-kyc-otp', [TokenController::class, 'KycOtpSubmit'])->name('kyc-otp');
+    Route::post('/ccrv-report-generation', [TokenController::class, 'CcrvReportGeneration'])->name('ccrv-report-generation');
 
     // Checkout Routes
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');

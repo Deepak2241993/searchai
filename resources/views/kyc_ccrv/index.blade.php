@@ -97,13 +97,12 @@ Token List
                                                 data-aadhaar="{{ json_encode($Token->aadhaarData) }}">
                                                 View
                                             </button>
-                                            <button class="btn btn-sm btn-warning view-data-btn"
+                                            <button class="btn btn-sm btn-warning view-data-btn report_generate"
                                                 data-bs-toggle="modal"
-                                                data-bs-target="#aadhaarDataModal"
+                                                data-bs-target="#reportgenerate"
                                                 data-id="{{ $Token->id }}"
                                                 data-token="{{ $Token->token }}"
-                                                data-service="{{ $Token->service_type }}"
-                                                data-aadhaar="{{ json_encode($Token->aadhaarData) }}">
+                                                data-service="{{ $Token->service_type }}">
                                                 Generate Report
                                             </button>
                                            
@@ -316,6 +315,63 @@ Token List
             });
     });
 });
+
+//  For Report Generate
+$(document).ready(function () {
+    $(".report_generate").on("click", function () {
+        let button = $(this); // Store the button reference
+        let tokenId = button.data("id");
+        let tokenValue = button.data("token");
+        let serviceType = button.data("service");
+
+        // Disable button and show spinner
+        button.prop("disabled", true).html(`
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Generating...
+        `);
+
+        $("#reportgenerate .modal-body").html('<p>Loading...</p>');
+
+        $.ajax({
+            url: "{{ route('ccrv-report-generation') }}", // Ensure this route is correctly defined
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}", 
+                token_id: tokenId,
+                token: tokenValue,
+                service_type: serviceType
+            },
+            dataType: "json", // Ensures JSON response is parsed correctly
+            success: function (response) {
+                if (response.success) {
+                    let message = response.message || "Report generated successfully.";
+                    let reportData = response.data || null;
+
+                    if (reportData) {
+                        $("#reportgenerate .modal-body").html(`
+                            <p><strong>${message}</strong></p>
+                            <p><strong>Reference ID:</strong> ${reportData.reference_id || "N/A"}</p>
+                            <p><strong>Name:</strong> ${reportData.name || "N/A"}</p>
+                            <p><strong>Status:</strong> ${reportData.status || "N/A"}</p>
+                        `);
+                    } else {
+                        $("#reportgenerate .modal-body").html(`<p class="text-warning">${message}</p>`);
+                    }
+                } else {
+                    $("#reportgenerate .modal-body").html(`<p class="text-danger">${response.message || "Failed to generate report."}</p>`);
+                }
+            },
+            error: function (xhr) {
+                let errorMessage = xhr.responseJSON?.message || 'Something went wrong!';
+                $("#reportgenerate .modal-body").html(`<p class="text-danger">Error: ${errorMessage}</p>`);
+            },
+            complete: function () {
+                // Restore button state after request completes
+                button.prop("disabled", false).html("Generate Report");
+            }
+        });
+    });
+});
+
 
 
 </script>
