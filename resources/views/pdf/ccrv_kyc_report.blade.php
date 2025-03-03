@@ -190,7 +190,7 @@
         </div>
 
         <section class="client-info">
-            <div class="identity-check">CRIMINAL BACKGROUND SCREENING REPORT</div>
+            <div class="identity-check">BACKGROUND SCREENING REPORT</div>
 
             <table class="info-table">
                 <tr>
@@ -205,6 +205,56 @@
                     <th>Mobile Number</th>
                     <td>{{$token->aadhaarData->phone}}</td>
                 </tr> --}}
+                <tr>
+                    <th>Report Date</th>
+                    <td>{{ date('d-m-Y', strtotime($token->updated_at)) }}</td>
+                </tr>
+            </table>
+        </section>
+        <section class="client-info">
+            <div class="identity-check">IDENTITY CHECK : AADHAAR CARD</div>
+
+            <table class="info-table">
+                <tr>
+                    <th>Aadhaar Number</th>
+                    <td>{{ $name }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ $criminal_data['name'] }}</td>
+                </tr>
+                <tr>
+                    <th>Date Of Birth</th>
+                    <td>{{ $criminal_data['date_of_birth'] }}</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>{{ $criminal_data['gender'] }}</td>
+                </tr>
+                <tr>
+                    <th>Father’s Name / Care of</th>
+                    <td>{{ $criminal_data['care_of'] }}</td>
+                </tr>
+                <tr>
+                    <th>State</th>
+                    <td>{{ $criminal_data['state'] }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>
+                        {{ $criminal_data['house'] ?? '' }} 
+                        {{ ", ".$criminal_data['street'] ?? '' }}
+                        {{ ", ".$criminal_data['vtc_name'] ?? '' }}
+                        {{ ", ".$criminal_data['district'] ?? '' }}
+                        {{ ", ".$criminal_data['state'] ?? '' }}
+                        {{ ", ".$criminal_data['pincode'] ?? '' }}
+                        {{ ", ".$criminal_data['country'] ?? '' }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Pin Code</th>
+                    <td>{{ $criminal_data['pincode'] }}</td>
+                </tr>
                 <tr>
                     <th>Report Date</th>
                     <td>{{ date('d-m-Y', strtotime($token->updated_at)) }}</td>
