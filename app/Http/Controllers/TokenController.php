@@ -349,20 +349,21 @@ public function AllCCRVReport(){
       return view('ccrv.ccrv_report', compact('data'));
 
 }
-    public function downloadPdf($id)
-    {
-        $token = Token::findOrFail($id);
-       
-        $filteredAadhaarData = collect($token->aadhaarData)->except([
-            'photo_base64', 'mobile', 'landmark', 'reference_id', 'aadhaar_token', 'updated_at' ]);
-        $token->aadhaarData = $filteredAadhaarData;
-        $pdf = PDF::loadView('pdf.template', [
-            'token' => $token,
-        ]);
-        
-        return $pdf->download('details_' . $token->id . '.pdf');
-        // dd($pdf->output());
-    }
+public function downloadPdf($id)
+{
+    // Fetch the token by ID
+    $token = Token::findOrFail($id);
+    $kyc_date = AadhaarData::where('id_token', $token->id)->first();
+
+    // Generate and download the PDF
+    $pdf = PDF::loadView('pdf.template', [
+        'token' => $token,
+        'kyc_date' => $kyc_date,
+    ]);
+
+    return $pdf->download('details_' . $token->id . '.pdf');
+}
+
 
     public function ReportGenerate(Request $request, $id)
     {
