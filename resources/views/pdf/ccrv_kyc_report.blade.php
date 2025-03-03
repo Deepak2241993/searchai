@@ -217,7 +217,7 @@
             <table class="info-table">
                 <tr>
                     <th>Aadhaar Number</th>
-                    <td>{{ $name }}</td>
+                    <td>{{ $criminal_data['aadhaar_number'] }}</td>
                 </tr>
                 <tr>
                     <th>Name</th>
