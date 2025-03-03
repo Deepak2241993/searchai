@@ -174,7 +174,7 @@ class TokenController extends Controller
 
 
         // Process CCRV Data
-        $ccrvDataResult = $this->addCCRVData($apiResponse['transaction_id']);
+        $ccrvDataResult = $this->addCCRVData($apiResponse['transaction_id'], $token);
         
         // Return response based on data processing
         if ($ccrvDataResult['success']) {
@@ -213,8 +213,9 @@ class TokenController extends Controller
     }
 
     
-    public function addCCRVData($transaction_id)
+    public function addCCRVData($transaction_id,$token)
     {
+        // dd($token->token);
         $curl_report = curl_init();
         curl_setopt_array($curl_report, [
             CURLOPT_URL => rtrim(env('CCRV_API_URL'), '/') . "/result",
@@ -290,6 +291,7 @@ class TokenController extends Controller
                                 'type' => $caseData['type'] ?? null,
                                 'under_acts' => $caseData['under_acts'] ?? null,
                                 'under_sections' => $caseData['under_sections'] ?? null,
+                                'token_id' => $token->id ?? null,
                             ];
 
                             DB::table('ccrv_cases')->insert($caseRecord);
@@ -362,6 +364,35 @@ public function AllCCRVReport(){
         // dd($pdf->output());
     }
 
+    public function ReportGenerate(Request $request, $id)
+    {
+        // Fetch the token by ID
+        $token = Token::findOrFail($id);
+    
+        // Get the associated CCRV report
+        $ccrv_report = Ccrv_case::where('token_id', $token->id)->get();
+        $criminal_data = AadhaarData::where('id_token', $token->id)->first();
+    
+        // Filter Aadhaar data
+        $filteredAadhaarData = collect($token->aadhaarData)->except([
+            'name', 'mobile', 'landmark', 
+            'reference_id', 'aadhaar_token', 'updated_at'
+        ]);
+    
+        // Update the token's Aadhaar data with the filtered version
+        $token->aadhaarData = $filteredAadhaarData;
+    
+        // Pass both token and ccrv_report to the PDF view
+        $pdf = PDF::loadView('pdf.ccrv_kyc_report', [
+            'token' => $token,
+            'ccrv_report' => $ccrv_report,
+            'criminal_data' => $criminal_data,
+        ]);
+    
+        // Download the PDF with a filename
+        return $pdf->download('details_' . $token->id . '.pdf');
+    }
+    
 
     public function CcrvAndBackgroundVerification()
     {

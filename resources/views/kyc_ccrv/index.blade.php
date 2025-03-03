@@ -88,15 +88,7 @@ Token List
                                         @endif
                                         @if ($Token->status == 'active' && $Token->api_status == 'partially_run')
                                         <td class="text-center">
-                                            <button class="btn btn-sm btn-primary view-data-btn"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#aadhaarDataModal"
-                                                data-id="{{ $Token->id }}"
-                                                data-token="{{ $Token->token }}"
-                                                data-service="{{ $Token->service_type }}"
-                                                data-aadhaar="{{ json_encode($Token->aadhaarData) }}">
-                                                View
-                                            </button>
+                                            
                                             <button class="btn btn-sm btn-warning view-data-btn report_generate"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#reportgenerate"
@@ -111,7 +103,7 @@ Token List
                                         
                                         @if ($Token->status == 'expired' && $Token->api_status == 'completed')
                                         <td class="text-center">
-                                        <a href="{{ route('download.pdf', $Token->id) }}" class="btn btn-sm btn-secondary">
+                                        <a href="{{ route('reportgenerate', $Token->id) }}" class="btn btn-sm btn-secondary">
                                             Download Report
                                         </a>
                                         </td>

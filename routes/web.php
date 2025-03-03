@@ -124,13 +124,13 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/User/token/{id}', [TokenController::class, 'show'])->name('token.show');
 
     Route::get('/token-views', [TokenController::class, 'tokenList'])->name('token.index');
-    Route::get('/download-pdf/{id}', [TokenController::class, 'downloadPdf'])->name('download.pdf');
 
     //  For CCRV Service
     Route::get('/ccrv', [TokenController::class, 'CCRV'])->name('new-token.index');
     Route::get('/all-ccrv-report', [TokenController::class, 'AllCCRVReport'])->name('all-ccrv-report');
     Route::post('/ccrv-report', [TokenController::class, 'CCRVReport'])->name('ccrv-report');
     Route::get('/download-pdf/{id}', [TokenController::class, 'downloadPdf'])->name('download.pdf');
+    Route::get('/download-report/{id}', [TokenController::class, 'ReportGenerate'])->name('reportgenerate');
 
     // For Background And CCRV 
     Route::get('/ccrv-and-background-verification', [TokenController::class, 'CcrvAndBackgroundVerification'])->name('ccrv-and-background-verification');
