@@ -55,7 +55,8 @@ class ServiceController extends Controller
         ],
         'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5120', // Validate each image file
     ]);
-
+    // Correct way to add tax to validated data
+    $validatedData['tax'] = $request->input('tax');
     $product_image = [];
 
     if ($request->hasFile('images')) {  // Corrected input name from 'images' to 'image'
@@ -108,7 +109,7 @@ class ServiceController extends Controller
             'long_description' => 'nullable|string',
             'price' => 'required|numeric',
             'status' => 'required|boolean',
-            'image'       => [
+            'image' => [
                 'nullable',
                 'image',
                 'mimes:jpeg,png,jpg,gif,svg',
@@ -121,9 +122,12 @@ class ServiceController extends Controller
                         }
                     }
                 },
-            ], 
+            ],
         ]);
-
+        
+        // Correct way to add tax to validated data
+        $validatedData['tax'] = $request->input('tax');
+        
         $product_image = [];
 
     if ($request->hasFile('images')) {  // Corrected input name from 'images' to 'image'
@@ -142,6 +146,7 @@ class ServiceController extends Controller
         // Combine the image URLs into a single string separated by "|"
         $validatedData['images'] = implode('|', $product_image);
     }
+   
         $service->update($validatedData);
 
         return redirect()->route('admin.service.index')->with('message', 'Service updated successfully.');

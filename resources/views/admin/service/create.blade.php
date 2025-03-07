@@ -79,9 +79,15 @@
                                 </div>
                                 <div class="mb-3 col-lg-6">
                                     <label for="price" class="form-label">Price</label>
-                                    <input class="form-control" type="number" name="price"
+                                    <input class="form-control" type="text" name="price"
                                         value="{{ isset($serviceData) ? $serviceData->price : '' }}" placeholder="Price"
                                         id="price" required>
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <label for="price" class="form-label">Tax %</label>
+                                    <input class="form-control" type="number" name="tax"
+                                        value="{{ isset($serviceData) ? $serviceData->tax : '' }}" placeholder="tax"
+                                        id="tax" required>
                                 </div>
                                 <div class="mb-3 col-lg-6">
                                     <label for="status" class="form-label">Status</label>

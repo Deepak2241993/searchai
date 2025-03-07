@@ -189,12 +189,14 @@ td button:hover {
                                     Token</th>
                                 <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Tokens (Qty)
                                 </th>
+                                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Tax
+                                </th>
                                 <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
 
-
+{{-- {{dd($cart)}} --}}
                             @foreach ($cart as $item)
                                 @if (is_array($item))
                                     <tr id="cart-item-{{ $item['id'] }}" data-price-per-item="{{ $item['pricePerItem'] }}"
@@ -216,6 +218,11 @@ td button:hover {
 
                                         </td>
                                         <td>
+                                            <div class="product-info">
+                                                <h2>&#8377;{{ $item['tax_pay'] }}</h2>
+                                            </div>
+                                        </td>
+                                        <td>
                                             <button onclick="deleteItem('{{ $item['id'] }}')"
                                                 class="btn btn-danger">Remove</button>
                                         </td>
@@ -229,8 +236,12 @@ td button:hover {
                 <div class="total-cost-bar" style="margin-top: 20px; text-align: right;">
                     <h3>Total Cost</h3>
                     <ul style="list-style: none; padding: 0; font-size: 16px; color: #555;">
-                        <li><strong>Total:</strong> <span id="subtotal"
+                        <li><strong>Sub Total:</strong> <span id="subtotal"
                                 style="font-size: 18px; color: #000;">&#8377;{{ number_format($subtotal, 2) }}</span></li>
+                        <li><strong>Tax:</strong> <span id="subtotal"
+                                    style="font-size: 18px; color: #000;">&#8377;{{ number_format($tax, 2) }}</span></li>
+                                    <li><strong>Total:</strong> <span id="subtotal"
+                                        style="font-size: 18px; color: #000;">&#8377;{{ number_format($total, 2) }}</span></li>
                     </ul>
                 </div>
 
