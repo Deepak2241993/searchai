@@ -615,16 +615,17 @@ public function downloadPdf($id)
             $token->api_status = 'partially_run';
             $token->save();
 
-            return redirect()->route('aadhaar.success')->with('data', $data);
+            return response()->json(['success' => true, 'message' => 'OTP verified successfully!', 'data' => $data]);
         }
-
+        
         // **Handle Failed Response**
-        Log::error('Failed to submit OTP.', ['response' => $response->body()]);
-        return back()->withErrors('Failed to verify OTP. Please try again.');
-    } catch (\Exception $e) {
-        Log::critical('Exception occurred while submitting OTP.', ['error' => $e->getMessage()]);
-        return back()->withErrors('An error occurred. Please try again later.');
-    }
+        Log::error('OTP submission failed.', ['response' => $response->body()]);
+        return response()->json(['success' => false, 'message' => 'Invalid OTP. Please try again.']);
+        } catch (\Exception $e) {
+            Log::critical('Exception occurred.', ['error' => $e->getMessage()]);
+            return response()->json(['success' => false, 'message' => 'An error occurred. Please try again later.']);
+        }
+        
 }
 
 public function CcrvReportGeneration(Request $request){

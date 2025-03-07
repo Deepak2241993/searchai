@@ -160,7 +160,7 @@
 
         .footer-disclaimer {
             text-align: justify;
-            margin: 10px 0;
+            padding: 1.5rem;
         }
     </style>
 </head>
@@ -261,7 +261,7 @@
                 </tr>
             </table>
         </section>
-
+        <div style="page-break-before: always;"></div>
         <section class="report-info">
             <div class="identity-check">CRIMINAL CHECK DETAILS</div>
             <table class="info-table">
@@ -362,13 +362,10 @@
             </tr>
         </table>
         @endif
-
+        <div style="page-break-before: always;"></div>
         <footer>
             <div class="footer-disclaimer">
-                <h4 style="text-align:center"><b><u>LEGAL DISCLAIMER</u></b>
-
-
-                </h4>
+                <h4 style="text-align: center;"><strong><u>LEGAL DISCLAIMER</u></strong></h4>
                 <p class="text-wrap mt-4 p-4">All rights reserved. The report and its contents are the property of
                     SearchAPI (operated by Navigant Digital
                     Pvt. Ltd.) and may not be reproduced in any manner without the express written permission of

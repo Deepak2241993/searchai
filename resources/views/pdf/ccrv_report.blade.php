@@ -158,9 +158,10 @@
             border-top: 1px solid #eaeaea;
         }
 
+
         .footer-disclaimer {
             text-align: justify;
-            margin: 10px 0;
+            padding: 1.5rem;
         }
     </style>
 </head>
@@ -304,12 +305,10 @@
             </tr>
         </table>
         @endif
-
+        <div style="page-break-before: always;"></div>
         <footer>
             <div class="footer-disclaimer">
-                <h4 style="text-align:center"><b><u>LEGAL DISCLAIMER</u></b>
-
-
+                <h4 style="text-align: center;"><strong><u>LEGAL DISCLAIMER</u></strong></h4>
                 </h4>
                 <p class="text-wrap mt-4 p-4">All rights reserved. The report and its contents are the property of
                     SearchAPI (operated by Navigant Digital

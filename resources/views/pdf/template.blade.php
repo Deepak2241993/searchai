@@ -147,7 +147,7 @@
 
         .footer-disclaimer {
             text-align: justify;
-            margin: 10px 0;
+            padding: 1.5rem;
         }
     </style>
 </head>
@@ -243,10 +243,10 @@
                 </tr>
             </table>
         </section>
-
+        <div style="page-break-before: always;"></div>
         <footer>
             <div class="footer-disclaimer">
-                <h4 style="text-align:center"><b><u>LEGAL DISCLAIMER</u></b>
+                <h4 style="text-align: center;"><strong><u>LEGAL DISCLAIMER</u></strong></h4>
 
 
                 </h4>

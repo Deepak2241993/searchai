@@ -73,12 +73,12 @@
                         <p>Background Verification</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('new-token.index') }}" class="nav-link {{ Request::segment(1) === 'ccrv' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>
                         <p>CCRV</p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('ccrv-and-background-verification') }}" class="nav-link {{ Request::segment(1) === 'ccrv-and-background-verification' ? 'active' : '' }}">
                         <i class="nav-icon fa fa-check-square-o" aria-hidden="true"></i>

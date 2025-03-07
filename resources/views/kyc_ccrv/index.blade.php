@@ -89,7 +89,7 @@ Token List
                                         @if ($Token->status == 'active' && $Token->api_status == 'partially_run')
                                         <td class="text-center">
                                             
-                                            <button class="btn btn-sm btn-warning view-data-btn report_generate"
+                                            <button class="btn btn-sm btn-success view-data-btn report_generate"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#reportgenerate"
                                                 data-id="{{ $Token->id }}"
@@ -192,6 +192,7 @@ Token List
                         <div class="col-md-6 mt-4">
                             <button type="submit" class="btn btn-success">Verify OTP</button>
                         </div>
+                        <p id="successmessage" class="text-success d-none"></p>
                     </div> 
                 </form>
 
@@ -258,6 +259,7 @@ Token List
                         // Show OTP verification modal
                         let otpVerificationModal = new bootstrap.Modal(document.getElementById("optverification"));
                         otpVerificationModal.show();
+                       
                     }, 500); // Small delay to ensure first modal is completely hidden
                 } else {
                     alert("Error: " + data.message);
@@ -271,41 +273,66 @@ Token List
             });
     });
 
-    // Handle OTP Verification Form Submission via AJAX
     document.querySelector('#optverification form').addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent normal form submission
+    event.preventDefault(); // Prevent normal form submission
 
-        let formData = new FormData(this);
-        let submitButton = this.querySelector("button[type='submit']");
+    let formData = new FormData(this);
+    let submitButton = this.querySelector("button[type='submit']");
 
-        // Show spinner and disable button
-        submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Verifying...`;
-        submitButton.disabled = true;
+    // Show spinner and disable button
+    submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Verifying...`;
+    submitButton.disabled = true;
 
-        fetch(this.action, {
-            method: "POST",
-            body: formData,
-            headers: {
-                "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("OTP Verified Successfully!");
-                    let otpVerificationModal = bootstrap.Modal.getInstance(document.getElementById("optverification"));
-                    otpVerificationModal.hide();
-                } else {
-                    alert("OTP Verification Failed: " + data.message);
-                }
-            })
-            .catch(error => console.error("Error:", error))
-            .finally(() => {
-                // Reset button state
-                submitButton.innerHTML = "Verify OTP";
-                submitButton.disabled = false;
-            });
+    fetch(this.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to submit OTP');
+        }
+        return response.json();
+    })
+    .then(data => {
+    if (data.success) {
+        // Show success message
+        const successMessage = document.getElementById('successmessage');
+        if (successMessage) {
+            successMessage.textContent = 'OTP Verified';
+            successMessage.classList.remove('d-none');
+        }
+
+        // Hide OTP verification modal
+        const otpVerificationModal = bootstrap.Modal.getInstance(document.getElementById('optverification'));
+        if (otpVerificationModal) {
+            otpVerificationModal.hide();
+        }
+
+        // Reload page after a short delay for smooth transition
+        setTimeout(() => {
+            location.reload();
+        }, 1000);
+    } else {
+        // Handle failure case with fallback for missing messages
+        alert(`OTP Verification Failed: ${data.message ?? 'Please try again.'}`);
+    }
+})
+
+    .catch(error => {
+        console.error("Error:", error);
+        alert("An error occurred. Please try again.");
+    })
+    .finally(() => {
+        // Reset button state
+        submitButton.innerHTML = "Verify OTP";
+        submitButton.disabled = false;
     });
+});
+
+
 });
 
 //  For Report Generate
