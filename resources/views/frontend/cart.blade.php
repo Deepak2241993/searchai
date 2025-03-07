@@ -191,6 +191,8 @@ td button:hover {
                                 </th>
                                 <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Tax
                                 </th>
+                                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Amount
+                                </th>
                                 <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dee2e6;">Action</th>
                             </tr>
                         </thead>
@@ -220,6 +222,11 @@ td button:hover {
                                         <td>
                                             <div class="product-info">
                                                 <h2>&#8377;{{ $item['tax_pay'] }}</h2>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-info">
+                                                <h2>&#8377;{{ $item['tax_pay'] + ($item['pricePerItem'] * $item['tokens'])}}</h2>
                                             </div>
                                         </td>
                                         <td>
