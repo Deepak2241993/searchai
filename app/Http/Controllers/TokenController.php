@@ -123,6 +123,7 @@ class TokenController extends Controller
     $data = [
         "name" => $validated['name'],
         "address" => $validated['address'],
+        "father_name" => $request['father_name'],
         "date_of_birth" => $validated['date_of_birth'],  // Since this is validated, use it from $validated
         "consent" => $request->input('consent', 'Y'), // Use default fallback with input()
     ];
@@ -628,11 +629,11 @@ public function downloadPdf($id)
 
 public function CcrvReportGeneration(Request $request){
     $data = $request->all();
-    // dd($data);
    $adhardata =  AadhaarData::where('id_token',$request->token_id)->first();
     // ✅ Call CCRVReport after successful Aadhaar verification
     $ccrvRequest = new Request([
         'name' => $adhardata['name'] ?? null,
+        'father_name' => $adhardata['care_of'] ?? null,
         'address' => implode(', ', array_filter([
             $adhardata['house'] ?? '',
             $adhardata['street'] ?? '',

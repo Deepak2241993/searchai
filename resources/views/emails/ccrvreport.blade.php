@@ -72,7 +72,7 @@
             {{-- {{dd($cases[0]['name'],$caseCount['case_count'])}} --}}
             <div class="details">
                 @if(count($cases)>0)
-                <p><strong>Victim Name:</strong> {{ ucFirst($cases[0]['name'])}}</p>
+                <p><strong>Reviewee Name:</strong> {{ ucFirst($cases[0]['name'])}}</p>
                 @endif
                 <p><strong>Token ID:</strong> {{ $token }}</p>
                 <p><strong>Verification Type:</strong>Criminal Background</p>

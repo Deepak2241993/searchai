@@ -199,13 +199,59 @@
         <footer>
             <div class="footer-disclaimer">
                 <h4 style="text-align: center;"><strong><u>LEGAL DISCLAIMER</u></strong></h4>
-                <p>
-                    All rights reserved. The report and its contents are the property of SearchAPI (operated by Navigant Digital
-                    Pvt. Ltd.) and may not be reproduced in any manner without express written permission. These reports are
-                    confidential and intended for internal use only. No liability is assumed for any errors or omissions in the report.
-                </p>
+                <p class="text-wrap mt-4 p-4">All rights reserved. The report and its contents are the property of
+                    SearchAPI (operated by Navigant Digital
+                    Pvt. Ltd.) and may not be reproduced in any manner without the express written permission of
+                    SearchAPI.<br>
+                    The reports and information contained herein are confidential and are meant only for the
+                    internal use of
+                    the SearchAPI client for assessing the background of their applicant. The information and report
+                    are
+                    subject to change based on changes in factual information.<br>
+                    Information and reports, including text, graphics, links, or other items, are provided on an "as
+                    is," "as
+                    available" basis. SearchAPI expressly disclaims liability for errors or omissions in the report,
+                    information, and
+                    materials, as the information is obtained from various sources as per industry practice. No
+                    warranty of any
+                    kind implied, express, or statutory including but not limited to the warranties of
+                    non-infringement of third
+                    party rights, title, merchantability, fitness for a particular purpose, and freedom from
+                    computer viruses, is
+                    given in conjunction with the information and materials.<br>
+                    Our findings are based on the information available to us and industry practice; therefore, we
+                    cannot
+                    guarantee the accuracy of the information collected. Should additional information or
+                    documentation
+                    become available that impacts our conclusions, we reserve the right to amend our findings
+                    accordingly.<br>
+                    These reports are not intended for publication or circulation. They should not be shared with
+                    any other
+                    person, including the applicant, nor reproduced for any other purpose, in whole or in part,
+                    without prior
+                    written consent from SearchAPI in each specific instance. Our reports cannot be relied upon by
+                    any other
+                    person, and we expressly disclaim all responsibility or liability for any costs, damages,
+                    losses, or expenses
+                    incurred by anyone as a result of the circulation, publication, reproduction, or use of our
+                    reports contrary to
+                    the provisions of this paragraph.<br>
+                    The report and information consist of statements of opinion and not statements of fact or
+                    recommendations. You should obtain any additional information necessary to make an informed
+                    decision
+                    prior to using the report. SearchAPI and its directors, officers, agents, and representatives
+                    assume (and
+                    hereby disclaim) all responsibility or liability that may arise directly or indirectly from the
+                    usage of such
+                    reports.<br>
+                    Due to the limitations mentioned above, the result of our work with respect to background checks
+                    should
+                    be considered only as a guideline. Our reports and comments should not be considered a
+                    definitive
+                    pronouncement on the individual.</p>
             </div>
             <p style="font-size: 16px;">SearchAPI Confidential</p>
+            <br class="mb-4">
         </footer>
 
     </div>
