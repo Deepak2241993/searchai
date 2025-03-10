@@ -199,43 +199,50 @@ td button:hover {
                         <tbody>
 
 {{-- {{dd($cart)}} --}}
-                            @foreach ($cart as $item)
-                                @if (is_array($item))
-                                    <tr id="cart-item-{{ $item['id'] }}" data-price-per-item="{{ $item['pricePerItem'] }}"
-                                        style="border-bottom: 1px solid #dee2e6;">
-                                        <td>
-                                            <div class="product-info" style="font-weight: bold;">
-                                                <h2>{{ $item['serviceName'] }}</h2>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="product-info">
-                                                <h2>&#8377;{{ $item['pricePerItem'] }}</h2>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <input class="form-control" type="number" value="{{ $item['tokens'] }}"
-                                                min="1" style="width: 80px;"
-                                                onchange="updateTotalPrice(this, {{ $item['pricePerItem'] }}, '{{ $item['id'] }}')">
+                            @php
+                              $tax = 0;  
+                              $grandTotal = 0; 
+                            @endphp
+                    @foreach ($cart as $item)
+                    @if (is_array($item))
+                        <tr id="cart-item-{{ $item['id'] }}" data-price-per-item="{{ $item['pricePerItem'] }}">
+                            <td>
+                                <div class="product-info" style="font-weight: bold;">
+                                    <h2>{{ $item['serviceName'] }}</h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-info">
+                                    <h2>&#8377;{{ $item['pricePerItem'] }}</h2>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" value="{{ $item['tokens'] }}" min="1" style="width: 80px;"
+                                    onchange="updateTotalPrice(this, {{ $item['pricePerItem'] }}, '{{ $item['id'] }}', {{ $item['taxRate'] }})">
+                            </td>
+                            <td>
+                                <div class="product-info tax-amount">
+                                    <h2>&#8377;{{ $item['taxAmount'] }}</h2>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-info total-price">
+                                    <h2>&#8377;{{ $item['taxAmount'] + ($item['pricePerItem'] * $item['tokens']) }}</h2>
+                                </div>
+                            </td>
+                            <td>
+                                <button onclick="deleteItem('{{ $item['id'] }}')" class="btn btn-danger">Remove</button>
+                            </td>
+                        </tr>
+                        @php
+                        $itemTotal = $item['pricePerItem'] * $item['tokens'];
+                        $itemTotalWithTax = $itemTotal + $item['taxAmount'];
+                        $tax += $item['taxAmount'];
+                        $grandTotal += $itemTotalWithTax;
+                    @endphp
+                    @endif
+                    @endforeach
 
-                                        </td>
-                                        <td>
-                                            <div class="product-info">
-                                                <h2>&#8377;{{ $item['tax_pay'] }}</h2>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="product-info">
-                                                <h2>&#8377;{{ $item['tax_pay'] + ($item['pricePerItem'] * $item['tokens'])}}</h2>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button onclick="deleteItem('{{ $item['id'] }}')"
-                                                class="btn btn-danger">Remove</button>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -243,14 +250,12 @@ td button:hover {
                 <div class="total-cost-bar" style="margin-top: 20px; text-align: right;">
                     <h3>Total Cost</h3>
                     <ul style="list-style: none; padding: 0; font-size: 16px; color: #555;">
-                        <li><strong>Sub Total:</strong> <span id="subtotal"
-                                style="font-size: 18px; color: #000;">&#8377;{{ number_format($subtotal, 2) }}</span></li>
-                        <li><strong>Tax:</strong> <span id="subtotal"
-                                    style="font-size: 18px; color: #000;">&#8377;{{ number_format($tax, 2) }}</span></li>
-                                    <li><strong>Total:</strong> <span id="subtotal"
-                                        style="font-size: 18px; color: #000;">&#8377;{{ number_format($total, 2) }}</span></li>
+                        <li><strong>Subtotal:</strong> <span id="subtotal" style="font-size: 18px; color: #000;">&#8377;{{ number_format($grandTotal - $tax, 2) }}</span></li>
+                        <li><strong>Tax:</strong> <span id="total-tax" style="font-size: 18px; color: #000;">&#8377;{{ number_format($tax, 2) }}</span></li>
+                        <li><strong>Grand Total:</strong> <span id="grand-total" style="font-size: 18px; color: #000;">&#8377;{{ number_format($grandTotal, 2) }}</span></li>
                     </ul>
                 </div>
+                
 
                 <div class="btn-wrap" style="margin-top: 20px; text-align: center;">
                     <form action="{{ route('checkout') }}" method="get" style="display: inline-block;">
@@ -265,53 +270,96 @@ td button:hover {
     </main>
 
     <script>
-        function updateTotalPrice(input, pricePerItem, itemId) {
-            const quantity = parseInt(input.value) || 1;
-            const itemTotal = pricePerItem * quantity;
-            const itemRow = document.querySelector(`#cart-item-${itemId}`);
-            const priceElement = itemRow.querySelector('.item-total');
-            if (priceElement) {
-                priceElement.innerText = `Rs.${itemTotal.toFixed(2)}`;
-            }
-            updateCartData();
-            updateSubtotalAndTotal();
-        }
+     function updateTotalPrice(input, pricePerItem, itemId, taxrate) {
+    const quantity = parseInt(input.value) || 1;
+    const itemTotal = pricePerItem * quantity;
+    const tax = (itemTotal * taxrate) / 100;
+    const totalPrice = itemTotal + tax;
 
-        function updateCartData() {
-            const cart = [];
-            document.querySelectorAll('tr[id^="cart-item-"]').forEach(row => {
-                const itemId = row.id.replace('cart-item-', '');
-                const quantityInput = row.querySelector('input[type="number"]');
-                const pricePerItem = parseFloat(row.dataset.pricePerItem);
-                const quantity = parseInt(quantityInput.value) || 1;
-                const serviceName = row.querySelector('.product-info h2').innerText;
-                cart.push({
-                    id: itemId,
-                    serviceName: serviceName,
-                    tokens: quantity,
-                    pricePerItem: pricePerItem,
-                    totalPrice: pricePerItem * quantity
-                });
-            });
-            const cartDataInput = document.getElementById('cart-data');
-            if (cartDataInput) {
-                cartDataInput.value = JSON.stringify(cart);
-            }
-        }
+    const itemRow = document.querySelector(`#cart-item-${itemId}`);
+    if (!itemRow) return;
 
-        function updateSubtotalAndTotal() {
-            let subtotal = 0;
-            document.querySelectorAll('tr[id^="cart-item-"]').forEach(row => {
-                const quantityInput = row.querySelector('input[type="number"]');
-                const pricePerItem = parseFloat(row.dataset.pricePerItem);
-                const quantity = parseInt(quantityInput.value) || 1;
-                subtotal += pricePerItem * quantity;
-            });
-            const subtotalElement = document.getElementById('subtotal');
-            if (subtotalElement) {
-                subtotalElement.innerText = `Rs.${subtotal.toFixed(2)}`;
-            }
-        }
+    // Update tax amount
+    const taxElement = itemRow.querySelector('.tax-amount h2');
+    if (taxElement) {
+        taxElement.innerText = `₹${tax.toFixed(2)}`;
+    }
+
+    // Update total price
+    const totalPriceElement = itemRow.querySelector('.total-price h2');
+    if (totalPriceElement) {
+        totalPriceElement.innerText = `₹${totalPrice.toFixed(2)}`;
+    }
+
+    // Recalculate cart data and totals
+    updateCartData();
+    updateSubtotalAndTotal();
+}
+
+
+
+function updateCartData() {
+    const cart = [];
+
+    document.querySelectorAll('tr[id^="cart-item-"]').forEach(row => {
+        const itemId = row.id.replace('cart-item-', '');
+        const quantityInput = row.querySelector('input[type="number"]');
+        const pricePerItem = parseFloat(row.dataset.pricePerItem) || 0;
+        const quantity = parseInt(quantityInput.value) || 1;
+        const serviceName = row.querySelector('.product-info h2').innerText;
+
+        // Ensure tax and total price are extracted correctly
+        const taxAmount = parseFloat(row.querySelector('.tax-amount h2').innerText.replace('₹', '')) || 0;
+        const totalPrice = parseFloat(row.querySelector('.total-price h2').innerText.replace('₹', '')) || 0;
+
+        cart.push({
+            id: itemId,
+            serviceName: serviceName,
+            tokens: quantity,
+            pricePerItem: pricePerItem,
+            taxAmount: taxAmount,
+            totalPrice: totalPrice
+        });
+    });
+
+    // Update hidden input for cart data (for backend submission)
+    const cartDataInput = document.getElementById('cart-data');
+    if (cartDataInput) {
+        cartDataInput.value = JSON.stringify(cart);
+    }
+}
+
+
+
+function updateSubtotalAndTotal() {
+    let subtotal = 0;
+    let totalTax = 0;
+    let grandTotal = 0;
+
+    // Iterate through each cart item row
+    document.querySelectorAll('tr[id^="cart-item-"]').forEach(row => {
+        const quantityInput = row.querySelector('input[type="number"]');
+        const pricePerItem = parseFloat(row.dataset.pricePerItem) || 0;
+        const quantity = parseInt(quantityInput.value) || 1;
+        const taxAmount = parseFloat(row.querySelector('.tax-amount h2').innerText.replace('₹', '')) || 0;
+
+        subtotal += pricePerItem * quantity;
+        totalTax += taxAmount;
+    });
+
+    grandTotal = subtotal + totalTax;
+
+    // Update DOM elements
+    const subtotalElement = document.getElementById('subtotal');
+    const totalTaxElement = document.getElementById('total-tax');
+    const grandTotalElement = document.getElementById('grand-total');
+
+    if (subtotalElement) subtotalElement.innerText = `₹${subtotal.toFixed(2)}`;
+    if (totalTaxElement) totalTaxElement.innerText = `₹${totalTax.toFixed(2)}`;
+    if (grandTotalElement) grandTotalElement.innerText = `₹${grandTotal.toFixed(2)}`;
+}
+
+
 
         function deleteItem(itemId) {
         if (confirm('Are you sure you want to remove this item?')) {

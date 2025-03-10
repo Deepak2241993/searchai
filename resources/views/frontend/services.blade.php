@@ -157,17 +157,18 @@
                             @csrf
                             <div class="row align-items-center mb-3">
                                 <div class="col-md-4">
-                                    <label for="tokens" class="form-label fw-semibold">Number of Tokens:</label>
-                                    <div class="input-group">
+                                    {{-- <label for="tokens" class="form-label fw-semibold">Number of Tokens:</label> --}}
+                                    <input type="hidden" id="tokens" name="tokens" min="1" value="1" required class="form-control">
+                                    {{-- <div class="input-group">
                                         <button type="button" id="decrease" class="btn btn-outline-secondary">-</button>
-                                        <input type="number" id="tokens" name="tokens" min="1" value="1" required class="form-control">
+                                        
                                         <button type="button" id="increase" class="btn btn-outline-secondary">+</button>
-                                    </div>
+                                    </div> --}}
                                     <input type="hidden" name="pricePerItem" value="{{ $item->price }}">
                                     <input type="hidden" name="serviceName" value="{{ $item->name }}">
-                                </div>
-                                <div class="col-md-4" style="margin-top: 30px;">
-                                    <button type="submit" class="btn btn-primary w-100">Add to Cart</button>
+                                    <div class="col-md-12" style="margin-top: 30px;">
+                                        <button type="submit" class="btn btn-primary w-100">Add to Cart</button>
+                                    </div>
                                 </div>
                             </div>
                         </form>

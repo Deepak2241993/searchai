@@ -114,7 +114,6 @@ class TokenController extends Controller
     {
     $validated = $request->validate([
         'name' => 'required|string|max:50',
-        'father_name' => 'required|string|max:50',
         'address' => 'required|string|max:255',
         'token' => 'required|string',
         'date_of_birth' => 'required|string',
@@ -123,7 +122,6 @@ class TokenController extends Controller
 
     $data = [
         "name" => $validated['name'],
-        "father_name" => $validated['father_name'],
         "address" => $validated['address'],
         "date_of_birth" => $validated['date_of_birth'],  // Since this is validated, use it from $validated
         "consent" => $request->input('consent', 'Y'), // Use default fallback with input()
@@ -369,10 +367,10 @@ public function downloadPdf($id)
     {
         // Fetch the token by ID
         $token = Token::findOrFail($id);
-    
         // Get the associated CCRV report
         $ccrv_report = Ccrv_case::where('token_id', $token->id)->get();
         $criminal_data = AadhaarData::where('id_token', $token->id)->first();
+
     
         // Filter Aadhaar data
         $filteredAadhaarData = collect($token->aadhaarData)->except([
@@ -630,11 +628,11 @@ public function downloadPdf($id)
 
 public function CcrvReportGeneration(Request $request){
     $data = $request->all();
+    // dd($data);
    $adhardata =  AadhaarData::where('id_token',$request->token_id)->first();
     // ✅ Call CCRVReport after successful Aadhaar verification
     $ccrvRequest = new Request([
         'name' => $adhardata['name'] ?? null,
-        'father_name' => $adhardata['care_of'] ?? null,
         'address' => implode(', ', array_filter([
             $adhardata['house'] ?? '',
             $adhardata['street'] ?? '',
@@ -646,7 +644,7 @@ public function CcrvReportGeneration(Request $request){
         'service_type' => $data['service_type'],
         'token' => $data['token']
     ]);
-
+// dd($ccrvRequest);
     Log::info('Initiating CCRVReport after Aadhaar verification.');
     $ccrvResponse = $this->CCRVReport($ccrvRequest);
     $responseData = $ccrvResponse->getData(true); // Convert JSON response to an associative array

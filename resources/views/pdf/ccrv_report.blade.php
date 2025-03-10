@@ -220,19 +220,19 @@
                 <tr>
                     <th>Name of the applicant
                     </th>
-                    <td>{{ $victimdata['name'] }}</td>
+                    <td>{{ $victimdata['name'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>Father's Name/Care of</th>
-                    <td>{{ $victimdata['father_name'] }}</td>
+                    <td>{{ $victimdata['father_name'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td>{{ $victimdata['address'] }}</td>
+                    <td>{{ $victimdata['address'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>DOB</th>
-                    <td>{{ $victimdata['date_of_birth'] }}</td>
+                    <td>{{ $victimdata['date_of_birth'] ?? '--' }}</td>
                 </tr>
                 <tr>
                     <th>Check Status</th>

@@ -242,48 +242,48 @@
     <script>
         
         $('#aadhaarOtpForm').on('submit', function(e) {
-    e.preventDefault();  // Prevent form from submitting the usual way
+            e.preventDefault();  // Prevent form from submitting the usual way
 
-    // Validate form fields
-    if (!$('#name').val() || !$('#father_name').val() || !$('#date_of_birth').val() || !$('#address').val()) {
-        alert('Please fill in all required fields.');
-        return;  // Stop the form submission if validation fails
-    }
+            // Validate form fields
+            if (!$('#name').val() || !$('#father_name').val() || !$('#date_of_birth').val() || !$('#address').val()) {
+                alert('Please fill in all required fields.');
+                return;  // Stop the form submission if validation fails
+            }
 
-    // Show the spinner on button click
-    var submitButton = $('#submitButton');
-    submitButton.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'); // Show spinner and disable button
+            // Show the spinner on button click
+            var submitButton = $('#submitButton');
+            submitButton.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'); // Show spinner and disable button
 
-    var form = $(this);
-    var formData = form.serialize();  // Serialize the form data
+            var form = $(this);
+            var formData = form.serialize();  // Serialize the form data
 
-    $.ajax({
-        url: '{{ route('ccrv-report') }}',
-        type: 'POST',
-        data: formData,  // Send serialized data
-        success: function(response) {
-    console.log(response);
-    
-    if (response.success) {
-        alert(response.message);
-        
-        if (response.redirect_url) {
-            window.location.href = response.redirect_url;  // Redirect upon success
+            $.ajax({
+                url: '{{ route('ccrv-report') }}',
+                type: 'POST',
+                data: formData,  // Send serialized data
+                success: function(response) {
+            console.log(response);
+            
+            if (response.success) {
+                alert(response.message);
+                
+                if (response.redirect_url) {
+                    window.location.href = response.redirect_url;  // Redirect upon success
+                }
+            } else {
+                alert('Operation failed: ' + response.message);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error:', error);
+            alert('Technical Error Try After Some Time');
+        },
+        complete: function() {
+            // Hide spinner and enable button after AJAX call
+            submitButton.prop('disabled', false).html('Submit');
         }
-    } else {
-        alert('Operation failed: ' + response.message);
-    }
-},
-error: function(xhr, status, error) {
-    console.error('AJAX Error:', error);
-    alert('Technical Error Try After Some Time');
-},
-complete: function() {
-    // Hide spinner and enable button after AJAX call
-    submitButton.prop('disabled', false).html('Submit');
-}
-    });
-});
+            });
+        });
 
     </script>
 

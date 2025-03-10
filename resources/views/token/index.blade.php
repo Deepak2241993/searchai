@@ -63,6 +63,7 @@ Token List
                                         <th>#</th>
                                         <th>Service Type</th>
                                         <th>Token</th>
+                                        <th>Purchase Date</th>
                                         <th>Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -73,6 +74,7 @@ Token List
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $Token->service_type }}</td>
                                         <td>{{ $Token->token }}</td>
+                                        <td>{{ (date('d-m-Y',strtotime($Token->created_at))) }}</td>
                                         <td>{{ $Token->status == 'active' ? 'Active' : 'Expired' }}</td>
                                         @if ($Token->status == 'active')
                                         <td class="text-center">

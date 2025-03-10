@@ -332,21 +332,21 @@
                                     value="{{ isset($customerAddress) ? $customerAddress->address : '' }}"
                                     placeholder="e.g. House, Road, Street Name" required></textarea>
                             </div>                           
-<hr>
-<h4>Company Details</h4>
-<hr>
-<div class="form-group">
-    <label for="company_name">Company Name (Optional)</label>
-    <input type="text" id="company_name" name="company_name" class="form-control"
-        value="{{ isset($customercompany_name) ? $customercompany_name->company_name : '' }}"
-        placeholder="e.g. xyz.pvt.ltd">
-</div>  
-<div class="form-group">
-    <label for="gst_number">GST (Optional)</label>
-    <input type="text" id="gst_number" name="gst_number" class="form-control"
-        value="{{ isset($customergst_number) ? $customergst_number->gst_number : '' }}"
-        placeholder="e.g. 29GGGGG1314R9Z6">
-</div>  
+                            <hr>
+                            <h4>Company Details</h4>
+                            <hr>
+                            <div class="form-group">
+                                <label for="company_name">Company Name (Optional)</label>
+                                <input type="text" id="company_name" name="company_name" class="form-control"
+                                    value="{{ isset($customercompany_name) ? $customercompany_name->company_name : '' }}"
+                                    placeholder="e.g. xyz.pvt.ltd">
+                            </div>  
+                            <div class="form-group">
+                                <label for="gst_number">GST (Optional)</label>
+                                <input type="text" id="gst_number" name="gst_number" class="form-control"
+                                    value="{{ isset($customergst_number) ? $customergst_number->gst_number : '' }}"
+                                    placeholder="e.g. 29GGGGG1314R9Z6">
+                            </div>  
                            
                         </div>
 
@@ -359,39 +359,62 @@
                                     <div class="cart-items-list mb-4">
                                         <ul class="list-unstyled">
                                             @php
-                                            $amount = 0;
+                                                $subtotal = 0;
+                                                $totalTax = 0;
+                                                $grandTotal = 0;
+                                                $totalTokens = 0;
                                             @endphp
-                                            @foreach ($carts as $item)
-                                            @php
-                                            $amount += $item['pricePerItem'] * $item['tokens'];
-                                            $totalTokens = $item['tokens'];
-                                            @endphp
-                                            <li class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-3">
-                                                <div>
-                                                    <h5 class="font-weight-bold">{{ $item['serviceName'] }}</h5>
-                                                    <input type="hidden"  name="serviceName[]" value="{{ $item['serviceName'] }}">
-                                                    <input type="hidden" name="tokens[]" value="{{ $item['tokens'] }}">
-                                                    <span class="text-muted">&#8377;{{ $item['pricePerItem'] }} x {{ $item['tokens'] }} tokens</span>
-                                                </div>
-                                            </li>
+                                            {{-- {{dd($carts)}} --}}
+                                            @foreach ($carts as $key => $item)
+                                                @php
+                                                    $itemTotal = $item['pricePerItem'] * $item['tokens'];
+                                                    $taxAmount = $item['taxAmount'] ?? 0;
+                                                    $itemTotalWithTax = $itemTotal + $taxAmount;
+                                        
+                                                    $subtotal += $itemTotal;
+                                                    $totalTax += $taxAmount;
+                                                    $grandTotal += $itemTotalWithTax;
+                                                    $totalTokens += $item['tokens'];
+                                                @endphp
+                                        
+                                                <li class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-3">
+                                                    <div>
+                                                        <h5 class="font-weight-bold">{{ $item['serviceName'] }}</h5>
+                                                        <input type="hidden" name="serviceName[]" value="{{ $item['serviceName'] }}">
+                                                        <input type="hidden" name="tokens[]" value="{{ $item['tokens'] }}">
+                                                        <span class="text-muted">&#8377;{{ number_format($item['pricePerItem'], 2) }} x {{ $item['tokens'] }} tokens</span>
+                                                    </div>
+                                                    <div>
+                                                        <small>Tax: &#8377;{{ number_format($taxAmount, 2) }}</small><br>
+                                                        <strong>Total: &#8377;{{ number_format($itemTotalWithTax, 2) }}</strong>
+                                                    </div>
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </div>
-
+                                
                                     <!-- Total Amount Section -->
-                                    <div class="d-flex justify-content-between mb-4">
-                                        <h5 class="font-weight-bold">Total Amount</h5>
-                                        <span class="text-right">&#8377;{{ $amount }}</span>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h5 class="font-weight-bold">Subtotal</h5>
+                                        <span class="text-right">&#8377;{{ number_format($subtotal, 2) }}</span>
                                     </div>
-
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h5 class="font-weight-bold">Tax</h5>
+                                        <span class="text-right">&#8377;{{ number_format($totalTax, 2) }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <h5 class="font-weight-bold">Grand Total</h5>
+                                        <span class="text-right">&#8377;{{ number_format($grandTotal, 2) }}</span>
+                                    </div>
+                                
                                     <div class="payment-information mb-4">
                                         <div class="form-check mb-3">
                                             <input id="credit-card" hidden type="radio" name="payment_method" value="stripe" class="form-check-input" checked>
-                                            <input type="hidden" id="order-amount" name="amount" value="{{ $amount }}">
+                                            <input type="hidden" id="order-amount" name="amount" value="{{ $grandTotal }}">
                                             <input type="hidden" id="buy-tokens" name="buy-tokens" value="{{ $totalTokens }}">
                                         </div>
                                     </div>
-
+                                
                                     <div class="text-center">
                                         <button type="submit" id="submitButton" class="btn btn-lg btn-primary w-100 btn-rounded shadow-lg transition-all">
                                             <i class="las la-check-circle"></i> <span id="buttonText">Place Order</span>
@@ -399,6 +422,7 @@
                                         </button>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
 
