@@ -564,19 +564,7 @@
                             </div>
                         </div>
                     </a>
-                    <a style="text-decoration:none;padding:2px" href="mailto:">
-                        <div style="min-width:125px" class="card box-hover-effect">
-                            <div style="background:#ccc;padding:10px 6px;border-radius:10px 10px 0 0;">
-                                <amp-img src="{{ url('/front-assets') }}/images/icons/contact-us.svg" width="75"
-                                    height="75" alt="Steps"></amp-img>
-                            </div>
-                            <div style="padding:8px" class="card-body">
-                                <!--<div style="margin:10px 0" class="divider"></div>-->
-                                <h4 style="font-size:16px;font-weight:400;line-height:24px">Have a doubt?<br />Write to
-                                    us</h4>
-                            </div>
-                        </div>
-                    </a>
+                    
                 </amp-carousel>
             </div>
         </div>
